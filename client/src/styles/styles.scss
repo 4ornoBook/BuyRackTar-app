@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "variables";
+@import "tui-override";
+
+*, *::after, *::before {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	min-height: 100vh;
+	overflow-x: hidden;
+
+	color: var(--color-text-primary);
+	background-color: var(--color-bg-primary);
+
+	font-size: 16px;
+}
+
+//tui-root,
+//tui-root tui-dropdown-host .content {
+//	min-height: 100vh;
+//}

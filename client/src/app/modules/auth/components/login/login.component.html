@@ -1,0 +1,53 @@
+<div class="login-form-container">
+	<div class="form-content">
+		<h1 class="auth-method">{{ authType }}</h1>
+		<form
+			class="b-form"
+			[formGroup]="credentialsForm"
+		>
+			<div class="tui-space_bottom-5">
+				<tui-input
+					tuiTextfieldExampleText="Enter email"
+					formControlName="email"
+					tuiHintContent="Email is required"
+				>
+					Email
+					<span class="tui-required"></span>
+				</tui-input>
+				<tui-field-error
+					formControlName="email"
+				></tui-field-error>
+			</div>
+
+			<div class="tui-space_bottom-5">
+				<tui-input-password formControlName="password">
+					Type a password
+					<input
+						tuiTextfield
+						placeholder="Make it secure!"
+					/>
+				</tui-input-password>
+				<tui-field-error
+					formControlName="password"
+				></tui-field-error>
+			</div>
+
+			<div class="control-row">
+				<button
+					tuiButton (click)="submitForm()"
+					class="tui-space_right-4"
+				>
+					Submit
+				</button>
+				<button
+					tuiButton
+					(click)="changeAuthType()"
+					size="s"
+					shape="rounded"
+					appearance="outline"
+				>or {{nextType[authType].toLowerCase()}}</button>
+			</div>
+
+		</form>
+	</div>
+</div>

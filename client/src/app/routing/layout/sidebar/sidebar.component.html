@@ -1,0 +1,24 @@
+<div
+	class="app-sidebar"
+	[class.hidden]="(sidebarToggled$ | async) === false"
+>
+	<nav>
+		<ul>
+			<li>
+				<app-nav-item
+					title="Dashboard"
+					[expandable]="true"
+				>
+					<app-nav-item title="Home" link="dashboard/abooba"></app-nav-item>
+					<app-nav-item title="Other link" link="dashboard/aboba"></app-nav-item>
+				</app-nav-item>
+			</li>
+			<li>
+				<app-nav-item title="Visit this to have a headache" link="dashboard/kazino"></app-nav-item>
+			</li>
+			<li>
+				<app-nav-item title="Напасть" link="dashboard/tratata"></app-nav-item>
+			</li>
+		</ul>
+	</nav>
+</div>

@@ -1,0 +1,65 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+
+import {
+	TuiRootModule,
+	TuiDialogModule,
+	TuiButtonModule,
+	TuiSvgModule,
+	TuiExpandModule,
+	TuiLabelModule,
+} from '@taiga-ui/core';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { StoreModule } from '@ngrx/store';
+
+import { AppComponent } from './app.component';
+
+import { AppRoutingModule } from './app.routing';
+import { DashboardModule } from './modules/dashboard/dashboard.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { NotFoundPageComponent } from './routing/not-found-page/not-found-page.component';
+import { DefaultLayoutComponent } from './routing/layout/default-layout/default-layout.component';
+import { HeaderComponent } from './routing/layout/header/header.component';
+import { ApiModule } from './modules/shared/api/api.module';
+import { SidebarComponent } from './routing/layout/sidebar/sidebar.component';
+import { NavItemComponent } from './routing/layout/sidebar/components/nav-item/nav-item.component';
+import { AuthInterceptor } from './modules/shared/api/interceptors/auth.interceptor';
+import { TuiInputModule } from '@taiga-ui/kit';
+
+@NgModule({
+	declarations: [
+		AppComponent,
+		NotFoundPageComponent,
+		DefaultLayoutComponent,
+		HeaderComponent,
+		SidebarComponent,
+		NavItemComponent,
+	],
+	imports: [
+		BrowserModule,
+		StoreModule.forRoot({}, {}),
+		TuiRootModule,
+		BrowserAnimationsModule,
+		TuiDialogModule,
+		TuiButtonModule,
+		TuiSvgModule,
+		AppRoutingModule,
+		DashboardModule,
+		AuthModule,
+		ApiModule,
+		TuiExpandModule,
+		HttpClientModule,
+		TuiInputModule,
+		TuiLabelModule,
+	],
+	providers: [
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: AuthInterceptor,
+			multi: true,
+		},
+	],
+	bootstrap: [AppComponent],
+})
+export class AppModule {}

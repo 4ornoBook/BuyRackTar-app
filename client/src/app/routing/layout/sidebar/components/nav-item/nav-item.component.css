@@ -1,0 +1,12 @@
+
+.nav-item > tui-expand {
+	padding-left: 2rem;
+}
+
+a {
+	transition: background-color 150ms ease;
+}
+
+.active {
+	background-color: var(--tui-secondary-active);
+}

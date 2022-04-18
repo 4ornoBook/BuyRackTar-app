@@ -1,0 +1,26 @@
+
+.app-sidebar {
+	background-color: var(--color-bg-secondary);
+	padding: 1rem;
+
+	border-radius: 0 1rem 1rem 0;
+
+	width: 300px;
+	overflow: hidden;
+
+	transition: transform 300ms ease, width .5s ease-in-out;
+}
+
+@media screen and (max-width: 51.5rem) {
+	.app-sidebar {
+		position: absolute;
+
+		box-shadow: 0 0 gray;
+	}
+
+	.app-sidebar.hidden {
+		transform: translateX(-100%);
+	}
+}
+
+
