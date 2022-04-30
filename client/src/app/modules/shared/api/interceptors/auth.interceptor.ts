@@ -11,6 +11,8 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { API_URLS } from 'config/api-routes';
 
+const NO_AUTH_STATUS = 401;
+
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 	constructor(private authService: AuthService, private router: Router) {}
@@ -19,11 +21,14 @@ export class AuthInterceptor implements HttpInterceptor {
 		req: HttpRequest<any>,
 		next: HttpHandler
 	): Observable<HttpEvent<any>> {
-		const newRequest = this.getRequestWithAuthHeader(req);
+		const withAuthRequest = this.getRequestWithAuthHeader(req);
 
-		return next.handle(newRequest).pipe(
+		return next.handle(withAuthRequest).pipe(
 			mergeMap(event => {
-				if (event instanceof HttpResponse && event.status === 401) {
+				if (
+					event instanceof HttpResponse &&
+					event.status === NO_AUTH_STATUS
+				) {
 					const isRefreshRoute = event.url?.includes(
 						API_URLS.USER_REFRESH_TOKEN
 					);
