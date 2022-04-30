@@ -1,19 +1,47 @@
 import { Injectable } from '@angular/core';
 import {
-	HttpInterceptor,
 	HttpEvent,
-	HttpRequest,
 	HttpHandler,
+	HttpInterceptor,
+	HttpRequest,
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { retry } from 'rxjs/operators';
+import { delay, EMPTY, Observable, of, retry } from 'rxjs';
+import { NotificationAlertService } from '../../helpers/notification-alert.service';
+
+export const maxRetries = 2;
+export const delayRetry = 1500;
+export const statusesToSkip = [400, 403, 404];
 
 @Injectable()
-export class RetryInterceptor implements HttpInterceptor {
+export class ErrorInterceptor implements HttpInterceptor {
+	constructor(
+		private readonly notificationsService: NotificationAlertService
+	) {}
+
 	intercept(
-		httpRequest: HttpRequest<any>,
+		request: HttpRequest<unknown>,
 		next: HttpHandler
-	): Observable<HttpEvent<any>> {
-		return next.handle(httpRequest).pipe(retry(2));
+	): Observable<HttpEvent<unknown>> {
+		return next.handle(request).pipe(
+			retry({
+				delay: (error, retryCount) => {
+					if (
+						retryCount === maxRetries ||
+						statusesToSkip.includes(
+							error?.status
+						)
+					) {
+						this.notificationsService.showError(
+							error?.message
+						);
+						throw error;
+					}
+
+					return of(EMPTY).pipe(
+						delay(delayRetry)
+					);
+				},
+			})
+		);
 	}
 }

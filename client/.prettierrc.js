@@ -1,6 +1,6 @@
 module.exports = {
 	endOfLine: 'lf',
-	tabWidth: 8,
+	tabWidth: 4,
 	useTabs: true,
 	trailingComma: 'es5',
 	arrowParens: 'avoid',

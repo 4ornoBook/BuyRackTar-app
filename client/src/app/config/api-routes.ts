@@ -5,6 +5,7 @@ export const API_URL = environment.API_DOMAIN;
 export const API_URLS = {
 	WALLET_CREATE: `${API_URL}/wallets`,
 
+	USER_REFRESH_TOKEN: `${API_URL}/auth/refresh`,
 	USER_LOGIN: `${API_URL}/auth/login`,
 	USER_REGISTER: `${API_URL}/auth/register`,
 };

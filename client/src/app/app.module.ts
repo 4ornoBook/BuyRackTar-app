@@ -21,11 +21,13 @@ import { AuthModule } from './modules/auth/auth.module';
 import { NotFoundPageComponent } from './routing/not-found-page/not-found-page.component';
 import { DefaultLayoutComponent } from './routing/layout/default-layout/default-layout.component';
 import { HeaderComponent } from './routing/layout/header/header.component';
-import { ApiModule } from './modules/shared/api/api.module';
 import { SidebarComponent } from './routing/layout/sidebar/sidebar.component';
 import { NavItemComponent } from './routing/layout/sidebar/components/nav-item/nav-item.component';
 import { AuthInterceptor } from './modules/shared/api/interceptors/auth.interceptor';
 import { TuiInputModule } from '@taiga-ui/kit';
+import { ErrorInterceptor } from './modules/shared/api/interceptors/error.interceptor';
+import { SharedModule } from './modules/shared/shared.module';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
 	declarations: [
@@ -39,6 +41,7 @@ import { TuiInputModule } from '@taiga-ui/kit';
 	imports: [
 		BrowserModule,
 		StoreModule.forRoot({}, {}),
+		EffectsModule.forRoot([]),
 		TuiRootModule,
 		BrowserAnimationsModule,
 		TuiDialogModule,
@@ -47,13 +50,18 @@ import { TuiInputModule } from '@taiga-ui/kit';
 		AppRoutingModule,
 		DashboardModule,
 		AuthModule,
-		ApiModule,
+		SharedModule,
 		TuiExpandModule,
 		HttpClientModule,
 		TuiInputModule,
 		TuiLabelModule,
 	],
 	providers: [
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: ErrorInterceptor,
+			multi: true,
+		},
 		{
 			provide: HTTP_INTERCEPTORS,
 			useClass: AuthInterceptor,
