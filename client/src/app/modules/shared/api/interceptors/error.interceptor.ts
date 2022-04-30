@@ -27,19 +27,13 @@ export class ErrorInterceptor implements HttpInterceptor {
 				delay: (error, retryCount) => {
 					if (
 						retryCount === maxRetries ||
-						statusesToSkip.includes(
-							error?.status
-						)
+						statusesToSkip.includes(error?.status)
 					) {
-						this.notificationsService.showError(
-							error?.message
-						);
+						this.notificationsService.showError(error?.message);
 						throw error;
 					}
 
-					return of(EMPTY).pipe(
-						delay(delayRetry)
-					);
+					return of(EMPTY).pipe(delay(delayRetry));
 				},
 			})
 		);

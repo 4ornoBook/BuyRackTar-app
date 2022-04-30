@@ -30,10 +30,7 @@ export class LoginComponent {
 	) {
 		this.credentialsForm = new FormBuilder().group({
 			email: [null, Validators.required],
-			password: [
-				null,
-				[Validators.required, Validators.minLength(8)],
-			],
+			password: [null, [Validators.required, Validators.minLength(8)]],
 		});
 	}
 
@@ -51,10 +48,10 @@ export class LoginComponent {
 	}
 
 	private login() {
-		this.store.dispatch(
-			UserActions.login(this.credentialsForm.value)
-		);
+		this.store.dispatch(UserActions.login(this.credentialsForm.value));
 	}
 
-	private register() {}
+	private register() {
+		this.store.dispatch(UserActions.register(this.credentialsForm.value));
+	}
 }

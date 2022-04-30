@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { UserEntity } from 'entities/User.entity';
-import { LoginCredentials } from 'interfaces/login-credentials';
+import { LoginCredentials } from 'interfaces/auth/login-credentials.interface';
 
 const context = '[USER]';
 
