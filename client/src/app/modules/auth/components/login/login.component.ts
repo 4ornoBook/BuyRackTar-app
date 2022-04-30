@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TuiNotificationsService } from '@taiga-ui/core';
+import { UserActions } from 'modules/shared/+state/user.store';
+import { AuthService } from '../../../shared/api/services/auth.service';
+import { Store } from '@ngrx/store';
 
 enum AuthType {
 	login = 'Login',
@@ -23,7 +25,8 @@ export class LoginComponent {
 	credentialsForm: FormGroup;
 
 	constructor(
-		private readonly notificationsService: TuiNotificationsService
+		private readonly authService: AuthService,
+		private readonly store: Store
 	) {
 		this.credentialsForm = new FormBuilder().group({
 			email: [null, Validators.required],
@@ -38,7 +41,7 @@ export class LoginComponent {
 		this.authType = nextType[this.authType];
 	}
 
-	submitForm() {
+	submit() {
 		if (this.authType === AuthType.login) {
 			this.login();
 			return;
@@ -48,18 +51,10 @@ export class LoginComponent {
 	}
 
 	private login() {
-		this.notificationsService
-			.show('Aboba login hello', {
-				label: 'Login successful',
-			})
-			.subscribe();
+		this.store.dispatch(
+			UserActions.login(this.credentialsForm.value)
+		);
 	}
 
-	private register() {
-		this.notificationsService
-			.show('Aboba register hello', {
-				label: 'Registration successful',
-			})
-			.subscribe();
-	}
+	private register() {}
 }
