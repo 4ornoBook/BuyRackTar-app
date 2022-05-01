@@ -12,9 +12,7 @@ export const routes: Routes = [
 	{
 		path: 'auth',
 		loadChildren: () =>
-			import('./modules/auth/auth.module').then(
-				m => m.AuthModule
-			),
+			import('./modules/auth/auth.module').then(m => m.AuthModule),
 	},
 	{
 		path: '',
@@ -26,9 +24,9 @@ export const routes: Routes = [
 			{
 				path: 'dashboard',
 				loadChildren: () =>
-					import(
-						'./modules/dashboard/dashboard.module'
-					).then(m => m.DashboardModule),
+					import('./modules/dashboard/dashboard.module').then(
+						m => m.DashboardModule
+					),
 			},
 		],
 	},

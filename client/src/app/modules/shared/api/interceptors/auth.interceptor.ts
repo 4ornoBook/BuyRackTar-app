@@ -30,7 +30,7 @@ export class AuthInterceptor implements HttpInterceptor {
 					event.status === NO_AUTH_STATUS
 				) {
 					const isRefreshRoute = event.url?.includes(
-						API_URLS.USER_REFRESH_TOKEN
+						API_URLS.ACCOUNT_REFRESH_TOKEN
 					);
 
 					if (isRefreshRoute) {

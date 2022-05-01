@@ -8,6 +8,7 @@ import {
 	TuiSvgModule,
 	TuiExpandModule,
 	TuiLabelModule,
+	TuiLinkModule,
 } from '@taiga-ui/core';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -55,6 +56,7 @@ import { EffectsModule } from '@ngrx/effects';
 		HttpClientModule,
 		TuiInputModule,
 		TuiLabelModule,
+		TuiLinkModule,
 	],
 	providers: [
 		{

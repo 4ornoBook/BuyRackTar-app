@@ -1,6 +1,6 @@
 export interface UserEntity {
-	id: string;
-	accountId: string;
+	id: number;
+	accountId: number;
 	name: string;
 	isOwner: boolean;
 }
