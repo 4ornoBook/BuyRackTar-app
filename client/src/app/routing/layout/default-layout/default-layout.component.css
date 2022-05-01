@@ -12,3 +12,14 @@
 	transition: width 200ms ease;
 }
 
+main {
+	background-color: var(--color-bg-secondary);
+
+	border-radius: 1rem;
+	padding: 1rem;
+}
+
+.main-wrapper {
+	margin: 0 auto;
+	width: min(1200px, 100%);
+}

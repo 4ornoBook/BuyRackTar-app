@@ -7,7 +7,7 @@ import { MenuService } from '../menu.service';
 	styleUrls: ['./default-layout.component.css'],
 })
 export class DefaultLayoutComponent {
-	toggled$ = this.menuSevice.toggled$;
+	toggled$ = this.menuService.toggled$;
 
-	constructor(private menuSevice: MenuService) {}
+	constructor(private menuService: MenuService) {}
 }

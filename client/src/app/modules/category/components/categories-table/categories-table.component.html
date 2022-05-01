@@ -1,0 +1,11 @@
+
+<div
+	*ngFor="let category of categories$ | async"
+	class="tui-space_bottom-3"
+>
+	<app-category-item
+		[category]="category"
+	></app-category-item>
+</div>
+
+

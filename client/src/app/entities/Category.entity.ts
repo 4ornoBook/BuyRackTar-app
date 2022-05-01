@@ -1,7 +1,9 @@
 export interface CategoryEntity {
-	id: string;
-	accountId: string;
+	id: number;
+	accountId: number;
+	currencyId: number;
 	name: string;
+	limit: number;
 	description: string;
 	active: boolean;
 }

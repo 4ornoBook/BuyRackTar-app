@@ -20,16 +20,31 @@
 			</a>
 		</div>
 		<div>
+
 			<a
-				class=""
+				*ngIf="(currentUser$ | async) !== null; else login"
+				routerLink="users"
 				tuiButton
 				size="m"
-				routerLink="auth"
 				[shape]="'rounded'"
 			>
-				Login
-				<tui-svg class="tui-space_left-2" src="tuiIconLoginLarge"></tui-svg>
+				{{(currentUser$ | async)?.name}}
+				<tui-svg class="tui-space_left-2" src="tuiIconUser"></tui-svg>
 			</a>
+
+			<ng-template #login>
+				<a
+					class=""
+					tuiButton
+					size="m"
+					routerLink="auth"
+					[shape]="'rounded'"
+				>
+					Login
+					<tui-svg class="tui-space_left-2" src="tuiIconLoginLarge"></tui-svg>
+				</a>
+			</ng-template>
+
 		</div>
 	</div>
 </header>

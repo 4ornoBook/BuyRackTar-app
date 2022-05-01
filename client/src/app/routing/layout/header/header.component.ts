@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MenuService } from '../menu.service';
-import { AuthService } from 'modules/shared/api/services/auth.service';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { UserFeature } from 'modules/shared/+state/user.store';
 
 @Component({
 	selector: 'app-header',
@@ -10,9 +12,12 @@ import { AuthService } from 'modules/shared/api/services/auth.service';
 export class HeaderComponent {
 	sidebarToggled$ = this.menuService.toggled$;
 
+	currentUser$ = this.store.select(UserFeature.selectCurrentUser);
+
 	constructor(
 		private readonly menuService: MenuService,
-		private authService: AuthService
+		private readonly router: Router,
+		private readonly store: Store
 	) {}
 
 	toggleMenu() {
@@ -20,8 +25,6 @@ export class HeaderComponent {
 	}
 
 	login() {
-		this.authService
-			.register({ email: '', password: '' })
-			.subscribe();
+		this.router.navigate(['auth']);
 	}
 }

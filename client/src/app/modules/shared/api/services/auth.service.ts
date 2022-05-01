@@ -3,6 +3,7 @@ import { UserEntity } from 'entities/User.entity';
 import { HttpClient } from '@angular/common/http';
 import { API_URLS } from 'config/api-routes';
 import { Observable } from 'rxjs';
+import { AccountEntity } from 'entities/Account.entity';
 import { LoginCredentials } from 'interfaces/auth/login-credentials.interface';
 import { ApiResponse } from 'interfaces/api/api-response.interface';
 import { Tokens } from 'interfaces/auth/tokens.interface';
@@ -10,7 +11,7 @@ import { map } from 'rxjs/operators';
 
 export const ACCESS_TOKEN = 'accessToken';
 
-type UserAndTokens = { user: UserEntity } & Tokens;
+type AccountAndTokens = { account: AccountEntity } & Tokens;
 
 @Injectable({
 	providedIn: 'root',
@@ -18,34 +19,36 @@ type UserAndTokens = { user: UserEntity } & Tokens;
 export class AuthService {
 	constructor(private readonly http: HttpClient) {}
 
-	public register(credentials: LoginCredentials): Observable<UserEntity> {
+	public register(credentials: LoginCredentials): Observable<AccountEntity> {
 		return this.http
-			.post<ApiResponse<UserAndTokens>>(
-				API_URLS.USER_REGISTER,
+			.post<ApiResponse<AccountEntity>>(
+				API_URLS.ACCOUNT_REGISTER,
 				credentials
 			)
 			.pipe(
-				map(({ data: userAndTokens }) => {
-					AuthService.setAccessToken(userAndTokens.accessToken);
-					return userAndTokens.user;
+				map(({ data: account }) => {
+					return account;
 				})
 			);
 	}
 
-	public login(credentials: LoginCredentials): Observable<UserEntity> {
+	public login(credentials: LoginCredentials): Observable<AccountEntity> {
 		return this.http
-			.post<ApiResponse<UserAndTokens>>(API_URLS.USER_LOGIN, credentials)
+			.post<ApiResponse<AccountAndTokens>>(
+				API_URLS.ACCOUNT_LOGIN,
+				credentials
+			)
 			.pipe(
-				map(({ data: userAndToken }) => {
-					AuthService.setAccessToken(userAndToken.accessToken);
-					return userAndToken.user;
+				map(({ data: accountAndToken }) => {
+					AuthService.setAccessToken(accountAndToken.accessToken);
+					return accountAndToken.account;
 				})
 			);
 	}
 
 	public refresh() {
 		return this.http
-			.get<ApiResponse<Tokens>>(API_URLS.USER_REFRESH_TOKEN)
+			.get<ApiResponse<Tokens>>(API_URLS.ACCOUNT_REFRESH_TOKEN)
 			.pipe(
 				map(({ data: tokens }) => {
 					AuthService.setAccessToken(tokens.accessToken);

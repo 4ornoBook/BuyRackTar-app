@@ -1,5 +1,5 @@
 export interface CategoryTransactionsEntity {
-	id: string;
+	id: number;
 	walletId: string;
 	categoryId: string;
 	amount: number;

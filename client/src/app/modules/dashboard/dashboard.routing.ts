@@ -7,14 +7,7 @@ export const routes: Routes = [
 		path: '',
 		component: TableComponent,
 		data: {
-			title: 'lol',
-		},
-	},
-	{
-		path: '**',
-		component: TableComponent,
-		data: {
-			title: 'lol',
+			title: 'Dashboard',
 		},
 	},
 ];

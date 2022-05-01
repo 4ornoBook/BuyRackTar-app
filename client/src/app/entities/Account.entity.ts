@@ -1,6 +1,5 @@
 export interface AccountEntity {
-	id: string;
+	id: number;
 	email: string;
-	password: string;
 	confirmed: boolean;
 }

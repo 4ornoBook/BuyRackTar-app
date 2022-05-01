@@ -1,5 +1,5 @@
 export interface WalletTransactionEntity {
-	id: string;
+	id: number;
 	fromWalletId: string;
 	toWalletId: string;
 	amount: number;

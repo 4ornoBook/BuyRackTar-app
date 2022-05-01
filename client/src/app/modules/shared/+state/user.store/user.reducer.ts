@@ -1,23 +1,33 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { setUser } from './user.actions';
+import { setAccount, setAccountUsers, setCurrentUser } from './user.actions';
 import { UserEntity } from 'entities/User.entity';
+import { AccountEntity } from 'entities/Account.entity';
 
 export interface UserState {
-	user: UserEntity | null;
+	account: AccountEntity | null;
+	currentUser: UserEntity | null;
+	users: UserEntity[];
 }
 
-export const initialState: UserState = {
-	user: null,
+const initialState: UserState = {
+	account: null,
+	currentUser: null,
+	users: [],
 };
 
 export const userFeatureKey = 'user';
 
 export const userReducer = createReducer(
 	initialState,
-	on(setUser, (_, { user }) => ({ user }))
+	on(setAccount, (state, { account }) => ({ ...state, account })),
+	on(setAccountUsers, (state, { users }) => ({ ...state, users })),
+	on(setCurrentUser, (state, { userId }) => {
+		const user = state.users.find(u => u.id === userId)!;
+		return { ...state, currentUser: user };
+	})
 );
 
-export const userFeature = createFeature({
+export const UserFeature = createFeature({
 	name: userFeatureKey,
 	reducer: userReducer,
 });
