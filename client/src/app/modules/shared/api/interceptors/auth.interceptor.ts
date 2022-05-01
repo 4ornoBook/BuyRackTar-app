@@ -5,11 +5,12 @@ import {
 	HttpRequest,
 	HttpResponse,
 } from '@angular/common/http';
-import { mergeMap, Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { API_URLS } from 'config/api-routes';
+import { map } from 'rxjs/operators';
 
 const NO_AUTH_STATUS = 401;
 
@@ -24,7 +25,7 @@ export class AuthInterceptor implements HttpInterceptor {
 		const withAuthRequest = this.getRequestWithAuthHeader(req);
 
 		return next.handle(withAuthRequest).pipe(
-			mergeMap(event => {
+			map(event => {
 				if (
 					event instanceof HttpResponse &&
 					event.status === NO_AUTH_STATUS
@@ -40,7 +41,7 @@ export class AuthInterceptor implements HttpInterceptor {
 					}
 				}
 
-				return of(event);
+				return event;
 			})
 		);
 	}

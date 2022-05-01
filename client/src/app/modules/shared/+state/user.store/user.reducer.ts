@@ -9,7 +9,7 @@ export interface UserState {
 	users: UserEntity[];
 }
 
-export const initialState: UserState = {
+const initialState: UserState = {
 	account: null,
 	currentUser: null,
 	users: [],
@@ -27,7 +27,7 @@ export const userReducer = createReducer(
 	})
 );
 
-export const userFeature = createFeature({
+export const UserFeature = createFeature({
 	name: userFeatureKey,
 	reducer: userReducer,
 });

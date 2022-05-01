@@ -28,6 +28,13 @@ export const routes: Routes = [
 						m => m.DashboardModule
 					),
 			},
+			{
+				path: 'categories',
+				loadChildren: () =>
+					import('./modules/category/category.module').then(
+						m => m.CategoryModule
+					),
+			},
 		],
 	},
 	{ path: '**', component: NotFoundPageComponent },

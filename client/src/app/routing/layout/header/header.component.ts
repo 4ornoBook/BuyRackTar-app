@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MenuService } from '../menu.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { userFeature } from 'modules/shared/+state/user.store';
+import { UserFeature } from 'modules/shared/+state/user.store';
 
 @Component({
 	selector: 'app-header',
@@ -12,7 +12,7 @@ import { userFeature } from 'modules/shared/+state/user.store';
 export class HeaderComponent {
 	sidebarToggled$ = this.menuService.toggled$;
 
-	currentUser$ = this.store.select(userFeature.selectCurrentUser);
+	currentUser$ = this.store.select(UserFeature.selectCurrentUser);
 
 	constructor(
 		private readonly menuService: MenuService,

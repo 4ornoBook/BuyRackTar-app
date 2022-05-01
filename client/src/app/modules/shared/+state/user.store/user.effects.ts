@@ -51,7 +51,7 @@ export class UserEffects {
 						map(() => {
 							this.notificationsService.showInfo(
 								'Cool!',
-								'We have sent you a confirmation letter to your email. Please follow it to move forward!'
+								'We have sent a confirmation letter to your email. Please follow it to move forward!'
 							);
 						})
 					)
@@ -65,7 +65,7 @@ export class UserEffects {
 			ofType(getAccountUsers),
 			mergeMap(({ accountId }) =>
 				this.accountService.getAccountUsers(accountId).pipe(
-					map(({ data: users }) => {
+					map(users => {
 						return setAccountUsers({ users });
 					})
 				)

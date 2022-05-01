@@ -7,7 +7,7 @@ import { MenuService } from '../menu.service';
 	styleUrls: ['./sidebar.component.css'],
 })
 export class SidebarComponent {
-	sidebarToggled$ = this.menuSevice.toggled$;
+	sidebarToggled$ = this.menuService.toggled$;
 
-	constructor(private menuSevice: MenuService) {}
+	constructor(private menuService: MenuService) {}
 }

@@ -1,0 +1,20 @@
+
+
+<tui-island>
+	<h3 class="tui-island__title">
+		{{ category.name }}
+	</h3>
+	<p class="tui-island__paragraph">
+		{{ category.description }}
+	</p>
+	<p class="tui-island__paragraph tui-island__paragraph_button">
+		<button
+			tuiButton
+			appearance="secondary"
+			size="s"
+			[disabled]="!category.active"
+		>
+			{{category.active}}
+		</button>
+	</p>
+</tui-island>

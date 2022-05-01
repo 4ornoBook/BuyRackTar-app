@@ -14,8 +14,7 @@
 @media screen and (max-width: 51.5rem) {
 	.app-sidebar {
 		position: absolute;
-
-		box-shadow: 0 0 gray;
+		box-shadow: 4px 0 20px 0 #a8cef1;
 	}
 
 	.app-sidebar.hidden {
