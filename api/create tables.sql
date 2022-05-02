@@ -37,9 +37,9 @@ create table wallet_transaction (
 
 create table category (
     id serial primary key,
-    accound_id integer references account(id),
+    account_id integer references account(id),
     name varchar(255) not null,
-    limit money not null,
+    money_limit money not null,
     currency_id integer references currency(id),
     description text not null,
     active boolean not null
