@@ -26,4 +26,5 @@ const selectCategories = createSelector(
 
 export const CategorySelectors = {
 	selectCategories: selectCategories,
+	selectLoading: CategoryFeature.selectLoading,
 };

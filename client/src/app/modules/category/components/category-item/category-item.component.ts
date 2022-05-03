@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CategoryInterface } from '../../+state';
 
 enum BarColors {
@@ -12,6 +12,7 @@ enum BarColors {
 	selector: 'app-category-item',
 	templateUrl: './category-item.component.html',
 	styleUrls: ['./category-item.component.css'],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoryItemComponent {
 	@Input() category!: CategoryInterface;

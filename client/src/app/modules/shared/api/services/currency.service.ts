@@ -6,9 +6,7 @@ import { CurrencyEntity } from 'entities/Currency.entity';
 import { map } from 'rxjs/operators';
 import { API_URLS } from 'config/api-routes';
 
-@Injectable({
-	providedIn: 'root',
-})
+@Injectable()
 export class CurrencyService {
 	constructor(private readonly http: HttpClient) {}
 

@@ -1,0 +1,79 @@
+
+<div class="category-create">
+
+	<form [formGroup]="categoryForm">
+
+		<h2 class="tui-form__header tui-form__header_margin-top_none">Create a category</h2>
+
+		<div class="tui-form__row">
+			<tui-input formControlName="name">
+				Enter a name for category
+				<input
+					tuiTextfield
+					type="text"
+				/>
+			</tui-input>
+			<tui-field-error
+				formControlName="name"
+			></tui-field-error>
+		</div>
+
+		<div class="tui-form__row">
+			<tui-text-area
+				formControlName="description"
+			>
+				Category description
+			</tui-text-area>
+		</div>
+
+		<div class="tui-form__row tui-form__row_multi-fields">
+
+			<div class="tui-form__multi-field">
+				<tui-input-number formControlName="limit">
+					Monthly limit
+				</tui-input-number>
+				<tui-field-error
+					formControlName="limit"
+				></tui-field-error>
+			</div>
+
+			<div class="tui-form__multi-field">
+				<tui-select
+					*tuiLet="currencies$ | async as currencies"
+					formControlName="currencyId"
+					[valueContent]="currencies ? stringifyCurrency(currencies) : loading"
+				>
+					Currency
+					<tui-data-list *tuiDataList>
+						<button
+							*ngFor="let currency of currencies"
+							tuiOption
+							[value]="currency.id"
+						>
+							{{ currency.name }} - {{currency.code | tuiCurrency}}
+						</button>
+					</tui-data-list>
+				</tui-select>
+				<ng-template #loading>
+					<tui-loader class="tui-space_vertical-3 loader"></tui-loader>
+				</ng-template>
+			</div>
+
+		</div>
+
+		<div class="tui-form__buttons">
+			<button
+				tuiButton
+				size="m"
+				shape="rounded"
+				(click)="createCategory()"
+			>
+				Create
+			</button>
+		</div>
+
+	</form>
+
+
+
+</div>
