@@ -1,5 +1,12 @@
 import { Component, Input } from '@angular/core';
-import { CategoryEntity } from 'entities/Category.entity';
+import { CategoryInterface } from '../../+state';
+
+enum BarColors {
+	NO_COLOR = '#ffffff',
+	OK = '#8fe346',
+	WARNING = '#ffa889',
+	CLOSE_TO_LIMIT = '#ff8791',
+}
 
 @Component({
 	selector: 'app-category-item',
@@ -7,7 +14,24 @@ import { CategoryEntity } from 'entities/Category.entity';
 	styleUrls: ['./category-item.component.css'],
 })
 export class CategoryItemComponent {
-	@Input() category!: CategoryEntity;
+	@Input() category!: CategoryInterface;
+	@Input() categorySpending: number = 134;
 
 	constructor() {}
+
+	public getBarColor(): BarColors {
+		if (!this.category || !this.categorySpending) {
+			return BarColors.NO_COLOR;
+		}
+
+		const percentage = (this.categorySpending / this.category.limit) * 100;
+
+		if (percentage < 50) {
+			return BarColors.OK;
+		} else if (percentage < 80) {
+			return BarColors.WARNING;
+		} else {
+			return BarColors.CLOSE_TO_LIMIT;
+		}
+	}
 }
