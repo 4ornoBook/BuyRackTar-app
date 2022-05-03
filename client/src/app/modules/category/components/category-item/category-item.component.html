@@ -10,11 +10,7 @@
 	<p>
 		<label
 			tuiLabel
-			[label]="
-			categorySpending + (category.currency.code | tuiCurrency)
-			 + ' / ' +
-			 category.limit + (category.currency.code | tuiCurrency)
-"
+			[label]="categorySpending + ' ' + category.currency.name + ' / ' + category.limit + ' ' + category.currency.name"
 		>
 			<progress
 				class="spend-progress"
@@ -27,13 +23,13 @@
 
 	</p>
 	<p class="tui-island__paragraph tui-island__paragraph_button">
-		<button
+		<a
+			[routerLink]="'/categories/' + category.id"
 			tuiButton
 			appearance="secondary"
 			size="s"
-			[disabled]="!category.active"
 		>
-			{{category.active}}
-		</button>
+			Show details
+		</a>
 	</p>
 </tui-island>

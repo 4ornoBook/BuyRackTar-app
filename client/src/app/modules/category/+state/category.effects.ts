@@ -15,9 +15,9 @@ export class CategoryEffects {
 	loadCategories$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(loadCategories),
-			mergeMap(({ accountId }) =>
+			mergeMap(() =>
 				this.accountService
-					.getAccountCategories(accountId)
+					.getAccountCategories()
 					.pipe(map(categories => setCategories({ categories })))
 			)
 		)
