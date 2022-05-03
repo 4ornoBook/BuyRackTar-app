@@ -4,8 +4,27 @@
 	<h3 class="tui-island__title">
 		{{ category.name }}
 	</h3>
-	<p class="tui-island__paragraph">
+	<p class="tui-island__paragraph tui-space_bottom-3">
 		{{ category.description }}
+	</p>
+	<p>
+		<label
+			tuiLabel
+			[label]="
+			categorySpending + (category.currency.code | tuiCurrency)
+			 + ' / ' +
+			 category.limit + (category.currency.code | tuiCurrency)
+"
+		>
+			<progress
+				class="spend-progress"
+				tuiProgressBar
+				[color]="getBarColor()"
+				[max]="category.limit"
+				[value]="categorySpending"
+			></progress>
+		</label>
+
 	</p>
 	<p class="tui-island__paragraph tui-island__paragraph_button">
 		<button

@@ -1,8 +1,8 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CategoryActions, CategoryFeature } from '../../+state';
-import { UserFeature } from 'modules/shared/+state/user.store';
+import { CategoryActions, CategorySelectors } from '../../+state';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { UserSelectors } from 'modules/shared/+state/user.store';
 
 @UntilDestroy()
 @Component({
@@ -11,10 +11,8 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 	styleUrls: ['./categories-table.component.css'],
 })
 export class CategoriesTableComponent implements OnInit {
-	@Input() accountId: number | null = null;
-
-	private account$ = this.store.select(UserFeature.selectAccount);
-	public categories$ = this.store.select(CategoryFeature.selectCategories);
+	private account$ = this.store.select(UserSelectors.selectAccount);
+	public categories$ = this.store.select(CategorySelectors.selectCategories);
 
 	constructor(private readonly store: Store) {}
 
