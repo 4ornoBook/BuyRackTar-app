@@ -1,5 +1,5 @@
 export interface CurrencyEntity {
 	id: number;
-	code: string;
+	code: number;
 	name: string;
 }

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { UserEntity } from 'entities/User.entity';
 import { HttpClient } from '@angular/common/http';
 import { API_URLS } from 'config/api-routes';
 import { Observable } from 'rxjs';
@@ -13,9 +12,7 @@ export const ACCESS_TOKEN = 'accessToken';
 
 type AccountAndTokens = { account: AccountEntity } & Tokens;
 
-@Injectable({
-	providedIn: 'root',
-})
+@Injectable()
 export class AuthService {
 	constructor(private readonly http: HttpClient) {}
 

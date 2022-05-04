@@ -1,11 +1,33 @@
 
-<div
-	*ngFor="let category of categories$ | async"
+<a
+	routerLink="/categories/create"
+	tuiButton
+	size="m"
+	shape="rounded"
 	class="tui-space_bottom-3"
 >
-	<app-category-item
-		[category]="category"
-	></app-category-item>
-</div>
+	Create category
+</a>
+
+<tui-loader
+	[showLoader]="!!(categoriesLoading$ | async)"
+>
+	<div
+		*ngFor="let category of categories$ | async"
+		class="tui-space_bottom-3"
+	>
+		<tui-loader
+			class="inline-flex tui-space_right-2"
+			[showLoader]="!category.currency"
+			[overlay]="true"
+		>
+			<app-category-item
+				[category]="category"
+			></app-category-item>
+		</tui-loader>
+
+	</div>
+</tui-loader>
+
 
 

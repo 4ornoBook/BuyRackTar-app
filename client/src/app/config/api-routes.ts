@@ -10,4 +10,6 @@ export const API_URLS = {
 	ACCOUNT_REGISTER: `${API_URL}/auth/register`,
 	ACCOUNT_USERS: `${API_URL}/accounts/:id`,
 	ACCOUNT_CATEGORIES: `${API_URL}/accounts/categories`,
+
+	CURRENCIES_GET: `${API_URL}/currencies`,
 };
