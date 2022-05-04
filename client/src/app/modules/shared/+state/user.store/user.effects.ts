@@ -10,8 +10,8 @@ import {
 	setAccountUsers,
 } from './user.actions';
 import { map } from 'rxjs/operators';
-import { NotificationAlertService } from '../../helpers/notification-alert.service';
-import { AccountService } from '../../api/services/account.service';
+import { NotificationAlertService } from 'modules/shared/helpers/notification-alert.service';
+import { AccountService } from 'modules/shared/api/services/account.service';
 
 @Injectable()
 export class UserEffects {
