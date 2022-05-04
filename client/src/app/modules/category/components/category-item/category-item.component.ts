@@ -17,6 +17,7 @@ enum BarColors {
 export class CategoryItemComponent {
 	@Input() category!: CategoryInterface;
 	@Input() categorySpending: number = 134;
+	@Input() includeShowButton: boolean = false;
 
 	constructor() {}
 

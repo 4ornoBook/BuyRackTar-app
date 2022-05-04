@@ -12,4 +12,6 @@ export const API_URLS = {
 	ACCOUNT_CATEGORIES: `${API_URL}/accounts/categories`,
 
 	CURRENCIES_GET: `${API_URL}/currencies`,
+
+	CATEGORY_GET_ONE: `${API_URL}/categories/:id`,
 };

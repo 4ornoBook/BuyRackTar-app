@@ -1,1 +1,10 @@
-<p>category-view works!</p>
+
+
+<tui-loader
+	*tuiLet="category$ | async as category"
+	[showLoader]="!category"
+>
+	<div>{{ category?.id }}</div>
+	<div>{{ category?.name }}</div>
+	<div>{{ category?.description }}</div>
+</tui-loader>

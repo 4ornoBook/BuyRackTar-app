@@ -1,35 +1,41 @@
 
 
-<tui-island>
-	<h3 class="tui-island__title">
-		{{ category.name }}
-	</h3>
-	<p class="tui-island__paragraph tui-space_bottom-3">
-		{{ category.description }}
-	</p>
-	<p>
-		<label
-			tuiLabel
-			[label]="categorySpending + ' ' + category.currency.name + ' / ' + category.limit + ' ' + category.currency.name"
-		>
-			<progress
-				class="spend-progress"
-				tuiProgressBar
-				[color]="getBarColor()"
-				[max]="category.limit"
-				[value]="categorySpending"
-			></progress>
-		</label>
+<tui-loader
+	class="inline-flex"
+	[showLoader]="!category.currency"
+	[overlay]="true"
+>
+	<tui-island>
+		<h3 class="tui-island__title">
+			{{ category.name }}
+		</h3>
+		<p class="tui-island__paragraph tui-space_bottom-3">
+			{{ category.description }}
+		</p>
+		<p *ngIf="category.currency">
+			<label
+				tuiLabel
+				[label]="categorySpending + ' ' + category.currency.name + ' / ' + category.limit + ' ' + category.currency.name"
+			>
+				<progress
+					class="spend-progress"
+					tuiProgressBar
+					[color]="getBarColor()"
+					[max]="category.limit"
+					[value]="categorySpending"
+				></progress>
+			</label>
 
-	</p>
-	<p class="tui-island__paragraph tui-island__paragraph_button">
-		<a
-			[routerLink]="'/categories/' + category.id"
-			tuiButton
-			appearance="secondary"
-			size="s"
-		>
-			Show details
-		</a>
-	</p>
-</tui-island>
+		</p>
+		<p class="tui-island__paragraph tui-island__paragraph_button">
+			<a
+				[routerLink]="'/categories/' + category.id"
+				tuiButton
+				appearance="secondary"
+				size="s"
+			>
+				Show details
+			</a>
+		</p>
+	</tui-island>
+</tui-loader>

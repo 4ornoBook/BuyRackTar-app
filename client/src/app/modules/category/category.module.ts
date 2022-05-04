@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CategoryViewComponent } from './components/category-view/category-view.component';
 import { CategoryItemComponent } from './components/category-item/category-item.component';
 import { CategoriesTableComponent } from './components/categories-table/categories-table.component';
+import { CategoryFormComponent } from './components/category-form/category-form.component';
 import { CategoryCreateComponent } from './components/category-create/category-create.component';
 import { CategoryRoutingModule } from './category.routing';
 import {
@@ -18,6 +19,7 @@ import {
 import {
 	TuiButtonModule,
 	TuiDataListModule,
+	TuiGroupModule,
 	TuiLabelModule,
 	TuiLoaderModule,
 } from '@taiga-ui/core';
@@ -33,6 +35,7 @@ import { TuiLetModule } from '@taiga-ui/cdk';
 		CategoryViewComponent,
 		CategoryItemComponent,
 		CategoriesTableComponent,
+		CategoryFormComponent,
 		CategoryCreateComponent,
 	],
 	imports: [
@@ -55,6 +58,7 @@ import { TuiLetModule } from '@taiga-ui/cdk';
 		TuiDataListWrapperModule,
 		TuiDataListModule,
 		TuiLetModule,
+		TuiGroupModule,
 	],
 })
 export class CategoryModule {}
