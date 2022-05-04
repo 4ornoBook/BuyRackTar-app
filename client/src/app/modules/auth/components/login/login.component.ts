@@ -48,10 +48,14 @@ export class LoginComponent {
 	}
 
 	private login() {
-		this.store.dispatch(UserActions.login(this.credentialsForm.value));
+		this.store.dispatch(
+			UserActions.login({ credentials: this.credentialsForm.value })
+		);
 	}
 
 	private register() {
-		this.store.dispatch(UserActions.register(this.credentialsForm.value));
+		this.store.dispatch(
+			UserActions.register({ credentials: this.credentialsForm.value })
+		);
 	}
 }
