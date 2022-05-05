@@ -14,7 +14,7 @@ create table client (
 
 create table currency (
     id serial primary key,
-    code varchar(255) not null,
+    code smallint not null,
     name varchar(255) not null
 );
 
