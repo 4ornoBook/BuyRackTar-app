@@ -1,8 +1,9 @@
 import { CategoryFeature } from './category.reducer';
-import { createSelector } from '@ngrx/store';
+import { createSelector, Store } from '@ngrx/store';
 import { CurrencySelectors } from 'modules/shared/+state/currency.store';
 import { CategoryInterface } from './interfaces';
-import { CurrencyEntity } from 'entities/Currency.entity';
+import { combineLatest, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 const selectCategories = createSelector(
 	CategoryFeature.selectCategories,
@@ -18,13 +19,30 @@ const selectCategories = createSelector(
 				limit: category.limit,
 				currency: currencies.find(
 					curr => curr.id === category.currencyId
-				) as CurrencyEntity,
+				),
 			};
 		});
 	}
 );
 
+const selectCategory = (
+	store: Store,
+	categoryId$: Observable<number>
+): Observable<CategoryInterface> => {
+	return combineLatest([
+		store.select(CategoryFeature.selectCategories),
+		categoryId$,
+	]).pipe(
+		map(([categories, categoryId]) => {
+			return categories.find(
+				cat => cat.id === categoryId
+			) as CategoryInterface;
+		})
+	);
+};
+
 export const CategorySelectors = {
+	selectCategory: selectCategory,
 	selectCategories: selectCategories,
 	selectLoading: CategoryFeature.selectLoading,
 };
