@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { loadCurrencies, setCurrencies } from './currency.actions';
 import { mergeMap } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CurrencyService } from '../../api/services/currency.service';
+import { CurrencyService } from 'modules/shared/api/services/currency.service';
 
 @Injectable()
 export class CurrencyEffects {

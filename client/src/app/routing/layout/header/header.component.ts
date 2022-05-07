@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MenuService } from '../menu.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { UserSelectors } from 'modules/shared/+state/user.store';
+import { UserSelectors } from '+state/user.store';
 
 @Component({
 	selector: 'app-header',

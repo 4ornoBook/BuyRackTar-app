@@ -7,7 +7,7 @@ export interface CurrencyState {
 }
 
 const initialState: CurrencyState = {
-	currencies: [{ id: 1, name: 'USD', code: 840 }],
+	currencies: [],
 };
 
 const currencyFeatureKey = 'currency';

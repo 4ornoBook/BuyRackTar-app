@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { CategoryInterface } from '../../+state';
+import { CategoryInterface } from '+state/category.store';
 
 enum BarColors {
 	NO_COLOR = '#ffffff',

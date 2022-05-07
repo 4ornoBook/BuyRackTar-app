@@ -23,12 +23,11 @@ import {
 	TuiLabelModule,
 	TuiLoaderModule,
 } from '@taiga-ui/core';
-import { StoreModule } from '@ngrx/store';
-import { CategoryFeature, CategoryEffects } from './+state';
-import { EffectsModule } from '@ngrx/effects';
 import { TuiCurrencyPipeModule } from '@taiga-ui/addon-commerce';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TuiLetModule } from '@taiga-ui/cdk';
+import { SharedModule } from '../shared/shared.module';
+import { TuiArcChartModule, TuiRingChartModule } from '@taiga-ui/addon-charts';
 
 @NgModule({
 	declarations: [
@@ -40,8 +39,6 @@ import { TuiLetModule } from '@taiga-ui/cdk';
 	],
 	imports: [
 		CommonModule,
-		StoreModule.forFeature(CategoryFeature),
-		EffectsModule.forFeature([CategoryEffects]),
 		CategoryRoutingModule,
 		TuiIslandModule,
 		TuiButtonModule,
@@ -59,6 +56,9 @@ import { TuiLetModule } from '@taiga-ui/cdk';
 		TuiDataListModule,
 		TuiLetModule,
 		TuiGroupModule,
+		SharedModule,
+		TuiRingChartModule,
+		TuiArcChartModule,
 	],
 })
 export class CategoryModule {}

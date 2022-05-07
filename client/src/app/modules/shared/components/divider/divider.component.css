@@ -1,0 +1,26 @@
+
+.divider {
+	border-radius: 2px;
+	background-color: var(--color-text-primary);
+	margin: .7rem 0;
+}
+
+.divider-1 {
+	height: 1px;
+}
+
+.divider-2 {
+	height: 2px;
+}
+
+.divider-3 {
+	height: 3px;
+}
+
+.divider-4 {
+	height: 4px;
+}
+
+.divider-5 {
+	height: 5px;
+}

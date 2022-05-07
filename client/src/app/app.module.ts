@@ -29,6 +29,7 @@ import { TuiInputModule } from '@taiga-ui/kit';
 import { ErrorInterceptor } from './modules/shared/api/interceptors/error.interceptor';
 import { SharedModule } from './modules/shared/shared.module';
 import { EffectsModule } from '@ngrx/effects';
+import { StateModule } from './+state/state.module';
 
 @NgModule({
 	declarations: [
@@ -57,6 +58,7 @@ import { EffectsModule } from '@ngrx/effects';
 		TuiInputModule,
 		TuiLabelModule,
 		TuiLinkModule,
+		StateModule,
 	],
 	providers: [
 		{

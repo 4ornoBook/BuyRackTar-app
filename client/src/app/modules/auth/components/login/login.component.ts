@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserActions } from 'modules/shared/+state/user.store';
-import { AuthService } from '../../../shared/api/services/auth.service';
+import { UserActions } from '+state/user.store';
+import { AuthService } from 'modules/shared/api/services/auth.service';
 import { Store } from '@ngrx/store';
 
 enum AuthType {
