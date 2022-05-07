@@ -1,0 +1,26 @@
+
+.category-info {
+	padding: 1rem;
+}
+
+.category-name {
+	width: min-content;
+	color: var(--header-title-color);
+}
+
+.category-info {
+	display: flex;
+	gap: 3rem;
+}
+
+.category-name-description {
+	max-width: clamp(280px, 40%, 600px);
+}
+
+/*.category-info .category-name-description {*/
+/*	flex-basis: 60%;*/
+/*}*/
+
+/*.category-info .spendings-circle {*/
+/*	flex-basis: 40%;*/
+/*}*/

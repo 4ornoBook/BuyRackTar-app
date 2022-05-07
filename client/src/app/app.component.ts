@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CurrencyActions } from 'modules/shared/+state/currency.store';
+import { CurrencyActions } from '+state/currency.store';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector

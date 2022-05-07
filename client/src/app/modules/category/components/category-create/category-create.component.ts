@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { CategoryForm } from '../category-form/category-form.component';
 import { Store } from '@ngrx/store';
+import { CategoryActions } from '+state/category.store';
+import { CategoryDto } from '+state/category.store';
 
 @Component({
 	selector: 'app-category-create',
@@ -10,8 +11,11 @@ import { Store } from '@ngrx/store';
 export class CategoryCreateComponent {
 	constructor(private store: Store) {}
 
-	createCategory(categoryForm: CategoryForm): void {
+	createCategory(categoryForm: CategoryDto): void {
 		console.log(categoryForm);
-		// this.store.dispatch()
+
+		this.store.dispatch(
+			CategoryActions.createCategory({ categoryDto: categoryForm })
+		);
 	}
 }

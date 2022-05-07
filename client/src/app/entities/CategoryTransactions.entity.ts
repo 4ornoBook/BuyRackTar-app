@@ -1,7 +1,7 @@
 export interface CategoryTransactionsEntity {
 	id: number;
-	walletId: string;
-	categoryId: string;
+	walletId: number;
+	categoryId: number;
 	amount: number;
 	time: number;
 	description: string;

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CategoryActions, CategorySelectors } from '../../+state';
+import { CategoryActions, CategorySelectors } from '+state/category.store';
 import { UntilDestroy } from '@ngneat/until-destroy';
 
 @UntilDestroy()
