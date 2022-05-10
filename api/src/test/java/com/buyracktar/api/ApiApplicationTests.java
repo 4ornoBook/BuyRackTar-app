@@ -1,4 +1,4 @@
-package com.byracktar.api;
+package com.buyracktar.api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
