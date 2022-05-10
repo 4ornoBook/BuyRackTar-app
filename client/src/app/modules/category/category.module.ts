@@ -19,15 +19,19 @@ import {
 import {
 	TuiButtonModule,
 	TuiDataListModule,
+	TuiDropdownControllerModule,
 	TuiGroupModule,
+	TuiHostedDropdownModule,
 	TuiLabelModule,
 	TuiLoaderModule,
+	TuiSvgModule,
 } from '@taiga-ui/core';
 import { TuiCurrencyPipeModule } from '@taiga-ui/addon-commerce';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TuiLetModule } from '@taiga-ui/cdk';
 import { SharedModule } from '../shared/shared.module';
 import { TuiArcChartModule, TuiRingChartModule } from '@taiga-ui/addon-charts';
+import { CategoryEditComponent } from './components/category-edit/category-edit.component';
 
 @NgModule({
 	declarations: [
@@ -36,6 +40,7 @@ import { TuiArcChartModule, TuiRingChartModule } from '@taiga-ui/addon-charts';
 		CategoriesTableComponent,
 		CategoryFormComponent,
 		CategoryCreateComponent,
+		CategoryEditComponent,
 	],
 	imports: [
 		CommonModule,
@@ -59,6 +64,9 @@ import { TuiArcChartModule, TuiRingChartModule } from '@taiga-ui/addon-charts';
 		SharedModule,
 		TuiRingChartModule,
 		TuiArcChartModule,
+		TuiSvgModule,
+		TuiHostedDropdownModule,
+		TuiDropdownControllerModule,
 	],
 })
 export class CategoryModule {}

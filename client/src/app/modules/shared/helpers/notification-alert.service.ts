@@ -9,6 +9,15 @@ export class NotificationAlertService {
 		private readonly notificationsService: TuiNotificationsService
 	) {}
 
+	showSuccess(label: string, content: string) {
+		this.notificationsService
+			.show(content, {
+				label,
+				status: TuiNotification.Success,
+			})
+			.subscribe();
+	}
+
 	showInfo(label: string, content: string) {
 		this.notificationsService
 			.show(content, {

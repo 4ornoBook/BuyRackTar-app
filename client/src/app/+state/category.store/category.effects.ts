@@ -10,6 +10,7 @@ import {
 	loadCategoryTransactions,
 	setCategories,
 	setCategoriesLoading,
+	updateCategory,
 } from './category.actions';
 import { first, mergeMap, of } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -68,9 +69,26 @@ export class CategoryEffects {
 			mergeMap(({ categoryDto }) =>
 				this.categoryService.create(categoryDto).pipe(
 					map(category => {
-						this.notificationService.showInfo(
+						this.notificationService.showSuccess(
 							'Success',
 							`Category ${category.name} was created.`
+						);
+						return addCategory({ category });
+					})
+				)
+			)
+		)
+	);
+
+	updateCategory$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(updateCategory),
+			mergeMap(({ categoryId, categoryDto }) =>
+				this.categoryService.update(categoryId, categoryDto).pipe(
+					map(category => {
+						this.notificationService.showSuccess(
+							'Success',
+							`Category ${category.name} was updated.`
 						);
 						return addCategory({ category });
 					})

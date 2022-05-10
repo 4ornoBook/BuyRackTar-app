@@ -1,0 +1,56 @@
+<tui-loader
+	[showLoader]="!transactions.length"
+	[overlay]="true"
+>
+	<table class="tui-table">
+		<thead>
+		<tr class="tui-table__tr">
+			<th *ngIf="transactionType === TransactionTypes.Wallet" class="tui-table__th tui-table__th_font-size_l">
+				From wallet
+			</th>
+			<th *ngIf="transactionType === TransactionTypes.Wallet" class="tui-table__th tui-table__th_font-size_l">
+				To wallet
+			</th>
+
+			<th *ngIf="transactionType === TransactionTypes.Category" class="tui-table__th tui-table__th_font-size_l">
+				From wallet
+			</th>
+			<th *ngIf="transactionType === TransactionTypes.Category" class="tui-table__th tui-table__th_font-size_l">
+				<span>To category</span>
+				<tui-svg src="tuiIconFile"></tui-svg>
+			</th>
+
+			<th class="tui-table__th tui-table__th_font-size_l">Amount</th>
+			<th class="tui-table__th tui-table__th_font-size_l">Description</th>
+			<th class="tui-table__th tui-table__th_font-size_l">Date</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr
+			*ngFor="let transaction of transactions"
+			class="tui-table__tr"
+		>
+			<td *ngIf="transactionType === TransactionTypes.Wallet" class="tui-table__th">
+				<a tuiLink [routerLink]="'/wallets/' + transaction?.fromWalletId">{{ transaction?.fromWalletId }}</a>
+			</td>
+			<td *ngIf="transactionType === TransactionTypes.Wallet" class="tui-table__th">
+				<a tuiLink [routerLink]="'/wallets/' + transaction?.toWalletId">{{ transaction?.fromWalletId }}</a>
+			</td>
+
+			<td *ngIf="transactionType === TransactionTypes.Category" class="tui-table__th">
+				<a tuiLink [routerLink]="'/wallets/' + transaction?.walletId">{{ transaction?.walletId }}</a>
+			</td>
+			<td *ngIf="transactionType === TransactionTypes.Category" class="tui-table__th">
+				<a tuiLink [routerLink]="'/categories/' + transaction?.categoryId">{{ transaction?.categoryId }}</a>
+			</td>
+
+
+			<td class="tui-table__th">{{ transaction?.amount }}</td>
+			<td class="tui-table__th tui-table__td_text_overflow">{{ transaction?.description }}</td>
+			<td class="tui-table__th">{{ ((transaction?.time || 0) * 1000) | date:'dd-MM-yyyy hh:mm a'}}</td>
+		</tr>
+		</tbody>
+	</table>
+</tui-loader>
+
+
