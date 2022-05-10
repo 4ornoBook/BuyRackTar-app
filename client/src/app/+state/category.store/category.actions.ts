@@ -31,6 +31,11 @@ export const createCategory = createAction(
 	props<{ categoryDto: CategoryDto }>()
 );
 
+export const updateCategory = createAction(
+	`${context} update category`,
+	props<{ categoryId: number; categoryDto: CategoryDto }>()
+);
+
 export const loadCategoryTransactions = createAction(
 	`${context} load category spendings`,
 	props<{ categoryId: number }>()

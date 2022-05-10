@@ -12,8 +12,6 @@ export class CategoryCreateComponent {
 	constructor(private store: Store) {}
 
 	createCategory(categoryForm: CategoryDto): void {
-		console.log(categoryForm);
-
 		this.store.dispatch(
 			CategoryActions.createCategory({ categoryDto: categoryForm })
 		);

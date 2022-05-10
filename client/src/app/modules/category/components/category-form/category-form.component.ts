@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+	Component,
+	EventEmitter,
+	Input,
+	OnChanges,
+	OnInit,
+	Output,
+} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CurrencySelectors } from '+state/currency.store';
@@ -10,17 +17,17 @@ import {
 } from '@taiga-ui/cdk';
 import { CurrencyEntity } from 'entities/Currency.entity';
 import { CategoryEntity } from 'entities/Category.entity';
-import { CategoryDto } from '+state/category.store';
+import { CategoryEditDto } from '+state/category.store/interfaces/category-edit.dto';
 @Component({
 	selector: 'app-category-form',
 	templateUrl: './category-form.component.html',
 	styleUrls: ['./category-form.component.css'],
 })
-export class CategoryFormComponent {
+export class CategoryFormComponent implements OnChanges {
 	@Input() title: string = 'Create a category';
-	@Input() category?: CategoryEntity;
+	@Input() category?: CategoryEntity | null;
 
-	@Output() submitCategory = new EventEmitter<CategoryDto>();
+	@Output() submitCategory = new EventEmitter<CategoryEditDto>();
 
 	public currencies$ = this.store.select(CurrencySelectors.selectCurrencies);
 
@@ -33,12 +40,24 @@ export class CategoryFormComponent {
 
 	constructor(private readonly store: Store) {}
 
+	ngOnChanges() {
+		this.categoryForm.patchValue(
+			{
+				...this.category,
+			},
+			{ onlySelf: true }
+		);
+	}
+
 	submitForm() {
 		if (this.categoryForm.invalid) {
 			return;
 		}
 
-		this.submitCategory.emit(this.categoryForm.value);
+		this.submitCategory.emit({
+			id: this.category?.id || null,
+			...this.categoryForm.value,
+		});
 	}
 
 	@tuiPure

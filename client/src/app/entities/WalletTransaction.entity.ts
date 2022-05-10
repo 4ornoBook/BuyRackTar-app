@@ -1,8 +1,6 @@
-export interface WalletTransactionEntity {
-	id: number;
+import { TransactionInterface } from '../interfaces/api/transaction.interface';
+
+export interface WalletTransactionEntity extends TransactionInterface {
 	fromWalletId: number;
 	toWalletId: number;
-	amount: number;
-	time: number;
-	description: string;
 }

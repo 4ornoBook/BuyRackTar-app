@@ -1,18 +1,16 @@
 {
   "categories": [
     {
-      "id": 1,
-      "accountId": 1,
-      "name": "Games",
-      "active": true,
-      "currencyId": 1,
-      "description": "Aboba hello some big text for text lorem ipsub debil sit amet ya Anton vsem privet. A category for my leisure time, i like playing games. Sample text sample text sample text bzzzzz.",
-      "limit": 130
+      "name": "Games #2",
+      "description": "Aboba hello some big text for text lorem ipsub debil sit amet ya Anton vsem privet. A category for my leisure time, i like playing games. Sample text sample text sample text bzzzzz. Some additional text.",
+      "limit": 140,
+      "currencyId": 2,
+      "id": 1
     },
     {
       "id": 2,
       "accountId": 1,
-      "name": "Grocery",
+      "name": "Grocery salabim",
       "active": true,
       "currencyId": 1,
       "description": "Aboba hello some big text for text lorem ipsub debil sit amet ya Anton vsem privet. A category for my leisure time, i like playing games. Sample text sample text sample text bzzzzz.",

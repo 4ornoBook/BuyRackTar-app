@@ -4,6 +4,7 @@ import { CurrencySelectors } from '+state/currency.store';
 import { CategoryInterface, CategoryWithTransactions } from './interfaces';
 import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { CategoryEntity } from '../../entities/Category.entity';
 
 const selectCategories = createSelector(
 	CategoryFeature.selectCategories,
@@ -30,7 +31,7 @@ const selectCategory = (
 	categoryId$: Observable<number>
 ): Observable<CategoryWithTransactions | null> => {
 	return combineLatest([
-		store.select(CategoryFeature.selectCategories),
+		store.select(selectCategories),
 		store.select(CategoryFeature.selectCategoryTransactions),
 		categoryId$,
 	]).pipe(
@@ -52,7 +53,23 @@ const selectCategory = (
 	);
 };
 
+const selectSimpleCategory = (
+	store: Store,
+	categoryId$: Observable<number>
+): Observable<CategoryEntity | null> => {
+	return combineLatest([
+		store.select(CategoryFeature.selectCategories),
+		categoryId$,
+	]).pipe(
+		map(
+			([categories, categoryId]) =>
+				categories.find(cat => cat.id === categoryId) || null
+		)
+	);
+};
+
 export const CategorySelectors = {
+	selectSimpleCategory: selectSimpleCategory,
 	selectCategory: selectCategory,
 	selectCategories: selectCategories,
 	selectLoading: CategoryFeature.selectLoading,

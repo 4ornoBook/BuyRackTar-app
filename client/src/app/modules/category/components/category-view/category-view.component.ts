@@ -13,6 +13,7 @@ import { Store } from '@ngrx/store';
 import { CategoryActions, CategorySelectors } from '+state/category.store';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { CategoryTransactionsEntity } from 'entities/CategoryTransactions.entity';
+import { TransactionTypes } from 'enums/transaction-type.enum';
 
 @UntilDestroy()
 @Component({
@@ -23,10 +24,14 @@ import { CategoryTransactionsEntity } from 'entities/CategoryTransactions.entity
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoryViewComponent implements OnInit {
+	public TransactionTypes = TransactionTypes;
+
 	public category$ = CategorySelectors.selectCategory(
 		this.store,
 		this.categoryId$
 	);
+
+	public buttonsDropdownOpen = false;
 
 	constructor(
 		private store: Store,

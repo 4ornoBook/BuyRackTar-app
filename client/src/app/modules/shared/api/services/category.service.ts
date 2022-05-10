@@ -28,6 +28,15 @@ export class CategoryService {
 			.pipe(map(({ data: category }) => category));
 	}
 
+	update(categoryId: number, categoryDto: CategoryDto) {
+		return this.http
+			.put<ApiResponse<CategoryEntity>>(
+				API_URLS.CATEGORY_UPDATE.replace(':id', String(categoryId)),
+				categoryDto
+			)
+			.pipe(map(({ data: category }) => category));
+	}
+
 	getCategoryTransactions(categoryId: number) {
 		return this.http
 			.get<ApiResponse<CategoryTransactionsEntity[]>>(

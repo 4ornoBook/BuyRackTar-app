@@ -16,6 +16,7 @@ export const API_URLS = {
 
 	CATEGORY_GET_ONE: `${API_URL}/categories/:id`,
 	CATEGORY_CREATE: `${API_URL}/categories`,
+	CATEGORY_UPDATE: `${API_URL}/categories/:id`,
 	// CATEGORY_TRANSACTIONS: `${API_URL}/categories/:id/transactions`, -- original
 	CATEGORY_TRANSACTIONS: `${API_URL}/category-transactions`,
 };

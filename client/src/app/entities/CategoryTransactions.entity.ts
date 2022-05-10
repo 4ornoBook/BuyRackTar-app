@@ -1,8 +1,6 @@
-export interface CategoryTransactionsEntity {
-	id: number;
+import { TransactionInterface } from '../interfaces/api/transaction.interface';
+
+export interface CategoryTransactionsEntity extends TransactionInterface {
 	walletId: number;
 	categoryId: number;
-	amount: number;
-	time: number;
-	description: string;
 }
