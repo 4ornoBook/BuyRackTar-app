@@ -1,0 +1,59 @@
+{
+  "categories": [
+    {
+      "name": "Games #2",
+      "description": "Aboba hello some big text for text lorem ipsub debil sit amet ya Anton vsem privet. A category for my leisure time, i like playing games. Sample text sample text sample text bzzzzz. Some additional text.",
+      "limit": 140,
+      "currencyId": 2,
+      "id": 1
+    },
+    {
+      "id": 2,
+      "accountId": 1,
+      "name": "Grocery salabim",
+      "active": true,
+      "currencyId": 1,
+      "description": "Aboba hello some big text for text lorem ipsub debil sit amet ya Anton vsem privet. A category for my leisure time, i like playing games. Sample text sample text sample text bzzzzz.",
+      "limit": 200
+    },
+    {
+      "id": 3,
+      "accountId": 1,
+      "name": "Games",
+      "active": true,
+      "currencyId": 1,
+      "description": "Sim salabim ahalay mahalay there is nothing interesting to read. A category for my leisure time, i like playing games. Sample text sample text sample text bzzzzz.",
+      "limit": 320
+    }
+  ],
+  "currencies": [
+    {
+      "id": 1,
+      "name": "USD",
+      "code": 840
+    },
+    {
+      "id": 2,
+      "name": "EUR",
+      "code": 978
+    }
+  ],
+  "category-transactions": [
+    {
+      "id": 1,
+      "categoryId": 1,
+      "description": "Simple transaction",
+      "amount": 30,
+      "time": 1651859258,
+      "walletId": 1
+    },
+    {
+      "id": 2,
+      "categoryId": 1,
+      "description": "Simple transaction #2",
+      "amount": 80,
+      "time": 1651856891,
+      "walletId": 1
+    }
+  ]
+}

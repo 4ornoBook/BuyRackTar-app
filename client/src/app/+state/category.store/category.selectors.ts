@@ -1,9 +1,10 @@
 import { CategoryFeature } from './category.reducer';
 import { createSelector, Store } from '@ngrx/store';
-import { CurrencySelectors } from 'modules/shared/+state/currency.store';
-import { CategoryInterface } from './interfaces';
+import { CurrencySelectors } from '+state/currency.store';
+import { CategoryInterface, CategoryWithTransactions } from './interfaces';
 import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { CategoryEntity } from '../../entities/Category.entity';
 
 const selectCategories = createSelector(
 	CategoryFeature.selectCategories,
@@ -28,20 +29,47 @@ const selectCategories = createSelector(
 const selectCategory = (
 	store: Store,
 	categoryId$: Observable<number>
-): Observable<CategoryInterface> => {
+): Observable<CategoryWithTransactions | null> => {
 	return combineLatest([
-		store.select(CategoryFeature.selectCategories),
+		store.select(selectCategories),
+		store.select(CategoryFeature.selectCategoryTransactions),
 		categoryId$,
 	]).pipe(
-		map(([categories, categoryId]) => {
-			return categories.find(
+		map(([categories, categoryTransactions, categoryId]) => {
+			const category = categories.find(
 				cat => cat.id === categoryId
 			) as CategoryInterface;
+			const transactions = categoryTransactions[categoryId];
+
+			if (!category) {
+				return null;
+			}
+
+			return {
+				...category,
+				transactions,
+			};
 		})
 	);
 };
 
+const selectSimpleCategory = (
+	store: Store,
+	categoryId$: Observable<number>
+): Observable<CategoryEntity | null> => {
+	return combineLatest([
+		store.select(CategoryFeature.selectCategories),
+		categoryId$,
+	]).pipe(
+		map(
+			([categories, categoryId]) =>
+				categories.find(cat => cat.id === categoryId) || null
+		)
+	);
+};
+
 export const CategorySelectors = {
+	selectSimpleCategory: selectSimpleCategory,
 	selectCategory: selectCategory,
 	selectCategories: selectCategories,
 	selectLoading: CategoryFeature.selectLoading,

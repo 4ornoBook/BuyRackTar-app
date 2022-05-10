@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { AuthService } from '../../api/services/auth.service';
+import { AuthService } from 'modules/shared/api/services/auth.service';
 import { mergeMap } from 'rxjs';
 import {
 	login,

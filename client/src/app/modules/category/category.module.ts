@@ -19,16 +19,19 @@ import {
 import {
 	TuiButtonModule,
 	TuiDataListModule,
+	TuiDropdownControllerModule,
 	TuiGroupModule,
+	TuiHostedDropdownModule,
 	TuiLabelModule,
 	TuiLoaderModule,
+	TuiSvgModule,
 } from '@taiga-ui/core';
-import { StoreModule } from '@ngrx/store';
-import { CategoryFeature, CategoryEffects } from './+state';
-import { EffectsModule } from '@ngrx/effects';
 import { TuiCurrencyPipeModule } from '@taiga-ui/addon-commerce';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TuiLetModule } from '@taiga-ui/cdk';
+import { SharedModule } from '../shared/shared.module';
+import { TuiArcChartModule, TuiRingChartModule } from '@taiga-ui/addon-charts';
+import { CategoryEditComponent } from './components/category-edit/category-edit.component';
 
 @NgModule({
 	declarations: [
@@ -37,11 +40,10 @@ import { TuiLetModule } from '@taiga-ui/cdk';
 		CategoriesTableComponent,
 		CategoryFormComponent,
 		CategoryCreateComponent,
+		CategoryEditComponent,
 	],
 	imports: [
 		CommonModule,
-		StoreModule.forFeature(CategoryFeature),
-		EffectsModule.forFeature([CategoryEffects]),
 		CategoryRoutingModule,
 		TuiIslandModule,
 		TuiButtonModule,
@@ -59,6 +61,12 @@ import { TuiLetModule } from '@taiga-ui/cdk';
 		TuiDataListModule,
 		TuiLetModule,
 		TuiGroupModule,
+		SharedModule,
+		TuiRingChartModule,
+		TuiArcChartModule,
+		TuiSvgModule,
+		TuiHostedDropdownModule,
+		TuiDropdownControllerModule,
 	],
 })
 export class CategoryModule {}
