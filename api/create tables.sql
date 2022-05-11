@@ -9,7 +9,7 @@ create table client (
     id serial primary key,
     account_id integer references account(id),
     name varchar (255) not null,
-    isOwner boolean not null
+    is_owner boolean not null
 );
 
 create table currency (
