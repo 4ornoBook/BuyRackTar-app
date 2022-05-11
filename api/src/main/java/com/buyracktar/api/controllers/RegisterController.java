@@ -1,10 +1,10 @@
-package com.buyracktar.api.controller;
+package com.buyracktar.api.controllers;
 
-import com.buyracktar.api.entity.LoginCredentials;
-import com.buyracktar.api.entity.Account;
+import com.buyracktar.api.entities.LoginCredentials;
+import com.buyracktar.api.entities.Account;
 
-import com.buyracktar.api.entity.User;
-import com.buyracktar.api.repository.AccountRepository;
+import com.buyracktar.api.entities.User;
+import com.buyracktar.api.repositories.AccountRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

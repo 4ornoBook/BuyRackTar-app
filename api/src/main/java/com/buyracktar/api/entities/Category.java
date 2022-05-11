@@ -1,4 +1,4 @@
-package com.buyracktar.api.entity;
+package com.buyracktar.api.entities;
 
 import java.math.BigDecimal;
 

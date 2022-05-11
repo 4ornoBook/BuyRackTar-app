@@ -1,7 +1,7 @@
-package com.buyracktar.api.service;
+package com.buyracktar.api.services;
 
-import com.buyracktar.api.entity.Account;
-import com.buyracktar.api.repository.AccountRepository;
+import com.buyracktar.api.entities.Account;
+import com.buyracktar.api.repositories.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

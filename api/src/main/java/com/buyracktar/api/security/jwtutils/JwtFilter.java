@@ -1,6 +1,6 @@
 package com.buyracktar.api.security.jwtutils;
 
-import com.buyracktar.api.service.JwtAccountDetailsService;
+import com.buyracktar.api.services.JwtAccountDetailsService;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

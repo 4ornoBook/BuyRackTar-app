@@ -1,8 +1,7 @@
-package com.buyracktar.api.controller;
+package com.buyracktar.api.controllers;
 
-import com.buyracktar.api.entity.Account;
-import com.buyracktar.api.repository.AccountRepository;
-import com.buyracktar.api.service.JwtAccountDetailsService;
+import com.buyracktar.api.repositories.AccountRepository;
+import com.buyracktar.api.services.JwtAccountDetailsService;
 import com.buyracktar.api.security.jwtutils.TokenManager;
 import com.buyracktar.api.security.jwtutils.models.JwtRequestModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +11,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
-import org.springframework.web.client.RestTemplate;
 
 
 @CrossOrigin(origins = "http://localhost:4200")
