@@ -1,5 +1,6 @@
 package com.buyracktar.api.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +23,7 @@ public class Account implements UserDetails {
 
 	private String email;
 
+	@JsonIgnore
 	private String password;
 
 	private boolean confirmed;

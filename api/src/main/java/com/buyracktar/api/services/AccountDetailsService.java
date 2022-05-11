@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import static java.lang.String.format;
 
 @Service
-public class JwtAccountDetailsService implements UserDetailsService {
+public class AccountDetailsService implements UserDetailsService {
 	@Autowired
 	AccountRepository accountRepository;
 	@Override

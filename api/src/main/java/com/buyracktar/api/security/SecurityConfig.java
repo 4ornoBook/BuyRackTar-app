@@ -34,7 +34,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-//		return new BCryptPasswordEncoder(15);
     }
 
     @Override
