@@ -1,5 +1,6 @@
 package com.buyracktar.api.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,7 @@ public class User {
 	private String name;
 
 	@Column(name = "is_owner")
+	@JsonProperty("isOwner")
 	private boolean isOwner;
 
 }
