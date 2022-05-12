@@ -2,12 +2,11 @@ package com.buyracktar.api.controllers;
 
 import com.buyracktar.api.responsemodels.MyResponseTemplate;
 import com.buyracktar.api.entities.Account;
-import com.buyracktar.api.repositories.AccountRepository;
 import com.buyracktar.api.responsemodels.LoginResponse;
 import com.buyracktar.api.services.AccountDetailsService;
 import com.buyracktar.api.security.jwtutils.TokenManager;
 import com.buyracktar.api.security.jwtutils.models.LoginRequestModel;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -17,19 +16,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
+@AllArgsConstructor
 public class LoginController {
 
-    @Autowired
-    AccountRepository accountRepository;
+    private final AccountDetailsService userDetailsService;
 
-    @Autowired
-    private AccountDetailsService userDetailsService;
-    @Autowired
-    private AuthenticationManager authenticationManager;
-    @Autowired
-    private TokenManager tokenManager;
+    private final AuthenticationManager authenticationManager;
+
+    private final TokenManager tokenManager;
 
     @PostMapping(value = "auth/login")
     public ResponseEntity<Object> createToken(@RequestBody LoginRequestModel
