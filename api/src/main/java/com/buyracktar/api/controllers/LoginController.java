@@ -1,6 +1,6 @@
 package com.buyracktar.api.controllers;
 
-import com.buyracktar.api.MyResponse;
+import com.buyracktar.api.responsemodels.MyResponseTemplate;
 import com.buyracktar.api.entities.Account;
 import com.buyracktar.api.repositories.AccountRepository;
 import com.buyracktar.api.responsemodels.LoginResponse;
@@ -48,6 +48,6 @@ public class LoginController {
         final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
         Account account = (Account) userDetails;
         final String accessToken = tokenManager.generateJwtToken(userDetails);
-        return ResponseEntity.ok(new MyResponse(true, new LoginResponse(accessToken,account), null));
+        return ResponseEntity.ok(new MyResponseTemplate(true, new LoginResponse(accessToken,account), null));
     }
 }

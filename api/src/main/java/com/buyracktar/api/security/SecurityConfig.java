@@ -74,7 +74,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/currencies","auth/login");
+        web.ignoring().antMatchers("/currencies","/auth/login","/auth/register");
     }
     @Override
     public void addCorsMappings(CorsRegistry registry) {

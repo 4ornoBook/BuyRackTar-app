@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 
@@ -18,11 +19,13 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(name = "accound_id")
+	@Column(name = "account_id")
 	private Long accountId;
 
 	private String name;
 
+	@Column(name = "is_owner")
 	private boolean isOwner;
 
 }
+

@@ -1,9 +1,8 @@
-package com.buyracktar.api;
+package com.buyracktar.api.responsemodels;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonRootName;
 
-public class MyResponse {
+public class MyResponseTemplate {
     boolean success;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -12,7 +11,7 @@ public class MyResponse {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     String error;
 
-    public MyResponse(boolean success, Object data, String error) {
+    public MyResponseTemplate(boolean success, Object data, String error) {
         this.success = success;
         this.data = data;
         this.error = error;
