@@ -4,9 +4,17 @@ import { WalletTableComponent } from './components/wallet-table/wallet-table.com
 import { WalletItemComponent } from './components/wallet-item/wallet-item.component';
 import { WalletViewComponent } from './components/wallet-view/wallet-view.component';
 import { WalletRoutingModule } from './wallet.routing';
-import { TuiLoaderModule } from '@taiga-ui/core';
+import {
+	TuiButtonModule,
+	TuiDataListModule,
+	TuiDropdownControllerModule,
+	TuiHostedDropdownModule,
+	TuiLoaderModule,
+	TuiSvgModule,
+} from '@taiga-ui/core';
 import { TuiIslandModule } from '@taiga-ui/kit';
 import { TuiLetModule } from '@taiga-ui/cdk';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
 	declarations: [
@@ -20,6 +28,12 @@ import { TuiLetModule } from '@taiga-ui/cdk';
 		TuiLoaderModule,
 		TuiIslandModule,
 		TuiLetModule,
+		SharedModule,
+		TuiSvgModule,
+		TuiDataListModule,
+		TuiButtonModule,
+		TuiDropdownControllerModule,
+		TuiHostedDropdownModule,
 	],
 })
 export class WalletModule {}

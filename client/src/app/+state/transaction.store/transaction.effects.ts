@@ -10,7 +10,7 @@ import {
 	setAccountUsers,
 	loadAccount,
 	setCurrentUser,
-} from './user.actions';
+} from './transaction.actions';
 import { map } from 'rxjs/operators';
 import { NotificationAlertService } from 'modules/shared/helpers/notification-alert.service';
 import { AccountService } from 'modules/shared/api/services/account.service';
@@ -19,7 +19,7 @@ import { setUserWalletsLoaded } from '../wallet.store/wallet.actions';
 import { Router } from '@angular/router';
 
 @Injectable()
-export class UserEffects {
+export class TransactionEffects {
 	constructor(
 		private actions$: Actions,
 		private authService: AuthService,

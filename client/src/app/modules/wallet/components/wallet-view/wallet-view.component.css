@@ -1,0 +1,36 @@
+.buttons {
+	margin-bottom: 1rem;
+}
+
+
+.hide-on-large {
+	display: none;
+}
+
+@media screen and (max-width: 70rem) {
+	.hide-on-large {
+		display: inline-block;
+	}
+}
+
+.wallet-name {
+	max-width: 300px;
+	color: var(--header-title-color);
+}
+
+.info-top {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 3rem;
+
+	margin-bottom: 3rem;
+}
+
+.wallet-name-balance {
+	max-width: clamp(280px, 40%, 600px);
+}
+
+.spend-form {
+	flex-grow: 1;
+}
+

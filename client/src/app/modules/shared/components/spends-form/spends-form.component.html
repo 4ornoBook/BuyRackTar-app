@@ -1,0 +1,39 @@
+<form [formGroup]="spendsForm">
+	<tui-select
+		formControlName="source"
+		[valueContent]="stringifyWallet(wallets)"
+	>
+		Wallet
+		<tui-data-list *tuiDataList>
+			<button
+				*ngFor="let wallet of wallets"
+				tuiOption
+				[value]="wallet.id"
+			>
+				{{ wallet.name }}
+			</button>
+		</tui-data-list>
+	</tui-select>
+	<ng-template #loading>
+		<tui-loader class="tui-space_vertical-3 loader"></tui-loader>
+	</ng-template>
+
+	<tui-select
+		formControlName="destination"
+		[valueContent]="stringifyCategory(categories)"
+	>
+		Category
+		<tui-data-list *tuiDataList>
+			<button
+				*ngFor="let category of categories"
+				tuiOption
+				[value]="category.id"
+			>
+				{{ category.name }}
+			</button>
+		</tui-data-list>
+	</tui-select>
+	<ng-template #loading>
+		<tui-loader class="tui-space_vertical-3 loader"></tui-loader>
+	</ng-template>
+</form>

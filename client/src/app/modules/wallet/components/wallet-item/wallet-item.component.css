@@ -1,0 +1,13 @@
+
+.wallet-link {
+	display: block;
+	text-decoration: none;
+	cursor: pointer;
+	border-radius: 1rem;
+
+	transition: box-shadow 400ms ease;
+}
+
+.wallet-link:hover {
+	box-shadow: 0 0 20px 3px #a8cef1;
+}
