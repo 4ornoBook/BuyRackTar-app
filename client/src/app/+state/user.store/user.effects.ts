@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AuthService } from 'modules/shared/api/services/auth.service';
-import { mergeMap } from 'rxjs';
+import { from, mergeMap } from 'rxjs';
 import {
 	login,
 	register,
 	setAccount,
 	getAccountUsers,
 	setAccountUsers,
+	loadAccount,
 } from './user.actions';
 import { map } from 'rxjs/operators';
 import { NotificationAlertService } from 'modules/shared/helpers/notification-alert.service';
 import { AccountService } from 'modules/shared/api/services/account.service';
+import { Store } from '@ngrx/store';
+import { loadCurrencies } from '../currency.store/currency.actions';
 
 @Injectable()
 export class UserEffects {
@@ -19,13 +22,30 @@ export class UserEffects {
 		private actions$: Actions,
 		private authService: AuthService,
 		private notificationsService: NotificationAlertService,
-		private accountService: AccountService
+		private accountService: AccountService,
+		private store: Store
 	) {}
 
-	setAccount$ = createEffect(() =>
+	loadAccount$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(loadAccount),
+			mergeMap(({ accountId }) =>
+				this.accountService
+					.getAccount(accountId)
+					.pipe(map(account => setAccount({ account })))
+			)
+		)
+	);
+
+	loadCurrenciesAndUsers$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(setAccount),
-			map(({ account }) => getAccountUsers({ accountId: account.id }))
+			mergeMap(({ account }) => {
+				return from([
+					getAccountUsers({ accountId: account.id }),
+					loadCurrencies(),
+				]);
+			})
 		)
 	);
 
@@ -33,11 +53,9 @@ export class UserEffects {
 		this.actions$.pipe(
 			ofType(login),
 			mergeMap(({ credentials }) =>
-				this.authService.login(credentials).pipe(
-					map(account => {
-						return setAccount({ account });
-					})
-				)
+				this.authService
+					.login(credentials)
+					.pipe(map(account => setAccount({ account })))
 			)
 		)
 	);

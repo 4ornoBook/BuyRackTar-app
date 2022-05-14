@@ -53,8 +53,8 @@ export class AuthService {
 			);
 	}
 
-	public getAccessToken(): string | null {
-		return localStorage.getItem(ACCESS_TOKEN);
+	public getAccessToken(): string {
+		return localStorage.getItem(ACCESS_TOKEN) || '';
 	}
 
 	private static setAccessToken(token: string) {

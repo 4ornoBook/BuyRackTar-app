@@ -1,21 +1,28 @@
 import { Injectable } from '@angular/core';
 import {
+	HttpErrorResponse,
 	HttpEvent,
 	HttpHandler,
 	HttpInterceptor,
 	HttpRequest,
 } from '@angular/common/http';
-import { delay, EMPTY, Observable, of, retry } from 'rxjs';
-import { NotificationAlertService } from '../../helpers/notification-alert.service';
+import { delay, EMPTY, Observable, of, retry, tap } from 'rxjs';
+import { NotificationAlertService } from 'modules/shared/helpers/notification-alert.service';
+import { API_URLS } from 'config/api-routes';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
-export const maxRetries = 2;
-export const delayRetry = 1500;
-export const statusesToSkip = [400, 403, 404];
+const maxRetries = 2;
+const delayRetry = 1500;
+const statusesToSkip = [400, 403, 404];
+const NO_AUTH_STATUS = 401;
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 	constructor(
-		private readonly notificationsService: NotificationAlertService
+		private readonly notificationsService: NotificationAlertService,
+		private authService: AuthService,
+		private router: Router
 	) {}
 
 	intercept(
@@ -26,10 +33,25 @@ export class ErrorInterceptor implements HttpInterceptor {
 			retry({
 				delay: (error, retryCount) => {
 					if (
+						error instanceof HttpErrorResponse &&
+						error.status === NO_AUTH_STATUS
+					) {
+						const isRefreshRoute = error.url?.includes(
+							API_URLS.ACCOUNT_REFRESH_TOKEN
+						);
+
+						if (isRefreshRoute) {
+							this.router.navigate(['auth']);
+							throw error;
+						} else {
+							this.authService.refresh().subscribe();
+						}
+					}
+
+					if (
 						retryCount === maxRetries ||
 						statusesToSkip.includes(error?.status)
 					) {
-						this.notificationsService.showError(error?.message);
 						throw error;
 					}
 

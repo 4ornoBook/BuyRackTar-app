@@ -8,7 +8,9 @@ export const API_URLS = {
 	ACCOUNT_REFRESH_TOKEN: `${API_URL}/auth/refresh`,
 	ACCOUNT_LOGIN: `${API_URL}/auth/login`,
 	ACCOUNT_REGISTER: `${API_URL}/auth/register`,
-	ACCOUNT_USERS: `${API_URL}/accounts/:id`,
+	ACCOUNT_GET: `${API_URL}/accounts/:id`,
+	// ACCOUNT_USERS: `${API_URL}/accounts/:id/users`, -- original
+	ACCOUNT_USERS: `${API_URL}/users`,
 	// ACCOUNT_CATEGORIES: `${API_URL}/accounts/categories`, -- original
 	ACCOUNT_CATEGORIES: `${API_URL}/categories`,
 
