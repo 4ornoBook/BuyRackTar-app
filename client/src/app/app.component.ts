@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { CurrencyActions } from '+state/currency.store';
+import { Component } from '@angular/core';
 
 @Component({
 	// eslint-disable-next-line @angular-eslint/component-selector
@@ -8,10 +6,6 @@ import { CurrencyActions } from '+state/currency.store';
 	template: '<tui-root><router-outlet></router-outlet></tui-root>',
 	styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
-	constructor(private readonly store: Store) {}
-
-	ngOnInit() {
-		this.store.dispatch(CurrencyActions.loadCurrencies());
-	}
+export class AppComponent {
+	constructor() {}
 }

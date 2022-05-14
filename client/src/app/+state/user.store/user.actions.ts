@@ -20,6 +20,11 @@ export const getAccountUsers = createAction(
 	props<{ accountId: number }>()
 );
 
+export const loadAccount = createAction(
+	`${context} load account`,
+	props<{ accountId: number }>()
+);
+
 export const setAccount = createAction(
 	`${context} set account`,
 	props<{ account: AccountEntity }>()

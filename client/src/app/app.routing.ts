@@ -2,6 +2,7 @@ import { DefaultLayoutComponent } from 'routing/layout/default-layout/default-la
 import { NotFoundPageComponent } from 'routing/not-found-page/not-found-page.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { UsersModule } from './modules/users/users.module';
 
 export const routes: Routes = [
 	{
@@ -33,6 +34,20 @@ export const routes: Routes = [
 				loadChildren: () =>
 					import('./modules/category/category.module').then(
 						m => m.CategoryModule
+					),
+			},
+			{
+				path: 'wallets',
+				loadChildren: () =>
+					import('./modules/wallet/wallet.module').then(
+						m => m.WalletModule
+					),
+			},
+			{
+				path: 'users',
+				loadChildren: () =>
+					import('./modules/users/users.module').then(
+						m => m.UsersModule
 					),
 			},
 		],

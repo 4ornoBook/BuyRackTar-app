@@ -1,9 +1,46 @@
 {
+  "accounts": [
+    {
+      "id": 1,
+      "email": "aboba2002@gmail.com",
+      "confirmed": true
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "accountId": 1,
+      "name": "dimas",
+      "isOwner": true
+    },
+    {
+      "id": 2,
+      "accountId": 1,
+      "name": "raskolbas",
+      "isOwner": false
+    }
+  ],
+  "wallets": [
+    {
+      "id": 1,
+      "userId": 1,
+      "name": "For shit",
+      "currencyId": 1,
+      "amount": 52
+    },
+    {
+      "id": 2,
+      "accountId": 1,
+      "name": "For shit #2",
+      "currencyId": 2,
+      "amount": 114
+    }
+  ],
   "categories": [
     {
       "name": "Games #2",
       "description": "Aboba hello some big text for text lorem ipsub debil sit amet ya Anton vsem privet. A category for my leisure time, i like playing games. Sample text sample text sample text bzzzzz. Some additional text.",
-      "limit": 140,
+      "limit": 146,
       "currencyId": 2,
       "id": 1
     },
@@ -17,13 +54,11 @@
       "limit": 200
     },
     {
-      "id": 3,
-      "accountId": 1,
-      "name": "Games",
-      "active": true,
-      "currencyId": 1,
+      "name": "Games aloha",
       "description": "Sim salabim ahalay mahalay there is nothing interesting to read. A category for my leisure time, i like playing games. Sample text sample text sample text bzzzzz.",
-      "limit": 320
+      "limit": 325,
+      "currencyId": 1,
+      "id": 3
     }
   ],
   "currencies": [
@@ -54,6 +89,36 @@
       "amount": 80,
       "time": 1651856891,
       "walletId": 1
+    }
+  ],
+  "wallet-transactions": [
+    {
+      "id": 1,
+      "fromWallet": {
+        "id": 1,
+        "name": "For shit"
+      },
+      "description": "Simple transaction",
+      "amount": 13,
+      "time": 1651859258,
+      "toWallet": {
+        "id": 2,
+        "name": "For shit #2"
+      }
+    },
+    {
+      "id": 2,
+      "fromWallet": {
+        "id": 2,
+        "name": "For shit #2"
+      },
+      "description": "Simple transaction #2",
+      "amount": 80,
+      "time": 1651856891,
+      "toWallet": {
+        "id": 1,
+        "name": "For shit"
+      }
     }
   ]
 }

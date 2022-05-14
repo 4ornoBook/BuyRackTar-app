@@ -12,11 +12,10 @@ import {
 	setCategoriesLoading,
 	updateCategory,
 } from './category.actions';
-import { first, mergeMap, of } from 'rxjs';
+import { filter, mergeMap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CategoryService } from 'modules/shared/api/services/category.service';
 import { select, Store } from '@ngrx/store';
-import { EMPTY_ACTION } from '../utility';
 import { CategoryFeature } from './category.reducer';
 import { NotificationAlertService } from 'modules/shared/helpers/notification-alert.service';
 
@@ -35,19 +34,15 @@ export class CategoryEffects {
 			ofType(loadCategories),
 			mergeMap(() =>
 				this.store.pipe(
-					select(CategoryFeature.selectAllCategoriesLoaded),
-					first()
+					select(CategoryFeature.selectAllCategoriesLoaded)
 				)
 			),
-			mergeMap(allLoaded => {
-				if (!allLoaded) {
-					this.store.dispatch(setCategoriesLoading());
-					return this.accountService
-						.getAccountCategories()
-						.pipe(map(categories => setCategories({ categories })));
-				}
-
-				return of(EMPTY_ACTION());
+			filter(allLoaded => !allLoaded),
+			mergeMap(() => {
+				this.store.dispatch(setCategoriesLoading());
+				return this.accountService
+					.getAccountCategories()
+					.pipe(map(categories => setCategories({ categories })));
 			})
 		)
 	);

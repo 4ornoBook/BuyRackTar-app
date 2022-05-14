@@ -1,7 +1,7 @@
 export interface WalletEntity {
 	id: number;
 	userId: string;
-	currencyId: string;
+	currencyId: number;
 	name: string;
 	amount: number;
 }

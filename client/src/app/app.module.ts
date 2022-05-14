@@ -10,9 +10,9 @@ import {
 	TuiLabelModule,
 	TuiLinkModule,
 } from '@taiga-ui/core';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { StoreModule } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
 
@@ -24,12 +24,17 @@ import { DefaultLayoutComponent } from './routing/layout/default-layout/default-
 import { HeaderComponent } from './routing/layout/header/header.component';
 import { SidebarComponent } from './routing/layout/sidebar/sidebar.component';
 import { NavItemComponent } from './routing/layout/sidebar/components/nav-item/nav-item.component';
-import { AuthInterceptor } from './modules/shared/api/interceptors/auth.interceptor';
 import { TuiInputModule } from '@taiga-ui/kit';
 import { ErrorInterceptor } from './modules/shared/api/interceptors/error.interceptor';
 import { SharedModule } from './modules/shared/shared.module';
 import { EffectsModule } from '@ngrx/effects';
 import { StateModule } from './+state/state.module';
+import { JWT_OPTIONS, JwtHelperService, JwtModule } from '@auth0/angular-jwt';
+import { AuthService } from './modules/shared/api/services/auth.service';
+import { jwtOptionsFactory } from './modules/auth/factories/jwt-options.factory';
+import { loadSharedDataFactory } from './app.initializers';
+import { Router } from '@angular/router';
+import { UserRequestInterceptor } from './modules/shared/api/interceptors/user-request.interceptor';
 
 @NgModule({
 	declarations: [
@@ -44,6 +49,13 @@ import { StateModule } from './+state/state.module';
 		BrowserModule,
 		StoreModule.forRoot({}, {}),
 		EffectsModule.forRoot([]),
+		JwtModule.forRoot({
+			jwtOptionsProvider: {
+				provide: JWT_OPTIONS,
+				useFactory: jwtOptionsFactory,
+				deps: [AuthService],
+			},
+		}),
 		TuiRootModule,
 		BrowserAnimationsModule,
 		TuiDialogModule,
@@ -63,12 +75,18 @@ import { StateModule } from './+state/state.module';
 	providers: [
 		{
 			provide: HTTP_INTERCEPTORS,
-			useClass: ErrorInterceptor,
+			useClass: UserRequestInterceptor,
 			multi: true,
 		},
 		{
 			provide: HTTP_INTERCEPTORS,
-			useClass: AuthInterceptor,
+			useClass: ErrorInterceptor,
+			multi: true,
+		},
+		{
+			provide: APP_INITIALIZER,
+			useFactory: loadSharedDataFactory,
+			deps: [AuthService, Store, JwtHelperService, Router],
 			multi: true,
 		},
 	],
