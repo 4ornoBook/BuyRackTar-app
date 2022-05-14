@@ -9,6 +9,7 @@ import {
 	getAccountUsers,
 	setAccountUsers,
 	loadAccount,
+	setCurrentUser,
 } from './user.actions';
 import { map } from 'rxjs/operators';
 import { NotificationAlertService } from 'modules/shared/helpers/notification-alert.service';
@@ -83,8 +84,15 @@ export class UserEffects {
 			ofType(getAccountUsers),
 			mergeMap(({ accountId }) =>
 				this.accountService.getAccountUsers(accountId).pipe(
-					map(users => {
-						return setAccountUsers({ users });
+					mergeMap(users => {
+						const currentUser =
+							AccountService.getLastUsedUser() ||
+							users.find(user => user.isOwner)?.id!;
+
+						return from([
+							setAccountUsers({ users }),
+							setCurrentUser({ userId: currentUser }),
+						]);
 					})
 				)
 			)

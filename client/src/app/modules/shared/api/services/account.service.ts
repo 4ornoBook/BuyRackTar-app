@@ -8,9 +8,20 @@ import { CategoryEntity } from 'entities/Category.entity';
 import { map } from 'rxjs/operators';
 import { AccountEntity } from '../../../../entities/Account.entity';
 
+export const LAST_USED_USER = 'lastUsedUser';
+
 @Injectable()
 export class AccountService {
 	constructor(private readonly http: HttpClient) {}
+
+	public static getLastUsedUser(): number | null {
+		const userId = localStorage.getItem(LAST_USED_USER);
+		return userId ? +userId : null;
+	}
+
+	public static setLastUsedUser(userId: number): void {
+		return localStorage.setItem(LAST_USED_USER, String(userId));
+	}
 
 	public getAccount(accountId: number): Observable<AccountEntity> {
 		return this.http
