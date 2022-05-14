@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -32,4 +33,12 @@ public class CategoryService {
         return categoryRepository.save(category);
     }
 
+    public Category updateCategory(long id, Category category) {
+        category.setId(id);
+        return categoryRepository.save(category);
+    }
+
+    public Optional<Category> getCategoryById(long id) {
+        return categoryRepository.findById(id);
+    }
 }

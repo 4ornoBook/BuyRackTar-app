@@ -1,14 +1,12 @@
 package com.buyracktar.api.controllers;
 
 import com.buyracktar.api.entities.Category;
-import com.buyracktar.api.repositories.CategoryRepository;
 import com.buyracktar.api.responsemodels.MyResponseTemplate;
 import com.buyracktar.api.services.CategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 
 @RestController
 @RequestMapping(value = "/categories")
@@ -19,8 +17,13 @@ public class CategoryController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Object> getCategory(@PathVariable long id) {
-
-        return ResponseEntity.ok(new MyResponseTemplate(false, null, "get by id is not ready"));
+        Category category = categoryService.getCategoryById(id).orElse(null);
+        if(category != null){
+            return ResponseEntity.ok(new MyResponseTemplate(true, category, null));
+        }
+        else {
+            return ResponseEntity.ok(new MyResponseTemplate(false, null, "get by id is not ready"));
+        }
     }
 
     @PostMapping()
@@ -28,8 +31,8 @@ public class CategoryController {
         return ResponseEntity.ok(new MyResponseTemplate(true, categoryService.addCategory(Authorization, category), null));
     }
 
-    @PostMapping(value = "/{id}")
-    public ResponseEntity<Object> updateCategory() {
-        return ResponseEntity.ok(new MyResponseTemplate(false, null, "update by id is no ready"));
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Object> updateCategory(@PathVariable long id, @RequestBody Category category) {
+        return ResponseEntity.ok(new MyResponseTemplate(false, categoryService.updateCategory(id, category), null));
     }
 }
