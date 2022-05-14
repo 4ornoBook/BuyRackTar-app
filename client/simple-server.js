@@ -9,10 +9,15 @@ router.render = (req, res) => {
 			success: true,
 			data: res.locals.data,
 		});
-	}, 1000);
+	}, 300);
 };
 
 server.use(middlewares);
+
+// server.use((req, res, next) => {
+// 	res.status(401).json({ success: false, error: 'lol' });
+// });
+
 server.use(router);
 server.listen(3000, () => {
 	console.log('JSON Server is running');

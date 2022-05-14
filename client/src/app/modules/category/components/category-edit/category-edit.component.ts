@@ -11,6 +11,7 @@ import {
 } from 'modules/shared/helpers/routing-helper';
 import { Observable } from 'rxjs';
 import { CategoryEditDto } from '+state/category.store/interfaces/category-edit.dto';
+import { FormActs } from '../../../../enums/form-acts.enum';
 
 @Component({
 	selector: 'app-category-edit',
@@ -24,6 +25,8 @@ export class CategoryEditComponent {
 		this.store,
 		this.categoryId$
 	);
+
+	public FormActs = FormActs;
 
 	constructor(
 		private store: Store,

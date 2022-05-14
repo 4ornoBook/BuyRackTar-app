@@ -1,0 +1,13 @@
+
+
+<tui-loader
+	*tuiLet="wallets$ | async as wallets"
+	[showLoader]="!!(walletsLoading$ | async)"
+>
+
+	<app-wallet-item
+		*ngFor="let wallet of wallets"
+		[wallet]="wallet"
+	></app-wallet-item>
+
+</tui-loader>

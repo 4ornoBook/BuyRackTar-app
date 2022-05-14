@@ -1,17 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AuthService } from 'modules/shared/api/services/auth.service';
-import { mergeMap } from 'rxjs';
+import { from, mergeMap } from 'rxjs';
 import {
 	login,
 	register,
 	setAccount,
 	getAccountUsers,
 	setAccountUsers,
+	loadAccount,
+	setCurrentUser,
 } from './user.actions';
 import { map } from 'rxjs/operators';
 import { NotificationAlertService } from 'modules/shared/helpers/notification-alert.service';
 import { AccountService } from 'modules/shared/api/services/account.service';
+import { loadCurrencies } from '../currency.store/currency.actions';
+import { setUserWalletsLoaded } from '../wallet.store/wallet.actions';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class UserEffects {
@@ -19,13 +24,42 @@ export class UserEffects {
 		private actions$: Actions,
 		private authService: AuthService,
 		private notificationsService: NotificationAlertService,
-		private accountService: AccountService
+		private accountService: AccountService,
+		private router: Router
 	) {}
 
-	setAccount$ = createEffect(() =>
+	setLastUserAndUserWallets$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(setCurrentUser),
+			map(({ userId }) => {
+				AccountService.setLastUsedUser(userId);
+				return setUserWalletsLoaded({ loaded: false });
+			})
+		)
+	);
+
+	loadAccount$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(loadAccount),
+			mergeMap(({ accountId }) =>
+				this.accountService
+					.getAccount(accountId)
+					.pipe(map(account => setAccount({ account })))
+			)
+		)
+	);
+
+	loadCurrenciesAndUsers$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(setAccount),
-			map(({ account }) => getAccountUsers({ accountId: account.id }))
+			mergeMap(({ account }) => {
+				this.router.navigate(['/']);
+
+				return from([
+					getAccountUsers({ accountId: account.id }),
+					loadCurrencies(),
+				]);
+			})
 		)
 	);
 
@@ -33,11 +67,9 @@ export class UserEffects {
 		this.actions$.pipe(
 			ofType(login),
 			mergeMap(({ credentials }) =>
-				this.authService.login(credentials).pipe(
-					map(account => {
-						return setAccount({ account });
-					})
-				)
+				this.authService
+					.login(credentials)
+					.pipe(map(account => setAccount({ account })))
 			)
 		)
 	);
@@ -65,8 +97,17 @@ export class UserEffects {
 			ofType(getAccountUsers),
 			mergeMap(({ accountId }) =>
 				this.accountService.getAccountUsers(accountId).pipe(
-					map(users => {
-						return setAccountUsers({ users });
+					mergeMap(users => {
+						const currentUserId =
+							AccountService.getLastUsedUser() ||
+							users.find(user => user.isOwner)?.id!;
+
+						AccountService.setLastUsedUser(currentUserId);
+
+						return from([
+							setAccountUsers({ users }),
+							setCurrentUser({ userId: currentUserId }),
+						]);
 					})
 				)
 			)
