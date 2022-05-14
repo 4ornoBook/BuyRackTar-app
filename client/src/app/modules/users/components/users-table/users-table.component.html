@@ -1,1 +1,19 @@
-<p>users-table works!</p>
+
+<tui-loader
+	*tuiLet="users$ | async as users;"
+	[showLoader]="users?.length === 0"
+	[overlay]="true"
+>
+	<div
+		class="users-grid"
+	>
+
+			<app-user-item
+				*ngFor="let user of users"
+				[user]="user"
+				[isSelected]="user.id === (currentUserId$ | async)"
+				(selectUser)="setCurrentUser($event)"
+			></app-user-item>
+
+	</div>
+</tui-loader>

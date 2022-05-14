@@ -1,0 +1,15 @@
+
+
+.image {
+	border-radius: 50%;
+	width: 150px;
+	height: 150px;
+	margin: 0 auto 1rem auto;
+
+	overflow: hidden;
+}
+
+.image img {
+	width: 100%;
+	object-fit: cover;
+}

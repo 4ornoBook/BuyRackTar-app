@@ -9,7 +9,7 @@ router.render = (req, res) => {
 			success: true,
 			data: res.locals.data,
 		});
-	}, 1000);
+	}, 300);
 };
 
 server.use(middlewares);

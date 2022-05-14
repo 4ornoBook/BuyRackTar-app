@@ -1,0 +1,38 @@
+
+
+<tui-island
+	textAlign="center"
+>
+	<div class="image">
+		<img
+			src="https://picsum.photos/400/400"
+			alt="{{user.name}} is looking for some money"
+		>
+	</div>
+
+	<h3 class="tui-island__title">
+		<span
+			tuiHintDirection="right"
+			[tuiHint]="user.isOwner ? isOwner: null"
+		>
+			{{ user.name }}
+			<tui-svg *ngIf="user.isOwner" src="tuiIconTooltip"></tui-svg>
+		</span>
+	</h3>
+
+	<ng-template #isOwner>
+		<span>{{ user.name }} is owner of an account</span>
+	</ng-template>
+
+	<button
+		tuiButton
+		type="button"
+		appearance="flat"
+		size="m"
+		class="tui-island__footer-button"
+		(click)="selectUser.emit(user.id)"
+		[disabled]="isSelected"
+	>
+		{{ isSelected ? 'You' : 'Use'}}
+	</button>
+</tui-island>
