@@ -24,4 +24,12 @@ public class CategoryService {
         Account account = accountRepository.findByEmail(tokenManager.getUsernameFromToken(token));
         return categoryRepository.findByAccountId(account.getId());
     }
+
+    public Category addCategory(String authorization, Category category) {
+        String token = authorization.replace("Bearer ","");
+        Account account = accountRepository.findByEmail(tokenManager.getUsernameFromToken(token));
+        category.setAccountId(account.getId());
+        return categoryRepository.save(category);
+    }
+
 }
