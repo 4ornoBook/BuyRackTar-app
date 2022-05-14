@@ -34,6 +34,7 @@ import { AuthService } from './modules/shared/api/services/auth.service';
 import { jwtOptionsFactory } from './modules/auth/factories/jwt-options.factory';
 import { loadSharedDataFactory } from './app.initializers';
 import { Router } from '@angular/router';
+import { UserRequestInterceptor } from './modules/shared/api/interceptors/user-request.interceptor';
 
 @NgModule({
 	declarations: [
@@ -72,6 +73,11 @@ import { Router } from '@angular/router';
 		StateModule,
 	],
 	providers: [
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: UserRequestInterceptor,
+			multi: true,
+		},
 		{
 			provide: HTTP_INTERCEPTORS,
 			useClass: ErrorInterceptor,

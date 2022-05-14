@@ -37,6 +37,13 @@ export const routes: Routes = [
 					),
 			},
 			{
+				path: 'wallets',
+				loadChildren: () =>
+					import('./modules/wallet/wallet.module').then(
+						m => m.WalletModule
+					),
+			},
+			{
 				path: 'users',
 				loadChildren: () =>
 					import('./modules/users/users.module').then(

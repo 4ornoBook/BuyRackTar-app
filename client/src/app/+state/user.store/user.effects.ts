@@ -14,8 +14,9 @@ import {
 import { map } from 'rxjs/operators';
 import { NotificationAlertService } from 'modules/shared/helpers/notification-alert.service';
 import { AccountService } from 'modules/shared/api/services/account.service';
-import { Store } from '@ngrx/store';
 import { loadCurrencies } from '../currency.store/currency.actions';
+import { setUserWalletsLoaded } from '../wallet.store/wallet.actions';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class UserEffects {
@@ -24,8 +25,18 @@ export class UserEffects {
 		private authService: AuthService,
 		private notificationsService: NotificationAlertService,
 		private accountService: AccountService,
-		private store: Store
+		private router: Router
 	) {}
+
+	setLastUserAndUserWallets$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(setCurrentUser),
+			map(({ userId }) => {
+				AccountService.setLastUsedUser(userId);
+				return setUserWalletsLoaded({ loaded: false });
+			})
+		)
+	);
 
 	loadAccount$ = createEffect(() =>
 		this.actions$.pipe(
@@ -42,6 +53,8 @@ export class UserEffects {
 		this.actions$.pipe(
 			ofType(setAccount),
 			mergeMap(({ account }) => {
+				this.router.navigate(['/']);
+
 				return from([
 					getAccountUsers({ accountId: account.id }),
 					loadCurrencies(),
@@ -85,13 +98,15 @@ export class UserEffects {
 			mergeMap(({ accountId }) =>
 				this.accountService.getAccountUsers(accountId).pipe(
 					mergeMap(users => {
-						const currentUser =
+						const currentUserId =
 							AccountService.getLastUsedUser() ||
 							users.find(user => user.isOwner)?.id!;
 
+						AccountService.setLastUsedUser(currentUserId);
+
 						return from([
 							setAccountUsers({ users }),
-							setCurrentUser({ userId: currentUser }),
+							setCurrentUser({ userId: currentUserId }),
 						]);
 					})
 				)

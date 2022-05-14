@@ -2,7 +2,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CategoryActions, CategorySelectors } from '+state/category.store';
 import { UserSelectors } from '+state/user.store';
-import { UntilDestroy } from '@ngneat/until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { filter } from 'rxjs';
 
 @UntilDestroy()
 @Component({
@@ -22,10 +23,13 @@ export class CategoriesTableComponent implements OnInit {
 	constructor(private readonly store: Store) {}
 
 	ngOnInit(): void {
-		this.account$.subscribe(account => {
-			if (account) {
-				this.store.dispatch(CategoryActions.loadCategories());
-			}
-		});
+		this.account$
+			.pipe(
+				untilDestroyed(this),
+				filter(account => !!account)
+			)
+			.subscribe(() =>
+				this.store.dispatch(CategoryActions.loadCategories())
+			);
 	}
 }
