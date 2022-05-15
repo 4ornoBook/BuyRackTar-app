@@ -1,6 +1,6 @@
 package com.buyracktar.api.security.jwtutils;
 
-import com.buyracktar.api.services.AccountDetailsService;
+import com.buyracktar.api.services.AccountService;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,7 +19,7 @@ import java.io.IOException;
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 	@Autowired
-	private AccountDetailsService userDetailsService;
+	private AccountService userDetailsService;
 	@Autowired
 	private TokenManager tokenManager;
 	@Override

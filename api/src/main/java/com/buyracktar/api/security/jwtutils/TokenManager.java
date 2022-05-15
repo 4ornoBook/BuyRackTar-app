@@ -1,8 +1,12 @@
 package com.buyracktar.api.security.jwtutils;
 
+import com.buyracktar.api.entities.Account;
+import com.buyracktar.api.services.AccountService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -20,7 +24,8 @@ public class TokenManager implements Serializable {
 	private String jwtSecret;
 	public String generateJwtToken(UserDetails userDetails) {
 		Map<String, Object> claims = new HashMap<>();
-		return Jwts.builder().setClaims(claims).setSubject(userDetails.getUsername())
+		Account account = (Account) userDetails;
+		return Jwts.builder().setClaims(claims).setSubject(userDetails.getUsername()).claim("id",account.getId())
 				.setIssuedAt(new Date(System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis() + TOKEN_VALIDITY * 1000))
 				.signWith(SignatureAlgorithm.HS512, jwtSecret).compact();

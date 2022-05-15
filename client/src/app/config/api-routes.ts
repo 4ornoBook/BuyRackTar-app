@@ -29,6 +29,6 @@ export const API_URLS = {
 	// WALLET_GET_ONE: `${API_URL}/wallets/:id`,
 	// WALLET_CREATE: `${API_URL}/wallets`,
 	// WALLET_UPDATE: `${API_URL}/wallets/:id`,
-	// WALLET_TRANSACTIONS: `${API_URL}/wallets/:id/transactions`, -- original
-	WALLET_TRANSACTIONS: `${API_URL}/wallet-transactions`,
+	WALLET_TRANSACTIONS: `${API_URL}/wallets/:id/transactions`, //-- original
+	// WALLET_TRANSACTIONS: `${API_URL}/wallet-transactions`,
 };

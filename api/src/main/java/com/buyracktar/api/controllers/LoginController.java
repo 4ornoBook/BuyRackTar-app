@@ -3,7 +3,7 @@ package com.buyracktar.api.controllers;
 import com.buyracktar.api.responsemodels.MyResponseTemplate;
 import com.buyracktar.api.entities.Account;
 import com.buyracktar.api.responsemodels.LoginResponse;
-import com.buyracktar.api.services.AccountDetailsService;
+import com.buyracktar.api.services.AccountService;
 import com.buyracktar.api.security.jwtutils.TokenManager;
 import com.buyracktar.api.security.jwtutils.models.LoginRequestModel;
 import lombok.AllArgsConstructor;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class LoginController {
 
-    private final AccountDetailsService userDetailsService;
+    private final AccountService userDetailsService;
 
     private final AuthenticationManager authenticationManager;
 
@@ -37,8 +37,7 @@ public class LoginController {
             System.out.println("disabled: " + e.getMessage());
             throw new Exception("USER_DISABLED", e);
         } catch (BadCredentialsException e) {
-            System.out.println(e.getMessage());
-            throw new Exception("INVALID_CREDENTIALS", e);
+            return ResponseEntity.ok(new MyResponseTemplate(false, null,e.getMessage()));
         }
         final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
         Account account = (Account) userDetails;

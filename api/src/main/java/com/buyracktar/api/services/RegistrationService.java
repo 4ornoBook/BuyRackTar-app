@@ -8,7 +8,6 @@ import com.buyracktar.api.entities.User;
 import com.buyracktar.api.repositories.AccountRepository;
 import com.buyracktar.api.repositories.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +19,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class RegistrationService {
 
-    private final AccountDetailsService accountService;
+    private final AccountService accountService;
     private final AccountRepository accountRepository;
     private final UserRepository userRepository;
     private final ConfirmationTokenService confirmationTokenService;

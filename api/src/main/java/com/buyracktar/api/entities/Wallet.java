@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Getter
@@ -22,5 +19,6 @@ public class Wallet {
     private Long id;
     private Long userId;
     private Long currencyId;
-    private BigDecimal amount; 
+    private String name;
+    private BigDecimal amount;
 }

@@ -22,6 +22,7 @@ create table wallet (
     id serial primary key,
     user_id integer references client(id),
     currency_id integer references currency(id),
+    name varchar(255) not null,
     amount numeric(20,2) not null
 );
 
