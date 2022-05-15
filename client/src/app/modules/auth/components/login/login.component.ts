@@ -39,6 +39,10 @@ export class LoginComponent {
 	}
 
 	submit() {
+		if (!this.credentialsForm.valid) {
+			return;
+		}
+
 		if (this.authType === AuthType.login) {
 			this.login();
 			return;
