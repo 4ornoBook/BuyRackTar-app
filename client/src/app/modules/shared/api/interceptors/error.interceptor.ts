@@ -6,11 +6,12 @@ import {
 	HttpInterceptor,
 	HttpRequest,
 } from '@angular/common/http';
-import { delay, EMPTY, Observable, of, retry, tap } from 'rxjs';
+import { catchError, delay, EMPTY, Observable, of, retry, tap } from 'rxjs';
 import { NotificationAlertService } from 'modules/shared/helpers/notification-alert.service';
 import { API_URLS } from 'config/api-routes';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { ApiHelperService } from '../../helpers/api-helper.service';
 
 const maxRetries = 2;
 const delayRetry = 1500;
@@ -21,8 +22,9 @@ const NO_AUTH_STATUS = 401;
 export class ErrorInterceptor implements HttpInterceptor {
 	constructor(
 		private readonly notificationsService: NotificationAlertService,
-		private authService: AuthService,
-		private router: Router
+		private readonly authService: AuthService,
+		private readonly router: Router,
+		private readonly apiHelper: ApiHelperService
 	) {}
 
 	intercept(
@@ -57,6 +59,10 @@ export class ErrorInterceptor implements HttpInterceptor {
 
 					return of(EMPTY).pipe(delay(delayRetry));
 				},
+			}),
+			catchError((error: unknown) => {
+				this.apiHelper.catchHttpResponseError(error);
+				throw error;
 			})
 		);
 	}
