@@ -35,7 +35,7 @@ public class AccountController {
         return ResponseEntity.ok(new MyResponseTemplate(true, categoryService.getByAccount(Authorization),null));
     }
 
-    @GetMapping(value = "/accounts/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<Object> getAccountById(@PathVariable long id) {
         Account account = accountService.getAccountById(id).orElse(null);
         if(account == null) {
