@@ -33,4 +33,8 @@ public class AccountService implements UserDetailsService {
 	public Optional<Account> getAccountById(long id) {
 		return accountRepository.findById(id);
 	}
+
+	public Account getAccountByMail(String email) {
+		return accountRepository.findByEmail(email);
+	}
 }

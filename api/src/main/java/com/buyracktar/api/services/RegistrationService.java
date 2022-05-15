@@ -26,16 +26,16 @@ public class RegistrationService {
     private final BCryptPasswordEncoder passwordEncoder;
     private final EmailSender emailSender;
 
-    public void registerNewAccount(RegistrationRequest registrationRequest) {
-
+    public Account registerNewAccount(RegistrationRequest registrationRequest) {
         Account account= new Account();
         account.setEmail(registrationRequest.getEmail());
         account.setPassword(passwordEncoder.encode(registrationRequest.getPassword()));
         User user = new User();
         user.setOwner(true);
         user.setName(account.getEmail() + " owner");
-
-        addAccountAndUser(account, user);
+        if(accountRepository.findByEmail(registrationRequest.getEmail()) != null) {
+            return null;
+        }
         String token = UUID.randomUUID().toString();
         ConfirmationToken confirmationToken = new ConfirmationToken(
                 token,
@@ -47,6 +47,7 @@ public class RegistrationService {
 //        todo: send email for verification
         String link = "http://localhost:3000/register/confirm?token=" + token;
         emailSender.send(registrationRequest.getEmail(), link);
+        return addAccountAndUser(account, user);
     }
 
     public String confirmToken(String token) {
@@ -65,9 +66,10 @@ public class RegistrationService {
     }
 
     @Transactional
-    public void addAccountAndUser(Account account, User user) {
-        accountRepository.save(account);
+    public Account addAccountAndUser(Account account, User user) {
+        Account savedAccount = accountRepository.save(account);
         user.setAccountId(account.getId());
         userRepository.save(user);
+        return savedAccount;
     }
 }
