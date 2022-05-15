@@ -4,6 +4,7 @@
 >
 	<tui-loader [showLoader]="!category" [overlay]="true">
 		<app-category-form
+			title="Edit a category"
 			[category]="category"
 			(submitCategory)="updateCategory($event)"
 			[formAct]="FormActs.Update"

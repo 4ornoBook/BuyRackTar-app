@@ -14,7 +14,8 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TransactionTypes } from 'enums/transaction-type.enum';
 import { WalletSelectors, WalletActions } from '+state/wallet.store';
 import { CategorySelectors, CategoryActions } from '+state/category.store';
-import { SpendTargets } from 'modules/shared/components/spends-form/spends-form.component';
+import { TransactionActions } from '+state/transaction.store';
+import { SpendTargets } from 'enums/spend-targets.enum';
 
 @UntilDestroy()
 @Component({
@@ -42,9 +43,9 @@ export class WalletViewComponent implements OnInit {
 	ngOnInit(): void {
 		this.walletId$.pipe(untilDestroyed(this)).subscribe(walletId => {
 			this.store.dispatch(WalletActions.loadWallet({ walletId }));
-			// this.store.dispatch(
-			// 	WalletActions.({ categoryId })
-			// );
+			this.store.dispatch(
+				TransactionActions.loadWalletTransactions({ walletId })
+			);
 		});
 
 		this.store.dispatch(WalletActions.loadWallets());

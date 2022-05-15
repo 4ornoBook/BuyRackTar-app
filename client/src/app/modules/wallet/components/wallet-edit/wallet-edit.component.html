@@ -1,0 +1,14 @@
+
+
+<ng-container
+	*tuiLet="wallet$ | async as wallet"
+>
+	<tui-loader [showLoader]="!wallet" [overlay]="true">
+		<app-wallet-form
+			title="Edit a wallet"
+			[formAct]="FormActs.Update"
+			[wallet]="wallet$ | async"
+			(submitWallet)="updateWallet($event)"
+		></app-wallet-form>
+	</tui-loader>
+</ng-container>

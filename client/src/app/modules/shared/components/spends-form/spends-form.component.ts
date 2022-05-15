@@ -15,11 +15,7 @@ import {
 	TuiStringHandler,
 } from '@taiga-ui/cdk';
 import { StringifyHelperService } from '../../helpers/stringify-helper.service';
-
-export enum SpendTargets {
-	Category = 'category',
-	Wallet = 'wallet',
-}
+import { SpendTargets } from 'enums/spend-targets.enum';
 
 @Component({
 	selector: 'app-spends-form',

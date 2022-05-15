@@ -1,10 +1,24 @@
-
+<a
+	routerLink="/wallets/create"
+	tuiButton
+	size="m"
+	shape="rounded"
+	class="tui-space_bottom-3"
+>
+	Create wallet
+</a>
 
 <tui-loader
 	*tuiLet="wallets$ | async as wallets"
 	[showLoader]="!!(walletsLoading$ | async)"
 	[overlay]="true"
 >
+	<h2
+		*ngIf="(walletsLoading$ | async) === false && wallets?.length === 0"
+		class="no-wallets"
+	>
+		There are no wallets yet.
+	</h2>
 	<div class="wallet-grid">
 		<app-wallet-item
 			*ngFor="let wallet of wallets"
