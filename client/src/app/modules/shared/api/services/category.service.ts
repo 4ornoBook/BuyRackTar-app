@@ -40,7 +40,7 @@ export class CategoryService {
 	getCategoryTransactions(categoryId: number) {
 		return this.http
 			.get<ApiResponse<CategoryTransactionsEntity[]>>(
-				API_URLS.CATEGORY_TRANSACTIONS
+				API_URLS.CATEGORY_TRANSACTIONS.replace(':id', String(categoryId))
 			)
 			.pipe(
 				map(({ data: categoryTransactions }) => categoryTransactions)
