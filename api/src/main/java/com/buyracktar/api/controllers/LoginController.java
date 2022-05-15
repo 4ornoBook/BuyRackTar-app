@@ -7,6 +7,7 @@ import com.buyracktar.api.services.AccountService;
 import com.buyracktar.api.security.jwtutils.TokenManager;
 import com.buyracktar.api.security.jwtutils.models.LoginRequestModel;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -37,7 +38,7 @@ public class LoginController {
             System.out.println("disabled: " + e.getMessage());
             throw new Exception("USER_DISABLED", e);
         } catch (BadCredentialsException e) {
-            return ResponseEntity.ok(new MyResponseTemplate(false, null,e.getMessage()));
+            return new ResponseEntity<>(new MyResponseTemplate(false, null, "wrong email or password"), HttpStatus.BAD_REQUEST);
         }
         final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
         Account account = (Account) userDetails;
