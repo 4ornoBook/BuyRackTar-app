@@ -17,7 +17,24 @@ public class WalletService {
         return walletRepository.findByUserId(id);
     }
 
-    public Optional<Wallet> getWalletById(long id) {
-        return walletRepository.findById(id);
+    public Wallet getWalletById(long userId, long walletId) {
+        Wallet wallet = walletRepository.findById(walletId).orElse(null);
+        if(wallet == null || wallet.getUserId() != userId) {
+            return null;
+        }
+        else {
+            return wallet;
+        }
+    }
+
+    public Wallet updateWallet(long userId, long walletId, Wallet wallet) {
+        Wallet DbWallet = walletRepository.findById(walletId).orElse(null);
+        if(DbWallet == null || DbWallet.getUserId() != userId) {
+            return null;
+        }
+        else {
+            wallet.setId(DbWallet.getId());
+            return walletRepository.save(wallet);
+        }
     }
 }
