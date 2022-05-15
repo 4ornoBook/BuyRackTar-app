@@ -40,7 +40,6 @@ public class CategoryController {
 
     @GetMapping(value = "/{id}/transactions")
     public ResponseEntity<Object> getCategoryTransactions(@PathVariable long id) {
-//        System.out.println();
         return ResponseEntity.ok(new MyResponseTemplate(true, transactionService.getTransactionsByCategory(id), null));
     }
 }
