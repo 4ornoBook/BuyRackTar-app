@@ -18,6 +18,7 @@ import { CurrencyEntity } from 'entities/Currency.entity';
 import { CategoryEntity } from 'entities/Category.entity';
 import { CategoryEditDto } from '+state/category.store/interfaces/category-edit.dto';
 import { FormActs } from 'enums/form-acts.enum';
+import { StringifyHelperService } from '../../../shared/helpers/stringify-helper.service';
 
 @Component({
 	selector: 'app-category-form',
@@ -40,7 +41,10 @@ export class CategoryFormComponent implements OnChanges {
 		currencyId: [null, [Validators.required]],
 	});
 
-	constructor(private readonly store: Store) {}
+	constructor(
+		private readonly store: Store,
+		private readonly stringifyHelper: StringifyHelperService
+	) {}
 
 	ngOnChanges() {
 		if (this.formAct === FormActs.Update) {
@@ -70,11 +74,6 @@ export class CategoryFormComponent implements OnChanges {
 	stringifyCurrency(
 		currencies: CurrencyEntity[]
 	): TuiStringHandler<TuiContextWithImplicit<number>> {
-		const map = new Map(
-			currencies.map(({ id, name }) => [id, name] as [number, string])
-		);
-
-		return ({ $implicit }: TuiContextWithImplicit<number>) =>
-			map.get($implicit) || '';
+		return this.stringifyHelper.stringifyCurrency(currencies);
 	}
 }

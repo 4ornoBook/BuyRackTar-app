@@ -12,15 +12,28 @@ import {
 	TuiLoaderModule,
 	TuiSvgModule,
 } from '@taiga-ui/core';
-import { TuiIslandModule } from '@taiga-ui/kit';
+import {
+	TuiFieldErrorModule,
+	TuiInputModule,
+	TuiIslandModule,
+	TuiSelectModule,
+} from '@taiga-ui/kit';
 import { TuiLetModule } from '@taiga-ui/cdk';
 import { SharedModule } from '../shared/shared.module';
+import { WalletFormComponent } from './components/wallet-form/wallet-form.component';
+import { WalletCreateComponent } from './components/wallet-create/wallet-create.component';
+import { WalletEditComponent } from './components/wallet-edit/wallet-edit.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { TuiCurrencyPipeModule } from '@taiga-ui/addon-commerce';
 
 @NgModule({
 	declarations: [
 		WalletTableComponent,
 		WalletItemComponent,
 		WalletViewComponent,
+		WalletFormComponent,
+		WalletCreateComponent,
+		WalletEditComponent,
 	],
 	imports: [
 		CommonModule,
@@ -34,6 +47,11 @@ import { SharedModule } from '../shared/shared.module';
 		TuiButtonModule,
 		TuiDropdownControllerModule,
 		TuiHostedDropdownModule,
+		ReactiveFormsModule,
+		TuiFieldErrorModule,
+		TuiInputModule,
+		TuiSelectModule,
+		TuiCurrencyPipeModule,
 	],
 })
 export class WalletModule {}

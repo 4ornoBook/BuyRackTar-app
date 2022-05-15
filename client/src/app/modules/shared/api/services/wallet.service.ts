@@ -30,7 +30,7 @@ export class WalletService {
 	update(walletId: number, walletDto: WalletDto) {
 		return this.http
 			.put<ApiResponse<WalletEntity>>(
-				API_URLS.WALLET_UPDATE.replace(':id', String(walletId)),
+				API_URLS.WALLET_UPDATE.replace(':walletId', String(walletId)),
 				walletDto
 			)
 			.pipe(map(({ data: wallet }) => wallet));
@@ -39,7 +39,10 @@ export class WalletService {
 	getWalletTransactions(walletId: number) {
 		return this.http
 			.get<ApiResponse<WalletTransaction[]>>(
-				API_URLS.WALLET_TRANSACTIONS.replace(':id', String(walletId))
+				API_URLS.WALLET_TRANSACTIONS.replace(
+					':walletId',
+					String(walletId)
+				)
 			)
 			.pipe(map(({ data: walletTransactions }) => walletTransactions));
 	}

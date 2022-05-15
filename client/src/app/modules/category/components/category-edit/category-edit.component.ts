@@ -5,18 +5,14 @@ import {
 	OnInit,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import {
-	CategoryActions,
-	CategoryDto,
-	CategorySelectors,
-} from '+state/category.store';
+import { CategoryActions, CategorySelectors } from '+state/category.store';
 import {
 	ID_FROM_ROUTE,
 	ID_FROM_ROUTE_PROVIDERS,
 } from 'modules/shared/helpers/routing-helper';
 import { filter, Observable } from 'rxjs';
 import { CategoryEditDto } from '+state/category.store/interfaces/category-edit.dto';
-import { FormActs } from '../../../../enums/form-acts.enum';
+import { FormActs } from 'enums/form-acts.enum';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 @UntilDestroy()

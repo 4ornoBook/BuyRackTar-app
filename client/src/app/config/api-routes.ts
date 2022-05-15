@@ -24,11 +24,11 @@ export const API_URLS = {
 	// CATEGORY_TRANSACTIONS: `${API_URL}/category-transactions`,
 
 	WALLET_GET_ONE: `${API_URL}/users/:userId/wallets/:walletId`, //	-- original
-	WALLET_CREATE: `${API_URL}/users/:userId/wallets`,  		//-- original
+	WALLET_CREATE: `${API_URL}/users/:userId/wallets`, //-- original
 	WALLET_UPDATE: `${API_URL}/users/:userId/wallets/:walletId`, //    -- original
 	// WALLET_GET_ONE: `${API_URL}/wallets/:id`,
 	// WALLET_CREATE: `${API_URL}/wallets`,
 	// WALLET_UPDATE: `${API_URL}/wallets/:id`,
-	WALLET_TRANSACTIONS: `${API_URL}/wallets/:id/transactions`, //-- original
+	WALLET_TRANSACTIONS: `${API_URL}/wallets/:walletId/transactions`, //-- original
 	// WALLET_TRANSACTIONS: `${API_URL}/wallet-transactions`,
 };
