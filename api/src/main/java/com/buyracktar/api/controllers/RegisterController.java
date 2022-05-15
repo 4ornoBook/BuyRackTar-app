@@ -29,7 +29,7 @@ public class RegisterController {
     public ResponseEntity<Object> postMethodName(@RequestBody RegistrationRequest entity) {
         Account account = registrationService.registerNewAccount(entity);
         if(account == null) {
-            return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new MyResponseTemplate(false, null,"email is already used"),HttpStatus.BAD_REQUEST);
         }
         else {
             return ResponseEntity.ok(new MyResponseTemplate(true, "registered",null));
