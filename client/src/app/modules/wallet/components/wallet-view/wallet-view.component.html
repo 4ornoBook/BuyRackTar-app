@@ -65,10 +65,10 @@
 				</div>
 
 				<div class="spend-form">
-<!--					todo form to spend money on large and modal on small screens		-->
+					<h4 class="tui-space_bottom-2">Make a transaction:</h4>
 					<app-spends-form
 						[chosenSource]="wallet"
-						[wallets]="wallet ? [wallet] : []"
+						[wallets]="(wallets$ | async) || []"
 						[categories]="(categories$ | async) || []"
 					></app-spends-form>
 				</div>

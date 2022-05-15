@@ -11,9 +11,14 @@ import {
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { CategoryActions, CategorySelectors } from '+state/category.store';
+import {
+	TransactionActions,
+	TransactionSelectors,
+} from '+state/transaction.store';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { CategoryTransactionsEntity } from 'entities/CategoryTransactions.entity';
 import { TransactionTypes } from 'enums/transaction-type.enum';
+import { CombinedTransaction } from '../../../../+state/transaction.store/interfaces/combined-transaction.interface';
 
 @UntilDestroy()
 @Component({
@@ -30,6 +35,9 @@ export class CategoryViewComponent implements OnInit {
 		this.store,
 		this.categoryId$
 	);
+	public categoryTransactions$ = this.store.select(
+		TransactionSelectors.selectTransactions
+	);
 
 	public buttonsDropdownOpen = false;
 
@@ -42,16 +50,14 @@ export class CategoryViewComponent implements OnInit {
 		this.categoryId$.pipe(untilDestroyed(this)).subscribe(categoryId => {
 			this.store.dispatch(CategoryActions.loadCategory({ categoryId }));
 			this.store.dispatch(
-				CategoryActions.loadCategoryTransactions({ categoryId })
+				TransactionActions.loadCategoryTransactions({ categoryId })
 			);
 		});
 	}
 
-	public getCategoryTotalSpendings(
-		transactions: CategoryTransactionsEntity[]
-	) {
+	public getCategoryTotalSpendings(transactions: CombinedTransaction[]) {
 		return transactions.reduce((sum, transaction) => {
-			return sum + transaction.amount;
+			return sum + (transaction?.amount || 0);
 		}, 0);
 	}
 }

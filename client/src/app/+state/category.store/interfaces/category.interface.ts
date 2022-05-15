@@ -5,7 +5,3 @@ import { CategoryTransactionsEntity } from 'entities/CategoryTransactions.entity
 export type CategoryInterface = Omit<CategoryEntity, 'currencyId'> & {
 	currency?: CurrencyEntity;
 };
-
-export type CategoryWithTransactions = CategoryInterface & {
-	transactions: CategoryTransactionsEntity[];
-};

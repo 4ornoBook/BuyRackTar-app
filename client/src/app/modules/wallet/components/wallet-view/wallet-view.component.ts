@@ -14,6 +14,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TransactionTypes } from 'enums/transaction-type.enum';
 import { WalletSelectors, WalletActions } from '+state/wallet.store';
 import { CategorySelectors, CategoryActions } from '+state/category.store';
+import { SpendTargets } from 'modules/shared/components/spends-form/spends-form.component';
 
 @UntilDestroy()
 @Component({
@@ -24,6 +25,7 @@ import { CategorySelectors, CategoryActions } from '+state/category.store';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WalletViewComponent implements OnInit {
+	public SpendTargets = SpendTargets;
 	public TransactionTypes = TransactionTypes;
 	public buttonsDropdownOpen = false;
 
@@ -45,6 +47,7 @@ export class WalletViewComponent implements OnInit {
 			// );
 		});
 
+		this.store.dispatch(WalletActions.loadWallets());
 		this.store.dispatch(CategoryActions.loadCategories());
 	}
 

@@ -2,91 +2,89 @@
 <ng-container
 	*tuiLet="category$ | async as category"
 >
+	<ng-container *tuiLet="(categoryTransactions$ | async) || [] as transactions">
+		<div class="buttons">
 
-<div class="buttons">
-
-	<a
-		routerLink="/categories"
-		tuiButton
-		size="m"
-		[shape]="'rounded'"
-		class="hide-on-large tui-space_right-2"
-	>
-		<tui-svg src="tuiIconArrowLeft"></tui-svg>
-		Categories
-	</a>
-
-	<tui-hosted-dropdown
-		tuiDropdownAlign="left"
-		[content]="dropdown"
-		[(open)]="buttonsDropdownOpen"
-	>
-		<button
-			tuiButton
-			[shape]="'rounded'"
-			size="m"
-			[iconRight]="icon"
-		>
-			Options
-		</button>
-	</tui-hosted-dropdown>
-
-	<ng-template #icon>
-		<tui-svg
-			src="tuiIconChevronDown"
-			class="icon"
-			[class.icon_rotated]="buttonsDropdownOpen"
-		></tui-svg>
-	</ng-template>
-
-	<ng-template #dropdown>
-		<tui-data-list>
 			<a
-				tuiOption
-				[routerLink]="'/categories/edit/' + category?.id"
+				routerLink="/categories"
+				tuiButton
+				size="m"
+				[shape]="'rounded'"
+				class="hide-on-large tui-space_right-2"
 			>
-				Edit category
+				<tui-svg src="tuiIconArrowLeft"></tui-svg>
+				Categories
 			</a>
-		</tui-data-list>
-	</ng-template>
-</div>
 
-<tui-loader [showLoader]="!category">
-	<div class="category-info" [class.tui-skeleton]="!category">
+			<tui-hosted-dropdown
+				tuiDropdownAlign="left"
+				[content]="dropdown"
+				[(open)]="buttonsDropdownOpen"
+			>
+				<button
+					tuiButton
+					[shape]="'rounded'"
+					size="m"
+					[iconRight]="icon"
+				>
+					Options
+				</button>
+			</tui-hosted-dropdown>
 
-		<div class="info-top">
-			<div class="category-name-description">
-				<div class="category-name">
-					<h3 class="tui-text_h3">{{ category?.name }}</h3>
-					<app-divider [height]="2"></app-divider>
+			<ng-template #icon>
+				<tui-svg
+					src="tuiIconChevronDown"
+					class="icon"
+					[class.icon_rotated]="buttonsDropdownOpen"
+				></tui-svg>
+			</ng-template>
+
+			<ng-template #dropdown>
+				<tui-data-list>
+					<a
+						tuiOption
+						[routerLink]="'/categories/edit/' + category?.id"
+					>
+						Edit category
+					</a>
+				</tui-data-list>
+			</ng-template>
+		</div>
+
+		<tui-loader [showLoader]="!category">
+			<div class="category-info" [class.tui-skeleton]="!category">
+
+				<div class="info-top">
+					<div class="category-name-description">
+						<div class="category-name">
+							<h3 class="tui-text_h3">{{ category?.name }}</h3>
+							<app-divider [height]="2"></app-divider>
+						</div>
+
+						<p>{{ category?.description }}</p>
+					</div>
+
+					<div class="spendings-circle">
+						<tui-arc-chart
+							*tuiLet="getCategoryTotalSpendings(transactions) as totalSpendings"
+							size="xl"
+							minLabel="0"
+							[maxLabel]="category?.limit?.toString() || '100%'"
+							[value]="[totalSpendings / (category?.limit || 1) * 100]"
+						>
+							{{ totalSpendings }} / {{ category?.limit }} {{ category?.currency?.name }}
+							<p>Spendings</p>
+						</tui-arc-chart>
+					</div>
 				</div>
 
-				<p>{{ category?.description }}</p>
+				<div class="info-transactions">
+					<app-transactions-table
+						[transactions]="transactions"
+						[transactionType]="TransactionTypes.Category"
+					></app-transactions-table>
+				</div>
 			</div>
-
-			<div class="spendings-circle">
-				<tui-arc-chart
-					*tuiLet="getCategoryTotalSpendings(category?.transactions || []) as totalSpendings"
-					size="xl"
-					minLabel="0"
-					[maxLabel]="category?.limit?.toString() || '100%'"
-					[value]="[totalSpendings / (category?.limit || 1) * 100]"
-				>
-					{{ totalSpendings }} / {{ category?.limit }} {{ category?.currency?.name }}
-					<p>Spendings</p>
-				</tui-arc-chart>
-			</div>
-		</div>
-
-		<div class="info-transactions">
-			<app-transactions-table
-				[transactions]="category?.transactions || []"
-				[transactionType]="TransactionTypes.Category"
-			></app-transactions-table>
-		</div>
-
-	</div>
-
-</tui-loader>
-
+		</tui-loader>
+	</ng-container>
 </ng-container>

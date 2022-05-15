@@ -5,15 +5,19 @@ import { DividerComponent } from './components/divider/divider.component';
 import { TransactionsTableComponent } from './components/transactions-table/transactions-table.component';
 import { CommonModule } from '@angular/common';
 import {
+	TuiButtonModule,
 	TuiDataListModule,
+	TuiLabelModule,
 	TuiLinkModule,
 	TuiLoaderModule,
 	TuiSvgModule,
+	TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
 import { RouterModule } from '@angular/router';
 import { SpendsFormComponent } from './components/spends-form/spends-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TuiSelectModule } from '@taiga-ui/kit';
+import { TuiFilterPipeModule } from '@taiga-ui/cdk';
 
 @NgModule({
 	imports: [
@@ -27,6 +31,10 @@ import { TuiSelectModule } from '@taiga-ui/kit';
 		ReactiveFormsModule,
 		TuiDataListModule,
 		TuiSelectModule,
+		TuiFilterPipeModule,
+		TuiLabelModule,
+		TuiTextfieldControllerModule,
+		TuiButtonModule,
 	],
 	declarations: [
 		DividerComponent,

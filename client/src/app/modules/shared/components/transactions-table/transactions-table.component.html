@@ -31,23 +31,23 @@
 			class="tui-table__tr"
 		>
 			<td *ngIf="transactionType === TransactionTypes.Wallet" class="tui-table__th">
-				<a tuiLink [routerLink]="'/wallets/' + transaction?.fromWalletId">{{ transaction?.fromWalletId }}</a>
+				<a tuiLink [routerLink]="'/wallets/' + transaction?.fromWallet?.id">{{ transaction?.fromWallet?.name }}</a>
 			</td>
 			<td *ngIf="transactionType === TransactionTypes.Wallet" class="tui-table__th">
-				<a tuiLink [routerLink]="'/wallets/' + transaction?.toWalletId">{{ transaction?.fromWalletId }}</a>
+				<a tuiLink [routerLink]="'/wallets/' + transaction?.toWallet?.id">{{ transaction?.toWallet?.name }}</a>
 			</td>
 
 			<td *ngIf="transactionType === TransactionTypes.Category" class="tui-table__th">
-				<a tuiLink [routerLink]="'/wallets/' + transaction?.walletId">{{ transaction?.walletId }}</a>
+				<a tuiLink [routerLink]="'/wallets/' + transaction?.wallet?.id">{{ transaction?.wallet?.name }}</a>
 			</td>
 			<td *ngIf="transactionType === TransactionTypes.Category" class="tui-table__th">
-				<a tuiLink [routerLink]="'/categories/' + transaction?.categoryId">{{ transaction?.categoryId }}</a>
+				<a tuiLink [routerLink]="'/categories/' + transaction?.category?.id">{{ transaction?.category?.name }}</a>
 			</td>
 
 
 			<td class="tui-table__th">{{ transaction?.amount }}</td>
 			<td class="tui-table__th tui-table__td_text_overflow">{{ transaction?.description }}</td>
-			<td class="tui-table__th">{{ ((transaction?.time || 0) * 1000) | date:'dd-MM-yyyy hh:mm a'}}</td>
+			<td class="tui-table__th">{{ (transaction?.time || 0) | date:'d-M-yy - h:mm a'}}</td>
 		</tr>
 		</tbody>
 	</table>

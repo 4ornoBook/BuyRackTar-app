@@ -3,11 +3,9 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AccountService } from 'modules/shared/api/services/account.service';
 import {
 	addCategory,
-	addCategoryTransactions,
 	createCategory,
 	loadCategories,
 	loadCategory,
-	loadCategoryTransactions,
 	setCategories,
 	setCategoriesLoading,
 	updateCategory,
@@ -87,22 +85,6 @@ export class CategoryEffects {
 						);
 						return addCategory({ category });
 					})
-				)
-			)
-		)
-	);
-
-	loadCategoryTransactions$ = createEffect(() =>
-		this.actions$.pipe(
-			ofType(loadCategoryTransactions),
-			mergeMap(({ categoryId }) =>
-				this.categoryService.getCategoryTransactions(categoryId).pipe(
-					map(transactions =>
-						addCategoryTransactions({
-							categoryId,
-							transactions,
-						})
-					)
 				)
 			)
 		)

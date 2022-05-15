@@ -1,3 +1,3 @@
 export interface JwtPayload {
-	accountId: number;
+	id: number;
 }

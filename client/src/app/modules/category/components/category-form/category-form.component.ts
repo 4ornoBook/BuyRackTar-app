@@ -3,7 +3,6 @@ import {
 	EventEmitter,
 	Input,
 	OnChanges,
-	OnInit,
 	Output,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -44,6 +43,10 @@ export class CategoryFormComponent implements OnChanges {
 	constructor(private readonly store: Store) {}
 
 	ngOnChanges() {
+		if (this.formAct === FormActs.Update) {
+			this.categoryForm.get('currencyId')?.disable();
+		}
+
 		this.categoryForm.patchValue(
 			{
 				...this.category,
@@ -59,7 +62,7 @@ export class CategoryFormComponent implements OnChanges {
 
 		this.submitCategory.emit({
 			id: this.category?.id || null,
-			...this.categoryForm.value,
+			...this.categoryForm.getRawValue(),
 		});
 	}
 

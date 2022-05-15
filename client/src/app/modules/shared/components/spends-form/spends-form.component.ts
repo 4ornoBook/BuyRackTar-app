@@ -4,6 +4,7 @@ import {
 	Input,
 	OnChanges,
 	Output,
+	SimpleChanges,
 } from '@angular/core';
 import { WalletInterface } from '+state/wallet.store/interfaces/wallet.interface';
 import { CategoryInterface } from '+state/category.store';
@@ -26,10 +27,11 @@ export enum SpendTargets {
 	styleUrls: ['./spends-form.component.css'],
 })
 export class SpendsFormComponent implements OnChanges {
-	@Input() availableSpendTargets: SpendTargets[] = [
-		SpendTargets.Category,
-		SpendTargets.Wallet,
-	];
+	public SpendTargets = SpendTargets;
+	public get spendTargetList() {
+		return Object.values(SpendTargets);
+	}
+	@Input() spendTarget: SpendTargets | null = null;
 
 	@Input() categories: CategoryInterface[] = [];
 	@Input() wallets: WalletInterface[] = [];
@@ -41,15 +43,32 @@ export class SpendsFormComponent implements OnChanges {
 
 	public spendsForm = this.formBuilder.group({
 		source: [null, [Validators.required]],
+		spendTarget: [SpendTargets.Category, Validators.required],
 		destination: [null, [Validators.required]],
+		amount: [0, Validators.required],
 	});
 
 	constructor(
 		private formBuilder: FormBuilder,
 		private stringifyHelper: StringifyHelperService
-	) {}
+	) {
+		this.spendsForm.get('spendTarget')?.valueChanges.subscribe(() => {
+			this.spendsForm.patchValue(
+				{ destination: null },
+				{ onlySelf: true }
+			);
+		});
+	}
 
-	ngOnChanges() {
+	public ngOnChanges(changes: SimpleChanges) {
+		const spendTargetChange = changes['spendTarget'];
+		if (
+			this.spendTarget &&
+			spendTargetChange.currentValue !== spendTargetChange.previousValue
+		) {
+			this.changeDestinationTarget();
+		}
+
 		this.spendsForm.patchValue({
 			source: this.chosenSource?.id || this.spendsForm.value.source,
 			destination:
@@ -65,17 +84,39 @@ export class SpendsFormComponent implements OnChanges {
 		}
 	}
 
+	public submitForm() {
+		console.log(this.spendsForm.getRawValue());
+		this.submitTransaction.emit(this.spendsForm.getRawValue());
+	}
+
 	@tuiPure
-	stringifyWallet(
+	public stringifyWallet(
 		wallets: WalletInterface[]
 	): TuiStringHandler<TuiContextWithImplicit<number>> {
 		return this.stringifyHelper.stringifyWallet(wallets);
 	}
 
 	@tuiPure
-	stringifyCategory(
+	public stringifyCategory(
 		categories: CategoryInterface[]
 	): TuiStringHandler<TuiContextWithImplicit<number>> {
 		return this.stringifyHelper.stringifyCategory(categories);
+	}
+
+	public walletMatcher(
+		destinationWallet: WalletInterface,
+		sourceWalletId: number
+	) {
+		return destinationWallet.id !== sourceWalletId;
+	}
+
+	private changeDestinationTarget() {
+		this.spendsForm.patchValue(
+			{
+				spendTarget: this.spendTarget,
+				destination: null,
+			},
+			{ onlySelf: true }
+		);
 	}
 }

@@ -1,20 +1,14 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import {
 	addCategory,
-	addCategoryTransactions,
 	loadCategory,
 	setCategories,
 	setCategoriesLoading,
 } from './category.actions';
 import { CategoryEntity } from 'entities/Category.entity';
-import { CategoryTransactionsEntity } from 'entities/CategoryTransactions.entity';
 
 export interface CategoryState {
 	categories: CategoryEntity[];
-	categoryTransactions: Record<
-		CategoryEntity['id'],
-		CategoryTransactionsEntity[]
-	>;
 	loading: boolean;
 	allCategoriesLoaded: boolean;
 }
@@ -23,7 +17,6 @@ const initialState: CategoryState = {
 	categories: [],
 	loading: false,
 	allCategoriesLoaded: false,
-	categoryTransactions: {},
 };
 
 export const categoryFeatureKey = 'category';
@@ -45,14 +38,7 @@ export const categoryReducer = createReducer(
 		].sort((a, b) => a.id - b.id),
 	})),
 	on(setCategoriesLoading, (state, _) => ({ ...state, loading: true })),
-	on(loadCategory, (state, _) => ({ ...state, loading: true })),
-	on(addCategoryTransactions, (state, { categoryId, transactions }) => ({
-		...state,
-		categoryTransactions: {
-			...state.categoryTransactions,
-			[categoryId]: transactions,
-		},
-	}))
+	on(loadCategory, (state, _) => ({ ...state, loading: true }))
 );
 
 export const CategoryFeature = createFeature({

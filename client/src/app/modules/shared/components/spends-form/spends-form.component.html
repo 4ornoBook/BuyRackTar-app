@@ -1,39 +1,101 @@
-<form [formGroup]="spendsForm">
-	<tui-select
-		formControlName="source"
-		[valueContent]="stringifyWallet(wallets)"
-	>
-		Wallet
-		<tui-data-list *tuiDataList>
-			<button
-				*ngFor="let wallet of wallets"
-				tuiOption
-				[value]="wallet.id"
+<form [formGroup]="spendsForm" (ngSubmit)="submitForm()">
+	<div class="tui-space_bottom-2">
+		<label tuiLabel label="Source">
+			<tui-select
+				formControlName="source"
+				[valueContent]="stringifyWallet(wallets)"
+				[tuiTextfieldLabelOutside]="true"
+				tuiTextfieldSize="m"
 			>
-				{{ wallet.name }}
-			</button>
-		</tui-data-list>
-	</tui-select>
-	<ng-template #loading>
-		<tui-loader class="tui-space_vertical-3 loader"></tui-loader>
-	</ng-template>
+				Wallet
+				<tui-data-list *tuiDataList>
+					<button
+						*ngFor="let wallet of wallets"
+						tuiOption
+						[value]="wallet.id"
+					>
+						{{ wallet.name }}
+					</button>
+				</tui-data-list>
+			</tui-select>
+		</label>
+	</div>
 
-	<tui-select
-		formControlName="destination"
-		[valueContent]="stringifyCategory(categories)"
-	>
-		Category
-		<tui-data-list *tuiDataList>
-			<button
-				*ngFor="let category of categories"
-				tuiOption
-				[value]="category.id"
+	<div *ngIf="this.spendTarget === null" class="tui-space_bottom-2">
+		<label tuiLabel label="Destination is">
+			<tui-select
+				formControlName="spendTarget"
+				[tuiTextfieldLabelOutside]="true"
+				tuiTextfieldSize="m"
 			>
-				{{ category.name }}
-			</button>
-		</tui-data-list>
-	</tui-select>
-	<ng-template #loading>
-		<tui-loader class="tui-space_vertical-3 loader"></tui-loader>
-	</ng-template>
+				Destination is
+				<tui-data-list *tuiDataList>
+					<button
+						*ngFor="let target of spendTargetList"
+						tuiOption
+						[value]="target"
+					>
+						{{ target }}
+					</button>
+				</tui-data-list>
+			</tui-select>
+		</label>
+	</div>
+
+	<div class="tui-space_bottom-2">
+		<label
+			tuiLabel
+			label="Destination"
+		>
+			<ng-template [ngIf]="spendsForm.get('spendTarget')?.value === SpendTargets.Category" [ngIfElse]="targetWallet">
+				<tui-select
+					formControlName="destination"
+					[valueContent]="stringifyCategory(categories)"
+					[tuiTextfieldLabelOutside]="true"
+					tuiTextfieldSize="m"
+				>
+					Category
+					<tui-data-list *tuiDataList>
+						<button
+							*ngFor="let category of categories"
+							tuiOption
+							[value]="category.id"
+						>
+							{{ category.name }}
+						</button>
+					</tui-data-list>
+				</tui-select>
+			</ng-template>
+
+			<ng-template #targetWallet>
+				<tui-select
+					formControlName="destination"
+					[valueContent]="stringifyWallet(wallets)"
+					[tuiTextfieldLabelOutside]="true"
+					tuiTextfieldSize="m"
+				>
+					Wallet
+					<tui-data-list *tuiDataList>
+						<button
+							*ngFor="let wallet of wallets | tuiFilter: walletMatcher : chosenSource?.id"
+							tuiOption
+							[value]="wallet.id"
+						>
+							{{ wallet.name }}
+						</button>
+					</tui-data-list>
+				</tui-select>
+			</ng-template>
+		</label>
+	</div>
+
+	<div>
+		<button
+			tuiButton
+			[shape]="'rounded'"
+			size="s"
+		>
+			Submit
+		</button>
+	</div>
 </form>

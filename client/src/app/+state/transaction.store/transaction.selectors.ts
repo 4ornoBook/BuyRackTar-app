@@ -1,7 +1,5 @@
-import { UserFeature } from './transaction.reducer';
+import { TransactionFeature } from './transaction.reducer';
 
 export const TransactionSelectors = {
-	selectAccount: UserFeature.selectAccount,
-	selectUsers: UserFeature.selectUsers,
-	selectCurrentUser: UserFeature.selectCurrentUser,
+	selectTransactions: TransactionFeature.selectTransactions,
 };

@@ -3,10 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { ApiResponse } from 'interfaces/api/api-response.interface';
 import { API_URLS } from 'config/api-routes';
 import { map } from 'rxjs/operators';
-import { WalletTransactionEntity } from 'entities/WalletTransaction.entity';
 import { WalletDto } from '+state/wallet.store/interfaces/wallet.dto';
 import { WalletEntity } from 'entities/Wallet.entity';
-import { Observable } from 'rxjs';
+import { WalletTransaction } from '+state/transaction.store/interfaces/wallet-transaction.interface';
 
 @Injectable({
 	providedIn: 'root',
@@ -14,16 +13,10 @@ import { Observable } from 'rxjs';
 export class WalletService {
 	constructor(private readonly http: HttpClient) {}
 
-	getUserWallets(): Observable<WalletEntity[]> {
-		return this.http
-			.get<ApiResponse<WalletEntity[]>>(API_URLS.USER_GET_WALLETS)
-			.pipe(map(({ data: wallets }) => wallets));
-	}
-
 	getOne(walletId: number) {
 		return this.http
 			.get<ApiResponse<WalletEntity>>(
-				API_URLS.WALLET_GET_ONE.replace(':id', String(walletId))
+				API_URLS.WALLET_GET_ONE.replace(':walletId', String(walletId))
 			)
 			.pipe(map(({ data: wallet }) => wallet));
 	}
@@ -45,7 +38,7 @@ export class WalletService {
 
 	getWalletTransactions(walletId: number) {
 		return this.http
-			.get<ApiResponse<WalletTransactionEntity[]>>(
+			.get<ApiResponse<WalletTransaction[]>>(
 				API_URLS.WALLET_TRANSACTIONS.replace(':id', String(walletId))
 			)
 			.pipe(map(({ data: walletTransactions }) => walletTransactions));

@@ -1,6 +1,6 @@
-import { TransactionInterface } from '../interfaces/api/transaction.interface';
+import { TransactionRawInterface } from '../interfaces/api/transaction-raw.interface';
 
-export interface CategoryTransactionsEntity extends TransactionInterface {
+export interface CategoryTransactionsEntity extends TransactionRawInterface {
 	walletId: number;
 	categoryId: number;
 }
