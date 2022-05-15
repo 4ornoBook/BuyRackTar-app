@@ -32,10 +32,15 @@ public class WalletController {
     public ResponseEntity<Object> updateWallet(@PathVariable long userId, @PathVariable long walletId, @RequestBody Wallet wallet) {
         Wallet updatedWallet  = walletService.updateWallet(userId, walletId, wallet);
         if(updatedWallet == null) {
-            return ResponseEntity.ok(new MyResponseTemplate(true, null, "wallet cannot be updated"));
+            return ResponseEntity.ok(new MyResponseTemplate(false, null, "wallet cannot be updated"));
         }
         else {
-            return ResponseEntity.ok(new MyResponseTemplate(false, updatedWallet, null));
+            return ResponseEntity.ok(new MyResponseTemplate(true, updatedWallet, null));
         }
+    }
+
+    @PostMapping(value = "/users/{userId}/wallets")
+    public ResponseEntity<Object> createWallet(@PathVariable long userId, @RequestBody Wallet wallet) {
+        return ResponseEntity.ok(new MyResponseTemplate(true, walletService.addWallet(userId, wallet),null));
     }
 }

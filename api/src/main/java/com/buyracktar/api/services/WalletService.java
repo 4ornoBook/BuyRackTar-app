@@ -27,6 +27,11 @@ public class WalletService {
         }
     }
 
+    public Wallet addWallet(long userId, Wallet wallet) {
+        wallet.setUserId(userId);
+        return walletRepository.save(wallet);
+    }
+
     public Wallet updateWallet(long userId, long walletId, Wallet wallet) {
         Wallet DbWallet = walletRepository.findById(walletId).orElse(null);
         if(DbWallet == null || DbWallet.getUserId() != userId) {
