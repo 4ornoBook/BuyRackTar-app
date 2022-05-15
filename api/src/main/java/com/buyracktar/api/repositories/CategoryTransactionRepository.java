@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CategoryTransactionRepository extends CrudRepository<CategoryTransaction, Long> {
+    public Iterable<CategoryTransaction> findByCategoryId(Long categoryId);
 }

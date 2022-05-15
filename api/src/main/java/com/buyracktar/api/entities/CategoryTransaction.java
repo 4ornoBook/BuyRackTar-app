@@ -1,14 +1,12 @@
 package com.buyracktar.api.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 @Getter
@@ -20,7 +18,9 @@ public class CategoryTransaction {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Long walletId;
+    @ManyToOne()
+    @JoinColumn(name = "walletId")
+    private Wallet wallet;
     private Long categoryId;
     private BigDecimal amount;
     private LocalDateTime time;

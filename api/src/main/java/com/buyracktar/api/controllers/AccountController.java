@@ -20,7 +20,7 @@ public class AccountController {
     private final UserService userService;
     private final CategoryService categoryService;
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/{id}/users")
     public ResponseEntity<Object> getAccountsUsers(@PathVariable Long id) {
         Iterable<User> users = userService.getUsers(id);
         return ResponseEntity.ok(new MyResponseTemplate(true, users, null));
@@ -30,4 +30,5 @@ public class AccountController {
     public ResponseEntity<Object> getCategoriesByAccount(@RequestHeader String Authorization) {
         return ResponseEntity.ok(new MyResponseTemplate(true, categoryService.getByAccount(Authorization),null));
     }
+
 }

@@ -3,6 +3,7 @@ package com.buyracktar.api.controllers;
 import com.buyracktar.api.entities.Category;
 import com.buyracktar.api.responsemodels.MyResponseTemplate;
 import com.buyracktar.api.services.CategoryService;
+import com.buyracktar.api.services.CategoryTransactionService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class CategoryController {
 
     private final CategoryService categoryService;
+    private final CategoryTransactionService transactionService;
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Object> getCategory(@PathVariable long id) {
@@ -32,7 +34,13 @@ public class CategoryController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Object> updateCategory(@PathVariable long id, @RequestBody Category category) {
-        return ResponseEntity.ok(new MyResponseTemplate(false, categoryService.updateCategory(id, category), null));
+    public ResponseEntity<Object> updateCategory(@PathVariable long id, @RequestHeader String Authorization, @RequestBody Category category) {
+        return ResponseEntity.ok(new MyResponseTemplate(true, categoryService.updateCategory(id, Authorization, category), null));
+    }
+
+    @GetMapping(value = "/{id}/transactions")
+    public ResponseEntity<Object> getCategoryTransactions(@PathVariable long id) {
+//        System.out.println();
+        return ResponseEntity.ok(new MyResponseTemplate(true, transactionService.getTransactionsByCategory(id), null));
     }
 }

@@ -28,20 +28,12 @@ public class Account implements UserDetails {
 
 	private boolean confirmed;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "account_id")
-	private Set<User> users;
+//	@OneToMany(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "account_id")
+//	private Set<User> users;
 
 	public Account() {
 		confirmed = false;
-	}
-
-	public Account(Long id, String email, String password, boolean confirmed) {
-		this.id = id;
-		this.email = email;
-		this.password = password;
-		this.confirmed = confirmed;
-		users = new HashSet<>();
 	}
 
 	@Override
