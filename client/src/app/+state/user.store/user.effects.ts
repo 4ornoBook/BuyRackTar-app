@@ -53,8 +53,6 @@ export class UserEffects {
 		this.actions$.pipe(
 			ofType(setAccount),
 			mergeMap(({ account }) => {
-				this.router.navigate(['/']);
-
 				return from([
 					getAccountUsers({ accountId: account.id }),
 					loadCurrencies(),
@@ -67,9 +65,12 @@ export class UserEffects {
 		this.actions$.pipe(
 			ofType(login),
 			mergeMap(({ credentials }) =>
-				this.authService
-					.login(credentials)
-					.pipe(map(account => setAccount({ account })))
+				this.authService.login(credentials).pipe(
+					map(account => {
+						this.router.navigate(['/']);
+						return setAccount({ account });
+					})
+				)
 			)
 		)
 	);

@@ -6,6 +6,7 @@ import { API_URLS } from 'config/api-routes';
 import { map } from 'rxjs/operators';
 import { CategoryTransactionsEntity } from 'entities/CategoryTransactions.entity';
 import { CategoryDto } from '+state/category.store';
+import { CategoryTransaction } from '../../../../+state/transaction.store/interfaces/category-transaction.interface';
 
 @Injectable()
 export class CategoryService {
@@ -39,8 +40,11 @@ export class CategoryService {
 
 	getCategoryTransactions(categoryId: number) {
 		return this.http
-			.get<ApiResponse<CategoryTransactionsEntity[]>>(
-				API_URLS.CATEGORY_TRANSACTIONS.replace(':id', String(categoryId))
+			.get<ApiResponse<CategoryTransaction[]>>(
+				API_URLS.CATEGORY_TRANSACTIONS.replace(
+					':id',
+					String(categoryId)
+				)
 			)
 			.pipe(
 				map(({ data: categoryTransactions }) => categoryTransactions)

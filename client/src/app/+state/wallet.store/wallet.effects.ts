@@ -16,6 +16,7 @@ import { select, Store } from '@ngrx/store';
 import { WalletFeature } from './wallet.reducer';
 import { NotificationAlertService } from 'modules/shared/helpers/notification-alert.service';
 import { WalletService } from '../../modules/shared/api/services/wallet.service';
+import { UserService } from '../../modules/shared/api/services/user.service';
 
 @Injectable()
 export class WalletEffects {
@@ -24,6 +25,7 @@ export class WalletEffects {
 		private readonly actions$: Actions,
 		private readonly accountService: AccountService,
 		private readonly walletService: WalletService,
+		private readonly userService: UserService,
 		private readonly notificationService: NotificationAlertService
 	) {}
 
@@ -39,7 +41,7 @@ export class WalletEffects {
 			filter(allLoaded => !allLoaded),
 			mergeMap(() => {
 				this.store.dispatch(setWalletsLoading());
-				return this.walletService
+				return this.userService
 					.getUserWallets()
 					.pipe(map(wallets => setWallets({ wallets })));
 			})

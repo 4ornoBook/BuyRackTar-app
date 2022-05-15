@@ -3,7 +3,6 @@ import {
 	EventEmitter,
 	Input,
 	OnChanges,
-	OnInit,
 	Output,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -19,6 +18,7 @@ import { CurrencyEntity } from 'entities/Currency.entity';
 import { CategoryEntity } from 'entities/Category.entity';
 import { CategoryEditDto } from '+state/category.store/interfaces/category-edit.dto';
 import { FormActs } from 'enums/form-acts.enum';
+
 @Component({
 	selector: 'app-category-form',
 	templateUrl: './category-form.component.html',
@@ -43,6 +43,10 @@ export class CategoryFormComponent implements OnChanges {
 	constructor(private readonly store: Store) {}
 
 	ngOnChanges() {
+		if (this.formAct === FormActs.Update) {
+			this.categoryForm.get('currencyId')?.disable();
+		}
+
 		this.categoryForm.patchValue(
 			{
 				...this.category,
@@ -58,7 +62,7 @@ export class CategoryFormComponent implements OnChanges {
 
 		this.submitCategory.emit({
 			id: this.category?.id || null,
-			...this.categoryForm.value,
+			...this.categoryForm.getRawValue(),
 		});
 	}
 

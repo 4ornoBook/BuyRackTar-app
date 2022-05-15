@@ -1,4 +1,4 @@
-export interface TransactionInterface {
+export interface TransactionRawInterface {
 	id: number;
 	amount: number;
 	time: number;

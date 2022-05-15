@@ -17,7 +17,9 @@ export function loadSharedDataFactory(
 		const token = authService.getAccessToken();
 
 		try {
-			const { accountId } = jwtHelper.decodeToken(token) as JwtPayload;
+			const { id: accountId } = jwtHelper.decodeToken(
+				token
+			) as JwtPayload;
 
 			if (accountId) {
 				store.dispatch(UserActions.loadAccount({ accountId }));

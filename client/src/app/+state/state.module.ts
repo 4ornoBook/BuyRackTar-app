@@ -5,6 +5,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { CategoryFeature, CategoryEffects } from './category.store';
 import { WalletEffects, WalletFeature } from './wallet.store';
+import { TransactionEffects, TransactionFeature } from './transaction.store';
 
 @NgModule({
 	imports: [
@@ -13,11 +14,13 @@ import { WalletEffects, WalletFeature } from './wallet.store';
 			CurrencyEffects,
 			CategoryEffects,
 			WalletEffects,
+			TransactionEffects,
 		]),
 		StoreModule.forFeature(UserFeature),
 		StoreModule.forFeature(CurrencyFeature),
 		StoreModule.forFeature(CategoryFeature),
 		StoreModule.forFeature(WalletFeature),
+		StoreModule.forFeature(TransactionFeature),
 	],
 })
 export class StateModule {}

@@ -1,6 +1,5 @@
 import { createAction, props } from '@ngrx/store';
 import { CategoryEntity } from 'entities/Category.entity';
-import { CategoryTransactionsEntity } from 'entities/CategoryTransactions.entity';
 import { CategoryDto } from './interfaces';
 
 const context = '[CATEGORY]';
@@ -34,13 +33,4 @@ export const createCategory = createAction(
 export const updateCategory = createAction(
 	`${context} update category`,
 	props<{ categoryId: number; categoryDto: CategoryDto }>()
-);
-
-export const loadCategoryTransactions = createAction(
-	`${context} load category spendings`,
-	props<{ categoryId: number }>()
-);
-export const addCategoryTransactions = createAction(
-	`${context} add category transactions`,
-	props<{ categoryId: number; transactions: CategoryTransactionsEntity[] }>()
 );

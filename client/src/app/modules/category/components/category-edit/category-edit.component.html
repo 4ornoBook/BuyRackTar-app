@@ -2,10 +2,12 @@
 <ng-container
 	*tuiLet="category$ | async as category"
 >
-	<app-category-form
-		[category]="category"
-		(submitCategory)="updateCategory($event)"
-		[formAct]="FormActs.Update"
-	></app-category-form>
+	<tui-loader [showLoader]="!category" [overlay]="true">
+		<app-category-form
+			[category]="category"
+			(submitCategory)="updateCategory($event)"
+			[formAct]="FormActs.Update"
+		></app-category-form>
+	</tui-loader>
 </ng-container>
 

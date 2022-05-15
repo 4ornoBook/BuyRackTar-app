@@ -1,14 +1,11 @@
 
 <tui-loader [showLoader]="!wallet.currency" [overlay]="true">
-	<a [routerLink]="'/wallets/' + wallet.id">
-		<tui-island
-			textAlign="center"
-		>
+	<a class="wallet-link" [routerLink]="'/wallets/' + wallet.id">
+		<tui-island textAlign="center">
 
 			<h3 class="tui-island__title">{{ wallet.name }}</h3>
 
-			<div>{{wallet.amount}} {{ wallet.currency?.name }}</div>
-
+			<div>Current balance: {{wallet.amount}} {{ wallet.currency?.name }}</div>
 		</tui-island>
 	</a>
 </tui-loader>
