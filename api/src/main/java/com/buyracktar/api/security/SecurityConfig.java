@@ -3,6 +3,7 @@ package com.buyracktar.api.security;
 import com.buyracktar.api.security.jwtutils.JwtAuthenticationEntryPoint;
 import com.buyracktar.api.security.jwtutils.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,6 +31,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
     private UserDetailsService userDetailsService;
     @Autowired
     private JwtFilter filter;
+
+    @Value("${client.url}")
+    String clientUrl;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -79,7 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:4200")
+                .allowedOrigins(clientUrl)
                 .allowedMethods("*");
     }
 }

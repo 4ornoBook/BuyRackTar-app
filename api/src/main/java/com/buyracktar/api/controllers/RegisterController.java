@@ -4,13 +4,21 @@ import com.buyracktar.api.entities.RegistrationRequest;
 import com.buyracktar.api.responsemodels.MyResponseTemplate;
 import com.buyracktar.api.services.RegistrationService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@AllArgsConstructor
-public class RegisterController {
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
+@RestController
+//@AllArgsConstructor
+public class RegisterController {
+    public RegisterController(RegistrationService registrationService) {
+        this.registrationService = registrationService;
+    }
+    @Value("${client.url.login}")
+    String redirectUrl;
     private final RegistrationService registrationService;
 
     @PostMapping(value = "/auth/register")
@@ -20,8 +28,9 @@ public class RegisterController {
     }
 
     @GetMapping(value="register/confirm")
-    public String confirm(@RequestParam String token) {
-        return registrationService.confirmToken(token);
+    public void confirm(HttpServletResponse response, @RequestParam String token)  throws IOException {
+        registrationService.confirmToken(token);
+        response.sendRedirect(redirectUrl);
     }
 
 }
