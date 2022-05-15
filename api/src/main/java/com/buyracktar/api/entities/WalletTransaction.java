@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -16,9 +18,13 @@ public class WalletTransaction {
 
     private Long id;
 
-    private Long fromWalletId;
+    @ManyToOne()
+    @JoinColumn(name = "from_wallet_id")
+    private Wallet fromWallet;
 
-    private Long toWalletId;
+    @ManyToOne()
+    @JoinColumn(name = "to_wallet_id")
+    private Wallet toWallet;
 
     private String name;
 

@@ -37,8 +37,7 @@ public class LoginController {
             System.out.println("disabled: " + e.getMessage());
             throw new Exception("USER_DISABLED", e);
         } catch (BadCredentialsException e) {
-            System.out.println(e.getMessage());
-            throw new Exception("INVALID_CREDENTIALS", e);
+            return ResponseEntity.ok(new MyResponseTemplate(false, null,e.getMessage()));
         }
         final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
         Account account = (Account) userDetails;

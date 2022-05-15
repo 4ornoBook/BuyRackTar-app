@@ -22,5 +22,6 @@ public class Wallet {
     private Long id;
     private Long userId;
     private Long currencyId;
-    private BigDecimal amount; 
+    private String name;
+    private BigDecimal amount;
 }
