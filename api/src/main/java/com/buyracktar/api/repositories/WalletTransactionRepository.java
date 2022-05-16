@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface WalletTransactionRepository extends CrudRepository<WalletTransaction, Long> {
     public Iterable<WalletTransaction> findByToWallet(Wallet toWallet);
+    public Iterable<WalletTransaction> findByFromWallet(Wallet fromWallet);
 }

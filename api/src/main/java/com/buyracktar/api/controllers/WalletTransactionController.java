@@ -2,6 +2,7 @@ package com.buyracktar.api.controllers;
 
 import com.buyracktar.api.entities.WalletTransaction;
 import com.buyracktar.api.repositories.WalletTransactionRepository;
+import com.buyracktar.api.responsemodels.AllTransactions;
 import com.buyracktar.api.responsemodels.MyResponseTemplate;
 import com.buyracktar.api.services.WalletTransactionService;
 import lombok.AllArgsConstructor;
@@ -19,14 +20,11 @@ public class WalletTransactionController {
 
     @GetMapping(value = "/wallets/{walletId}/transactions")
     public ResponseEntity<Object> getWalletTransactions(@PathVariable long walletId) {
-        System.out.println("kuku");
-        Iterable<WalletTransaction> walletTransactions = walletTransactionService.getWalletTransactionsByWallet(walletId);
-        if (walletTransactions == null) {
-            System.out.println("null");
+        AllTransactions allTransactions = walletTransactionService.getWalletTransactionsByWallet(walletId);
+        if (allTransactions == null) {
             return new ResponseEntity<>(new MyResponseTemplate(false, null, "wrong wallet id"), HttpStatus.BAD_REQUEST);
         } else {
-            System.out.println("not null");
-            return ResponseEntity.ok(new MyResponseTemplate(true, walletTransactionService.getWalletTransactionsByWallet(walletId), null));
+            return ResponseEntity.ok(new MyResponseTemplate(true, allTransactions, null));
         }
     }
 }
