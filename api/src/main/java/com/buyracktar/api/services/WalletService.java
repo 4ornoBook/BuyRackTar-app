@@ -20,7 +20,6 @@ public class WalletService {
 
     public Wallet getWalletById(long userId, long walletId) {
         Wallet wallet = walletRepository.findById(walletId).orElse(null);
-        System.out.println(wallet);
         if(wallet == null || wallet.getUserId() != userId) {
             return null;
         }
