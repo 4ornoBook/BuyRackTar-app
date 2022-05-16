@@ -14,7 +14,10 @@ export class StringifyHelperService {
 		wallets: WalletInterface[]
 	): TuiStringHandler<TuiContextWithImplicit<number>> {
 		const map = new Map(
-			wallets.map(({ id, name }) => [id, name] as [number, string])
+			wallets.map(
+				({ id, name, currency }) =>
+					[id, `${name} ${currency?.name}`] as [number, string]
+			)
 		);
 
 		return ({ $implicit }: TuiContextWithImplicit<number>) =>
@@ -25,7 +28,10 @@ export class StringifyHelperService {
 		categories: CategoryInterface[]
 	): TuiStringHandler<TuiContextWithImplicit<number>> {
 		const map = new Map(
-			categories.map(({ id, name }) => [id, name] as [number, string])
+			categories.map(
+				({ id, name, currency }) =>
+					[id, `${name} ${currency?.name}`] as [number, string]
+			)
 		);
 
 		return ({ $implicit }: TuiContextWithImplicit<number>) =>

@@ -14,8 +14,14 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TransactionTypes } from 'enums/transaction-type.enum';
 import { WalletSelectors, WalletActions } from '+state/wallet.store';
 import { CategorySelectors, CategoryActions } from '+state/category.store';
-import { TransactionActions } from '+state/transaction.store';
+import {
+	TransactionActions,
+	TransactionSelectors,
+} from '+state/transaction.store';
 import { SpendTargets } from 'enums/spend-targets.enum';
+import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
+import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
+import { TransactionDto } from 'interfaces/transaction.dto';
 
 @UntilDestroy()
 @Component({
@@ -31,16 +37,20 @@ export class WalletViewComponent implements OnInit {
 	public buttonsDropdownOpen = false;
 
 	public wallet$ = WalletSelectors.selectWallet(this.store, this.walletId$);
+	public walletTransactions$ = this.store.select(
+		TransactionSelectors.selectTransactions
+	);
 
 	public wallets$ = this.store.select(WalletSelectors.selectWallets);
 	public categories$ = this.store.select(CategorySelectors.selectCategories);
 
 	constructor(
 		private store: Store,
+		private dialogService: TuiDialogService,
 		@Inject(ID_FROM_ROUTE) public walletId$: Observable<number>
 	) {}
 
-	ngOnInit(): void {
+	public ngOnInit(): void {
 		this.walletId$.pipe(untilDestroyed(this)).subscribe(walletId => {
 			this.store.dispatch(WalletActions.loadWallet({ walletId }));
 			this.store.dispatch(
@@ -52,11 +62,15 @@ export class WalletViewComponent implements OnInit {
 		this.store.dispatch(CategoryActions.loadCategories());
 	}
 
-	// public getWalletTotalSpendings(
-	// 	transactions: WalletTransactionEntity CategoryTransactionsEntity[]
-	// ) {
-	// 	return transactions.reduce((sum, transaction) => {
-	// 		return sum + transaction.amount;
-	// 	}, 0);
-	// }
+	public makeTransaction(
+		transactionDto: TransactionDto,
+		dialogObserver: any
+	) {
+		dialogObserver.complete();
+		console.log(transactionDto);
+	}
+
+	public showDialog(content: PolymorpheusContent<TuiDialogContext>): void {
+		this.dialogService.open(content).subscribe();
+	}
 }

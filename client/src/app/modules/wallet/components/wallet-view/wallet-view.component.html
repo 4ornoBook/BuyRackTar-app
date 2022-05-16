@@ -48,8 +48,29 @@
 					Edit wallet
 				</a>
 			</tui-data-list>
+			<tui-data-list>
+				<button
+					tuiOption
+					(click)="showDialog(spendsForm)"
+				>
+					Make a transaction
+				</button>
+			</tui-data-list>
 		</ng-template>
 	</div>
+
+	<ng-template #spendsForm let-observer>
+		<div class="spend-form">
+			<h2 class="tui-space_bottom-2">Make a transaction:</h2>
+			<app-spends-form
+				[chosenSource]="wallet"
+				[wallets]="(wallets$ | async) || []"
+				[categories]="(categories$ | async) || []"
+				(submitTransaction)="makeTransaction($event, observer)"
+				(cancelTransaction)="observer.complete()"
+			></app-spends-form>
+		</div>
+	</ng-template>
 
 	<tui-loader [showLoader]="!wallet">
 		<div class="wallet-info" [class.tui-skeleton]="!wallet">
@@ -62,15 +83,6 @@
 					</div>
 
 					<h4>Current balance: {{ wallet?.amount }} {{wallet?.currency?.name}}</h4>
-				</div>
-
-				<div class="spend-form">
-					<h4 class="tui-space_bottom-2">Make a transaction:</h4>
-					<app-spends-form
-						[chosenSource]="wallet"
-						[wallets]="(wallets$ | async) || []"
-						[categories]="(categories$ | async) || []"
-					></app-spends-form>
 				</div>
 			</div>
 

@@ -16,9 +16,13 @@ import {
 	TransactionSelectors,
 } from '+state/transaction.store';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { CategoryTransactionsEntity } from 'entities/CategoryTransactions.entity';
 import { TransactionTypes } from 'enums/transaction-type.enum';
-import { CombinedTransaction } from '../../../../+state/transaction.store/interfaces/combined-transaction.interface';
+import { CombinedTransaction } from '+state/transaction.store/interfaces/combined-transaction.interface';
+import { WalletActions, WalletSelectors } from '+state/wallet.store';
+import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
+import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
+import { SpendTargets } from 'enums/spend-targets.enum';
+import { TransactionDto } from '../../../../interfaces/transaction.dto';
 
 @UntilDestroy()
 @Component({
@@ -29,6 +33,7 @@ import { CombinedTransaction } from '../../../../+state/transaction.store/interf
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoryViewComponent implements OnInit {
+	public SpendTargets = SpendTargets;
 	public TransactionTypes = TransactionTypes;
 
 	public category$ = CategorySelectors.selectCategory(
@@ -39,10 +44,13 @@ export class CategoryViewComponent implements OnInit {
 		TransactionSelectors.selectTransactions
 	);
 
+	public wallets$ = this.store.select(WalletSelectors.selectWallets);
+
 	public buttonsDropdownOpen = false;
 
 	constructor(
 		private store: Store,
+		private dialogService: TuiDialogService,
 		@Inject(ID_FROM_ROUTE) public categoryId$: Observable<number>
 	) {}
 
@@ -53,6 +61,20 @@ export class CategoryViewComponent implements OnInit {
 				TransactionActions.loadCategoryTransactions({ categoryId })
 			);
 		});
+
+		this.store.dispatch(WalletActions.loadWallets());
+	}
+
+	public makeTransaction(
+		transactionDto: TransactionDto,
+		dialogObserver: any
+	) {
+		dialogObserver.complete();
+		console.log(transactionDto);
+	}
+
+	public showDialog(content: PolymorpheusContent<TuiDialogContext>): void {
+		this.dialogService.open(content).subscribe();
 	}
 
 	public getCategoryTotalSpendings(transactions: CombinedTransaction[]) {

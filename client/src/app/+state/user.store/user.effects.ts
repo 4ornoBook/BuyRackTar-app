@@ -15,7 +15,10 @@ import { map } from 'rxjs/operators';
 import { NotificationAlertService } from 'modules/shared/helpers/notification-alert.service';
 import { AccountService } from 'modules/shared/api/services/account.service';
 import { loadCurrencies } from '../currency.store/currency.actions';
-import { setUserWalletsLoaded } from '../wallet.store/wallet.actions';
+import {
+	setUserWalletsLoaded,
+	setWallets,
+} from '../wallet.store/wallet.actions';
 import { Router } from '@angular/router';
 
 @Injectable()
@@ -31,9 +34,12 @@ export class UserEffects {
 	setLastUserAndUserWallets$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(setCurrentUser),
-			map(({ userId }) => {
+			mergeMap(({ userId }) => {
 				AccountService.setLastUsedUser(userId);
-				return setUserWalletsLoaded({ loaded: false });
+				return from([
+					setWallets({ wallets: [] }),
+					setUserWalletsLoaded({ loaded: false }),
+				]);
 			})
 		)
 	);
