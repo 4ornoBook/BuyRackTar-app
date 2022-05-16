@@ -32,9 +32,3 @@
 .wallet-name-balance {
 	max-width: clamp(280px, 40%, 600px);
 }
-
-.spend-form {
-	flex-grow: 1;
-	max-width: 400px;
-}
-

@@ -47,9 +47,29 @@
 					>
 						Edit category
 					</a>
+					<button
+						tuiOption
+						(click)="showDialog(spendsForm)"
+					>
+						Make a transaction
+					</button>
 				</tui-data-list>
 			</ng-template>
 		</div>
+
+		<ng-template #spendsForm let-observer>
+			<div class="spend-form">
+				<h2 class="tui-space_bottom-2">Make a transaction:</h2>
+				<app-spends-form
+					[spendTarget]="SpendTargets.Category"
+					[chosenDestination]="category"
+					[wallets]="(wallets$ | async) || []"
+					[categories]="category ? [category] : []"
+					(submitTransaction)="makeTransaction($event, observer)"
+					(cancelTransaction)="observer.complete()"
+				></app-spends-form>
+			</div>
+		</ng-template>
 
 		<tui-loader [showLoader]="!category">
 			<div class="category-info" [class.tui-skeleton]="!category">

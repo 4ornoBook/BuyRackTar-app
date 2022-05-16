@@ -14,8 +14,9 @@ import {
 	tuiPure,
 	TuiStringHandler,
 } from '@taiga-ui/cdk';
-import { StringifyHelperService } from '../../helpers/stringify-helper.service';
+import { StringifyHelperService } from 'modules/shared/helpers/stringify-helper.service';
 import { SpendTargets } from 'enums/spend-targets.enum';
+import { TransactionDto } from 'interfaces/transaction.dto';
 
 @Component({
 	selector: 'app-spends-form',
@@ -35,7 +36,8 @@ export class SpendsFormComponent implements OnChanges {
 	@Input() chosenSource: WalletInterface | null = null;
 	@Input() chosenDestination: CategoryInterface | null = null;
 
-	@Output() submitTransaction = new EventEmitter();
+	@Output() submitTransaction = new EventEmitter<TransactionDto>();
+	@Output() cancelTransaction = new EventEmitter<void>();
 
 	public spendsForm = this.formBuilder.group({
 		source: [null, [Validators.required]],
@@ -68,7 +70,7 @@ export class SpendsFormComponent implements OnChanges {
 		this.spendsForm.patchValue({
 			source: this.chosenSource?.id || this.spendsForm.value.source,
 			destination:
-				this.chosenDestination || this.spendsForm.value.destination,
+				this.chosenDestination?.id || this.spendsForm.value.destination,
 		});
 
 		if (this.chosenSource) {
@@ -76,13 +78,19 @@ export class SpendsFormComponent implements OnChanges {
 		}
 
 		if (this.chosenDestination) {
-			this.spendsForm.get('source')?.disable({ onlySelf: true });
+			this.spendsForm.get('destination')?.disable({ onlySelf: true });
 		}
 	}
 
 	public submitForm() {
-		console.log(this.spendsForm.getRawValue());
-		this.submitTransaction.emit(this.spendsForm.getRawValue());
+		if (this.spendsForm.valid) {
+			this.submitTransaction.emit(this.spendsForm.getRawValue());
+		}
+	}
+
+	public cancel(event: Event) {
+		event.preventDefault();
+		this.cancelTransaction.emit();
 	}
 
 	@tuiPure

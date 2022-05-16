@@ -2,7 +2,6 @@ import { DefaultLayoutComponent } from 'routing/layout/default-layout/default-la
 import { NotFoundPageComponent } from 'routing/not-found-page/not-found-page.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { UsersModule } from './modules/users/users.module';
 
 export const routes: Routes = [
 	{
@@ -14,12 +13,16 @@ export const routes: Routes = [
 		path: 'auth',
 		loadChildren: () =>
 			import('./modules/auth/auth.module').then(m => m.AuthModule),
+		data: {
+			animation: 'auth',
+		},
 	},
 	{
 		path: '',
 		component: DefaultLayoutComponent,
 		data: {
 			title: 'Home',
+			animation: 'dashboard',
 		},
 		children: [
 			{
@@ -52,7 +55,11 @@ export const routes: Routes = [
 			},
 		],
 	},
-	{ path: '**', component: NotFoundPageComponent },
+	{
+		path: '**',
+		component: NotFoundPageComponent,
+		data: { animation: 'not-found' },
+	},
 ];
 
 @NgModule({
