@@ -74,7 +74,7 @@
 
 	<tui-loader
 		[showLoader]="!wallet"
-		*tuiLet="(transactions$ | async) || [] as transactions"
+		*tuiLet="filterTransactions((transactions$ | async) || [], transactionType.value) as transactions"
 	>
 		<div class="wallet-info" [class.tui-skeleton]="!wallet">
 
@@ -122,7 +122,7 @@
 			<div class="info-transactions">
 				<app-transactions-table
 					[transactions]="transactions"
-					[transactionType]="TransactionTypes.Category"
+					[transactionType]="transactionType.value"
 				></app-transactions-table>
 			</div>
 

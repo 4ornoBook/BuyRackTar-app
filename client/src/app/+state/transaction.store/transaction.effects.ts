@@ -42,11 +42,16 @@ export class TransactionEffects {
 			ofType(loadWalletTransactions),
 			mergeMap(({ walletId }) => {
 				this.store.dispatch(setTransactions({ transactions: [] }));
-				return this.walletService
-					.getWalletTransactions(walletId)
-					.pipe(
-						map(transactions => setTransactions({ transactions }))
-					);
+				return this.walletService.getWalletTransactions(walletId).pipe(
+					map(transactions =>
+						setTransactions({
+							transactions: [
+								...transactions.categoryTransactions,
+								...transactions.walletTransactions,
+							],
+						})
+					)
+				);
 			})
 		)
 	);
