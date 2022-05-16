@@ -1,6 +1,8 @@
 package com.buyracktar.api.security.jwtutils;
 
+import com.buyracktar.api.responsemodels.MyResponseTemplate;
 import com.buyracktar.api.services.AccountService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -47,6 +49,9 @@ public class JwtFilter extends OncePerRequestFilter {
 					System.out.println("Unable to get JWT Token");
 				} catch (ExpiredJwtException e) {
 					System.out.println("JWT Token has expired");
+					ObjectMapper objectMapper =new ObjectMapper();
+					response.sendError(401,objectMapper.writeValueAsString(new MyResponseTemplate(false, null, "token has expired")));
+					return ;
 				}
 				System.out.println("token is valid");
 			}
