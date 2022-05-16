@@ -85,7 +85,32 @@
 						<app-divider [height]="2"></app-divider>
 					</div>
 
-					<h4>Current balance: {{ wallet?.amount }} {{wallet?.currency?.name}}</h4>
+					<h4 class="tui-space_bottom-5">
+						Current balance: {{ wallet?.amount }} {{wallet?.currency?.name}}
+					</h4>
+
+					<div>
+						<label
+							tuiLabel
+						>
+							<p class="tui-space_bottom-3">Transaction type</p>
+							<tui-radio-labeled
+								[formControl]="transactionType"
+								class="tui-space_bottom-3"
+								[item]="TransactionTypes.Wallet"
+							>
+								Wallet
+							</tui-radio-labeled>
+
+							<tui-radio-labeled
+								[formControl]="transactionType"
+								class="tui-space_bottom-3"
+								[item]="TransactionTypes.Category"
+							>
+								Category
+							</tui-radio-labeled>
+						</label>
+					</div>
 				</div>
 
 				<div class="wallet-spends">
@@ -94,29 +119,6 @@
 						[currencyName]="wallet?.currency?.name || ''"
 					></app-spends-ring>
 				</div>
-			</div>
-
-			<div>
-				<label
-					tuiLabel
-				>
-					<p class="tui-space_bottom-3">Transaction type</p>
-					<tui-radio-labeled
-						[formControl]="transactionType"
-						class="tui-space_bottom-3"
-						[item]="TransactionTypes.Wallet"
-					>
-						Wallet
-					</tui-radio-labeled>
-
-					<tui-radio-labeled
-						[formControl]="transactionType"
-						class="tui-space_bottom-3"
-						[item]="TransactionTypes.Category"
-					>
-						Category
-					</tui-radio-labeled>
-				</label>
 			</div>
 
 			<div class="info-transactions">

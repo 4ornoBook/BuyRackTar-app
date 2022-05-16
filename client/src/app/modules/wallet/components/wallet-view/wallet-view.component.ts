@@ -12,8 +12,9 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TransactionTypes } from 'enums/transaction-type.enum';
-import { WalletSelectors, WalletActions } from '+state/wallet.store';
-import { CategorySelectors, CategoryActions } from '+state/category.store';
+import { WalletActions, WalletSelectors } from '+state/wallet.store';
+import { CategoryActions, CategorySelectors } from '+state/category.store';
+import { CombinedTransaction } from '+state/transaction.store/interfaces/combined-transaction.interface';
 import {
 	TransactionActions,
 	TransactionSelectors,
@@ -24,7 +25,6 @@ import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
 import { TransactionDto } from 'interfaces/transaction.dto';
 import { FormControl } from '@angular/forms';
 import { tuiPure } from '@taiga-ui/cdk';
-import { CombinedTransaction } from '../../../../+state/transaction.store/interfaces/combined-transaction.interface';
 
 @UntilDestroy()
 @Component({
@@ -71,8 +71,12 @@ export class WalletViewComponent implements OnInit {
 		transactionDto: TransactionDto,
 		dialogObserver: any
 	) {
+		if (transactionDto.spendTarget === SpendTargets.Category) {
+			// todo do something
+		} else {
+			// todo do something else
+		}
 		dialogObserver.complete();
-		console.log(transactionDto);
 	}
 
 	@tuiPure
@@ -80,9 +84,6 @@ export class WalletViewComponent implements OnInit {
 		transactions: CombinedTransaction[],
 		transactionType: TransactionTypes
 	) {
-		console.log(this.transactionType.value);
-		console.log(transactions);
-
 		if (transactionType === TransactionTypes.Category) {
 			return transactions.filter(transaction => transaction.category);
 		}
