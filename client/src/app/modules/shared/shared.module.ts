@@ -16,7 +16,7 @@ import {
 import { RouterModule } from '@angular/router';
 import { SpendsFormComponent } from './components/spends-form/spends-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TuiSelectModule } from '@taiga-ui/kit';
+import { TuiInputNumberModule, TuiSelectModule } from '@taiga-ui/kit';
 import { TuiFilterPipeModule } from '@taiga-ui/cdk';
 
 @NgModule({
@@ -35,6 +35,7 @@ import { TuiFilterPipeModule } from '@taiga-ui/cdk';
 		TuiLabelModule,
 		TuiTextfieldControllerModule,
 		TuiButtonModule,
+		TuiInputNumberModule,
 	],
 	declarations: [
 		DividerComponent,
