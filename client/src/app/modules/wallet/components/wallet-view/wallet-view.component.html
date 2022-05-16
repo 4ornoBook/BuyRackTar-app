@@ -72,7 +72,10 @@
 		</div>
 	</ng-template>
 
-	<tui-loader [showLoader]="!wallet">
+	<tui-loader
+		[showLoader]="!wallet"
+		*tuiLet="filterTransactions((transactions$ | async) || [], transactionType.value) as transactions"
+	>
 		<div class="wallet-info" [class.tui-skeleton]="!wallet">
 
 			<div class="info-top">
@@ -84,14 +87,42 @@
 
 					<h4>Current balance: {{ wallet?.amount }} {{wallet?.currency?.name}}</h4>
 				</div>
+
+				<div class="wallet-spends">
+					<app-spends-ring
+						[transactions]="transactions"
+						[currencyName]="wallet?.currency?.name || ''"
+					></app-spends-ring>
+				</div>
 			</div>
 
-<!--			todo   switch to toggle different transaction types  -->
+			<div>
+				<label
+					tuiLabel
+				>
+					<p class="tui-space_bottom-3">Transaction type</p>
+					<tui-radio-labeled
+						[formControl]="transactionType"
+						class="tui-space_bottom-3"
+						[item]="TransactionTypes.Wallet"
+					>
+						Wallet
+					</tui-radio-labeled>
+
+					<tui-radio-labeled
+						[formControl]="transactionType"
+						class="tui-space_bottom-3"
+						[item]="TransactionTypes.Category"
+					>
+						Category
+					</tui-radio-labeled>
+				</label>
+			</div>
 
 			<div class="info-transactions">
 				<app-transactions-table
-					[transactions]="(walletTransactions$ | async) || []"
-					[transactionType]="TransactionTypes.Category"
+					[transactions]="transactions"
+					[transactionType]="transactionType.value"
 				></app-transactions-table>
 			</div>
 

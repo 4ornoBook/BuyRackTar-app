@@ -22,6 +22,9 @@ import { SpendTargets } from 'enums/spend-targets.enum';
 import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
 import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
 import { TransactionDto } from 'interfaces/transaction.dto';
+import { FormControl } from '@angular/forms';
+import { tuiPure } from '@taiga-ui/cdk';
+import { CombinedTransaction } from '../../../../+state/transaction.store/interfaces/combined-transaction.interface';
 
 @UntilDestroy()
 @Component({
@@ -37,12 +40,14 @@ export class WalletViewComponent implements OnInit {
 	public buttonsDropdownOpen = false;
 
 	public wallet$ = WalletSelectors.selectWallet(this.store, this.walletId$);
-	public walletTransactions$ = this.store.select(
+	public transactions$ = this.store.select(
 		TransactionSelectors.selectTransactions
 	);
 
 	public wallets$ = this.store.select(WalletSelectors.selectWallets);
 	public categories$ = this.store.select(CategorySelectors.selectCategories);
+
+	public transactionType = new FormControl(TransactionTypes.Wallet);
 
 	constructor(
 		private store: Store,
@@ -68,6 +73,21 @@ export class WalletViewComponent implements OnInit {
 	) {
 		dialogObserver.complete();
 		console.log(transactionDto);
+	}
+
+	@tuiPure
+	public filterTransactions(
+		transactions: CombinedTransaction[],
+		transactionType: TransactionTypes
+	) {
+		console.log(this.transactionType.value);
+		console.log(transactions);
+
+		if (transactionType === TransactionTypes.Category) {
+			return transactions.filter(transaction => transaction.category);
+		}
+
+		return transactions.filter(transaction => transaction.toWallet);
 	}
 
 	public showDialog(content: PolymorpheusContent<TuiDialogContext>): void {
