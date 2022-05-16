@@ -9,7 +9,7 @@ import {
 	ID_FROM_ROUTE_PROVIDERS,
 } from 'modules/shared/helpers/routing-helper';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, startWith } from 'rxjs';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TransactionTypes } from 'enums/transaction-type.enum';
 import { WalletSelectors, WalletActions } from '+state/wallet.store';
@@ -22,6 +22,7 @@ import { SpendTargets } from 'enums/spend-targets.enum';
 import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
 import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
 import { TransactionDto } from 'interfaces/transaction.dto';
+import { FormControl } from '@angular/forms';
 
 @UntilDestroy()
 @Component({
@@ -37,12 +38,14 @@ export class WalletViewComponent implements OnInit {
 	public buttonsDropdownOpen = false;
 
 	public wallet$ = WalletSelectors.selectWallet(this.store, this.walletId$);
-	public walletTransactions$ = this.store.select(
+	public transactions$ = this.store.select(
 		TransactionSelectors.selectTransactions
 	);
 
 	public wallets$ = this.store.select(WalletSelectors.selectWallets);
 	public categories$ = this.store.select(CategorySelectors.selectCategories);
+
+	public transactionType = new FormControl(TransactionTypes.Wallet);
 
 	constructor(
 		private store: Store,

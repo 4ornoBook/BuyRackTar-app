@@ -1,0 +1,17 @@
+<tui-ring-chart
+	[value]="getRingChartValues()"
+	[content]="content"
+	size="xl"
+></tui-ring-chart>
+
+<ng-template
+	#content
+	let-index
+>
+	<tui-money
+		[singleColor]="true"
+		[value]="getRingValue( index)"
+		[currency]="currencyName"
+	></tui-money>
+	<div>{{ getRingLabel(index) }}</div>
+</ng-template>

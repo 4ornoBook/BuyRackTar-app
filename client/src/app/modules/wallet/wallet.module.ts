@@ -9,6 +9,7 @@ import {
 	TuiDataListModule,
 	TuiDropdownControllerModule,
 	TuiHostedDropdownModule,
+	TuiLabelModule,
 	TuiLoaderModule,
 	TuiSvgModule,
 } from '@taiga-ui/core';
@@ -16,6 +17,7 @@ import {
 	TuiFieldErrorModule,
 	TuiInputModule,
 	TuiIslandModule,
+	TuiRadioLabeledModule,
 	TuiSelectModule,
 } from '@taiga-ui/kit';
 import { TuiLetModule } from '@taiga-ui/cdk';
@@ -24,7 +26,11 @@ import { WalletFormComponent } from './components/wallet-form/wallet-form.compon
 import { WalletCreateComponent } from './components/wallet-create/wallet-create.component';
 import { WalletEditComponent } from './components/wallet-edit/wallet-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { TuiCurrencyPipeModule } from '@taiga-ui/addon-commerce';
+import {
+	TuiCurrencyPipeModule,
+	TuiMoneyModule,
+} from '@taiga-ui/addon-commerce';
+import { TuiRingChartModule } from '@taiga-ui/addon-charts';
 
 @NgModule({
 	declarations: [
@@ -52,6 +58,10 @@ import { TuiCurrencyPipeModule } from '@taiga-ui/addon-commerce';
 		TuiInputModule,
 		TuiSelectModule,
 		TuiCurrencyPipeModule,
+		TuiRingChartModule,
+		TuiMoneyModule,
+		TuiLabelModule,
+		TuiRadioLabeledModule,
 	],
 })
 export class WalletModule {}
