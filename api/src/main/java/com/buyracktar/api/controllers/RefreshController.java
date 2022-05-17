@@ -39,7 +39,6 @@ public class RefreshController {
             Account account = accountService.getAccountByMail(tokenManager.getUsernameFromToken(refreshToken) );
             if (tokenManager.validateJwtToken(refreshToken, account)) {
                 String accessToken = tokenManager.generateJwtToken(account);
-                System.out.println("access token:"+accessToken);
                 String newRefreshToken = tokenManager.generateJwtRefreshToken(account);
                 ResponseCookie cookieHttp = ResponseCookie.from("refreshToken", newRefreshToken)
                         .httpOnly(true)
