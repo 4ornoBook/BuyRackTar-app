@@ -56,7 +56,7 @@ public class WalletTransactionService {
     }
 
     @Transactional
-    public Wallet replenishAccount(long walletId, BigDecimal amount) {
+    public WalletTransaction replenishAccount(long walletId, BigDecimal amount) {
         Wallet wallet = walletRepository.findById(walletId).orElse(null);
         if (wallet == null) {
             return null;
@@ -81,7 +81,7 @@ public class WalletTransactionService {
 
             walletTransactionRepository.save(walletTransaction);
             walletRepository.save(wallet);
-            return wallet;
+            return walletTransaction;
         }
     }
 }

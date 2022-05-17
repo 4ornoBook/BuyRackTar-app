@@ -33,12 +33,12 @@ public class WalletTransactionController {
     public ResponseEntity<Object> replenishWallet(@PathVariable long walletId, @RequestBody Wallet wallet) {
         BigDecimal amount = wallet.getAmount();
         System.out.println(amount);
-        Wallet replenishedWallet = walletTransactionService.replenishAccount(walletId, amount);
-        if(replenishedWallet == null) {
+        WalletTransaction replenishmentWalletTransaction = walletTransactionService.replenishAccount(walletId, amount);
+        if(replenishmentWalletTransaction == null) {
             return new ResponseEntity<>(new MyResponseTemplate(false, null, "wallet doesn't exists"),HttpStatus.BAD_REQUEST);
         }
         else {
-            return ResponseEntity.ok(new MyResponseTemplate(true, "wallet has been replenished successfully",null));
+            return ResponseEntity.ok(new MyResponseTemplate(true, replenishmentWalletTransaction,null));
         }
     }
 }
