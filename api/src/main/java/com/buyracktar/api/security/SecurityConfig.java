@@ -1,5 +1,6 @@
 package com.buyracktar.api.security;
 
+import com.buyracktar.api.responsemodels.MyResponseTemplate;
 import com.buyracktar.api.security.jwtutils.JwtAuthenticationEntryPoint;
 import com.buyracktar.api.security.jwtutils.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                         ((request, response, authException) -> {
                             response.sendError(
                                     HttpServletResponse.SC_UNAUTHORIZED,
-                                    authException.getMessage()
+                                    new MyResponseTemplate(false, null, authException.getMessage()).toString()
                             );
                         })
                 )

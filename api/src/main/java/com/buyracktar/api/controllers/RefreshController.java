@@ -13,10 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -32,8 +29,8 @@ public class RefreshController {
     private final TokenManager tokenManager;
 
     @GetMapping("/auth/refresh")
-    public ResponseEntity<Object> refreshToken(@CookieValue(name = "refreshToken") String refreshToken) {
-        if (refreshToken == null) {
+    public ResponseEntity<Object> refreshToken(@CookieValue(name = "refreshToken",defaultValue = "") String refreshToken) {
+        if (refreshToken == null || refreshToken.isEmpty()) {
             return new ResponseEntity<>(new MyResponseTemplate(false, null, "refresh token is not exists"), HttpStatus.UNAUTHORIZED);
         } else {
             Account account = accountService.getAccountByMail(tokenManager.getUsernameFromToken(refreshToken) );

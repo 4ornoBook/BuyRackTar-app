@@ -1,0 +1,703 @@
+[33mcommit 34e31d90f998d4534ca2c1606b6a5745c547ef20[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Merge: 9efddb8 f659405
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Tue May 17 21:34:48 2022 +0300
+
+    Merge branch 'master' of github.com:BuyRackTar/BuyRackTar-app
+
+[33mcommit 9efddb88c0e3e7b3693f54fcc3e8a77660e7a400[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Tue May 17 21:34:32 2022 +0300
+
+    add wallet replenishement controller
+
+[33mcommit 643ae305b88e51d969bff706b4e5720e1ff13927[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Tue May 17 16:51:36 2022 +0300
+
+    add refresh controller
+
+[33mcommit f65940595cba5c9bb320fd503330bcb792010e31[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: 45ae10d 934ded2
+Author: Anton <86152383+akuchmiy@users.noreply.github.com>
+Date:   Tue May 17 00:10:04 2022 +0300
+
+    Merge pull request #17 from BuyRackTar/client
+    
+    fix: more convenient place for radios
+
+[33mcommit 934ded2a2502d9061e487c804a80dfb8c8be6496[m[33m ([m[1;31morigin/client[m[33m)[m
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Tue May 17 00:09:38 2022 +0300
+
+    fix: more convenient place for radios
+
+[33mcommit 45ae10d8145d2d6ff1fc5fd6c7d39338c271146b[m
+Merge: 9be8d1b b6ae834
+Author: Anton <86152383+akuchmiy@users.noreply.github.com>
+Date:   Mon May 16 23:57:08 2022 +0300
+
+    Merge pull request #16 from BuyRackTar/client
+    
+    Client
+
+[33mcommit b6ae8349fd6b3db31cffdb18b57b1144f175ee26[m
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Mon May 16 23:56:46 2022 +0300
+
+    feat: wallet transactions effect, wallet view switch transaction type
+
+[33mcommit 7a06a8e540b21e952d54a90e778c41b989feed10[m
+Merge: e66f6f1 9be8d1b
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Mon May 16 23:39:34 2022 +0300
+
+    Merge branch 'master' into client
+
+[33mcommit e66f6f184e611d72e217d9b907540b7dbeacd1c1[m
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Mon May 16 23:39:02 2022 +0300
+
+    feat: wallet spends ring
+
+[33mcommit 9be8d1b425b64a74cce35205023ffcc9c3b5073c[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Mon May 16 22:34:09 2022 +0300
+
+    add category transactions in walletController's reposnse
+
+[33mcommit 41977e4cb32634d066c7b49a28a01bcbc1dbf9a9[m
+Merge: 0223085 a74b827
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Mon May 16 21:13:01 2022 +0300
+
+    Merge branch 'master' of github.com:BuyRackTar/BuyRackTar-app
+
+[33mcommit a74b8276366d10f917526ca93cf26729a0970c0f[m
+Merge: 20529a5 2295367
+Author: Anton <86152383+akuchmiy@users.noreply.github.com>
+Date:   Mon May 16 21:12:42 2022 +0300
+
+    Merge pull request #15 from BuyRackTar/client
+    
+    fix: wallet transactions prop
+
+[33mcommit 229536711f930dad23ffc10f99db6bbbe65135bf[m
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Mon May 16 21:12:15 2022 +0300
+
+    fix: wallet transactions prop
+
+[33mcommit 02230857e484e83a2082e53fe4f4ccc60e563ffe[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Mon May 16 21:11:30 2022 +0300
+
+    add wallet transaction repository,service and repository
+
+[33mcommit 20529a5090bbaf054455fed5bef43dcfb0c63fac[m
+Merge: 81729e0 21c2a80
+Author: Anton <86152383+akuchmiy@users.noreply.github.com>
+Date:   Mon May 16 21:09:53 2022 +0300
+
+    Merge pull request #14 from BuyRackTar/client
+    
+    feat: transaction form, wallet transaction
+
+[33mcommit 21c2a804367d254320cfb294bd1a0124d57465c4[m
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Mon May 16 21:09:35 2022 +0300
+
+    feat: transaction form, wallet transaction
+
+[33mcommit 81729e0e970c9b3ae1f9d457d7ea40d68b63b400[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Mon May 16 20:01:22 2022 +0300
+
+    reduce token validation time to 10 minutes
+
+[33mcommit 8d23b936db31aa17faf85cbd7ccaa7a3793b8668[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Mon May 16 19:49:37 2022 +0300
+
+    fix bug in jwt filter
+
+[33mcommit 70c14ff4741ef6217e04a762bb3450db7c090bc2[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Sun May 15 23:54:24 2022 +0300
+
+    fix bugs in wallet service
+
+[33mcommit 1f955aa1513d13515914d09bece83b1acfa0149b[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Sun May 15 23:39:34 2022 +0300
+
+    udate response in login
+
+[33mcommit 532a9391b847361cb30161b91e254036763e2dc0[m
+Merge: 6496ef1 32e3d8c
+Author: Anton <86152383+akuchmiy@users.noreply.github.com>
+Date:   Sun May 15 23:33:53 2022 +0300
+
+    Merge pull request #13 from BuyRackTar/client
+    
+    Client
+
+[33mcommit 32e3d8c0d7d9a1c20a162f8310dd41b4196e9022[m
+Merge: 54a6e60 6496ef1
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Sun May 15 23:31:53 2022 +0300
+
+    Merge branch 'master' into client
+
+[33mcommit 54a6e60ea31317c561525f8adee4c85c6974e722[m
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Sun May 15 23:31:06 2022 +0300
+
+    fix: don't send auth creds on invalid form
+
+[33mcommit dc186a2c60ab291644428629affbafe20811c377[m
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Sun May 15 23:30:45 2022 +0300
+
+    feat: catch all server error responses
+
+[33mcommit 6496ef13d472b9a21300b2e3c01355c49cf99bce[m
+Merge: fe8e1af bc17e60
+Author: Anton <86152383+akuchmiy@users.noreply.github.com>
+Date:   Sun May 15 23:07:30 2022 +0300
+
+    Merge pull request #12 from BuyRackTar/client
+    
+    feat: create, edit wallet
+
+[33mcommit bc17e60d6975d9084cde856acd00d57bfb88aee6[m
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Sun May 15 23:07:07 2022 +0300
+
+    feat: create, edit wallet
+
+[33mcommit fe8e1af818e08478a0f49d11ff048875fb95bbda[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Sun May 15 22:40:08 2022 +0300
+
+    udate response in registration for not valid email
+
+[33mcommit bfb01e8d099e8ef08362287a9dd424f9c3f84a9a[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Sun May 15 22:25:44 2022 +0300
+
+    add email duplicate check in registration
+
+[33mcommit e493b0ddf7186917d6875215b9cc5c7ef0559198[m
+Merge: 170d18e 0b2bce4
+Author: Anton <86152383+akuchmiy@users.noreply.github.com>
+Date:   Sun May 15 21:45:06 2022 +0300
+
+    Merge pull request #11 from BuyRackTar/client
+    
+    Client
+
+[33mcommit 0b2bce4b264a5a5ef9d4098241514f106196c09e[m
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Sun May 15 21:44:31 2022 +0300
+
+    feat: transactions store, wallet view
+
+[33mcommit 170d18e9995fa213da1c4e30ea56c1d198f10c79[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Sun May 15 21:42:44 2022 +0300
+
+    add client URLs and send redirect on login page after email verification
+
+[33mcommit b5733ca5b0dcc6c71e31e6f2780ab9041580c85b[m
+Merge: 305b594 06245cb
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Sun May 15 21:30:51 2022 +0300
+
+    Merge branch 'master' into client
+
+[33mcommit 06245cbec44e3afad4a4690181a50fd201309db8[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Sun May 15 21:18:58 2022 +0300
+
+    add id in jwt token
+
+[33mcommit d3e80606a7db36d96d08af812dab827d9192ed43[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Sun May 15 20:59:18 2022 +0300
+
+    add category in categoryTransaction
+
+[33mcommit d43900a53352e60717561351d2238c869cd42cf4[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Sun May 15 20:24:03 2022 +0300
+
+    clean up category controller
+
+[33mcommit 6672fcc6d538162237d5b6ba496d28135a6a906a[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Sun May 15 20:23:45 2022 +0300
+
+    add create wallet
+
+[33mcommit 32e8cfe6f65a614098adde1a59b19e10c414583a[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Sun May 15 19:49:52 2022 +0300
+
+    update get wallet by id and add update wallet
+
+[33mcommit 305b5940d54228ddef04675ea14009405973e2b4[m
+Merge: ace506f ae48a93
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Sun May 15 19:43:36 2022 +0300
+
+    Merge branch 'master' into client
+
+[33mcommit 4dc4d976c32c573c16ec60cef608c7f0632c212b[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Sun May 15 19:19:38 2022 +0300
+
+    fix path
+
+[33mcommit 59b3641016c1fc4594a5ccfade3d5f16273a6e91[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Sun May 15 19:16:46 2022 +0300
+
+    add get account by id
+
+[33mcommit 5f061296e126c870f5de275e27397907684c3153[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Sun May 15 19:08:51 2022 +0300
+
+    add get wallet by id
+
+[33mcommit e7ecea439a31d44e0598bf8556f8fad828ee7b3a[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Sun May 15 19:03:57 2022 +0300
+
+    add get wallets by user
+
+[33mcommit ac92553290f329e3ef4fadf69a1518cfff49c2b0[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Sun May 15 13:50:10 2022 +0300
+
+    update wallet transaction response
+
+[33mcommit ae48a93f3fecd7bf51ab153743cc252aac2889c0[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Sun May 15 13:12:03 2022 +0300
+
+    add get category's transactions by category id
+
+[33mcommit ace506fe843941c38e1f9b3bd9c4d3c88a04d20d[m
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Sat May 14 21:58:14 2022 +0300
+
+    feat: wallet view, spends form
+
+[33mcommit df965669c019519c8d24b3b1ad07d7eb173a95ac[m
+Merge: f21919d 6aacb50
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Sat May 14 20:07:59 2022 +0300
+
+    Merge branch 'master' of github.com:BuyRackTar/BuyRackTar-app
+
+[33mcommit f21919df8dd3e0fd7b66b746d2b6b57ddd05617b[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Sat May 14 20:07:03 2022 +0300
+
+    add wallet controller
+
+[33mcommit 6aacb5050a7e0662c5a8c977a38f08e09197b5ed[m
+Merge: 88af20f 70d37f1
+Author: Anton <86152383+akuchmiy@users.noreply.github.com>
+Date:   Sat May 14 20:06:03 2022 +0300
+
+    Merge pull request #10 from BuyRackTar/client
+    
+    Client
+
+[33mcommit 70d37f10d09fdb1ab6d069158f54f5968369ad5a[m
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Sat May 14 20:05:23 2022 +0300
+
+    feat: wallet module, state, login redirect
+
+[33mcommit 88af20f06789ddafcdd6993f5aa57a8c30b2a178[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Sat May 14 19:58:15 2022 +0300
+
+    add get category by id and update category
+
+[33mcommit 22058fbd35746b139d2c690e0ed62191f6c570e2[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Sat May 14 19:19:35 2022 +0300
+
+    change money type on numeric
+
+[33mcommit 84bcc9353ced553f02fe660c989889aea46cf94e[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Sat May 14 18:31:18 2022 +0300
+
+    add method for adding new categories
+
+[33mcommit b03fff6675d9a66d7fede8223f89b7ea6484d443[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Sat May 14 18:14:34 2022 +0300
+
+    add controller for getting categories by account
+
+[33mcommit c26f531b1af64827e2e458f76c4d5f4a1566f928[m
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Sat May 14 15:53:58 2022 +0300
+
+    feat: account users table
+
+[33mcommit 9479b56d66db6544f884d2858d34e62ba3502dbd[m
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Sat May 14 13:55:29 2022 +0300
+
+    feat: set current user on users load
+
+[33mcommit 0c0697cbbc899687071a17d181a5d2b5b87b3753[m
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Sat May 14 13:40:14 2022 +0300
+
+    fix: refresh request is sending, app initializer
+
+[33mcommit b46e53dac0a6fb1a73752c2264461b8ea7b9f3cc[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Fri May 13 20:51:01 2022 +0300
+
+    clean up and add new repositories
+
+[33mcommit 2a1fdaa0975d8dc9b0dadf804187eb619178f5bc[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Thu May 12 23:29:13 2022 +0300
+
+    clean up controllers
+
+[33mcommit c9fce1eaedaea3a9859148ff712e7f6d48fa79fc[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Thu May 12 23:21:21 2022 +0300
+
+    optimize currency controller
+
+[33mcommit b53efef24fcd2a80ff47ea3ef3f9b263ecda1dbd[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Thu May 12 23:17:58 2022 +0300
+
+    update user controller and add user service
+
+[33mcommit 1ae8c20e2c18ae58592f3b4ead7e4e4f5a4fe2bc[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Thu May 12 21:11:37 2022 +0300
+
+    add email account verification
+
+[33mcommit 7ee391a863d431f0af2192af888033029c03f8cf[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Thu May 12 00:42:43 2022 +0300
+
+    update field name in user table
+
+[33mcommit 2b3391f7f010694b107263de0522fc3a264cc696[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Wed May 11 20:04:17 2022 +0300
+
+    update response in login controller
+
+[33mcommit 2bd84cd06dfc930f33131c4462f1e1d42441e64b[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Wed May 11 17:30:20 2022 +0300
+
+    updated my response
+
+[33mcommit fab5826488ac574327809c93ab7b6a275518691d[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Wed May 11 00:08:19 2022 +0300
+
+    fix account service
+
+[33mcommit 43eb1b86477c147d39da54770fc55a1de54b24a5[m
+Merge: 748f580 4bdf021
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Tue May 10 23:14:57 2022 +0300
+
+    Merge branch 'master' of github.com:BuyRackTar/BuyRackTar-app
+
+[33mcommit 748f5808dfafc2346fa2f3920571dd19e224dda8[m
+Author: Kostia Chornobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Tue May 10 22:31:02 2022 +0300
+
+    jwt test version
+
+[33mcommit 4bdf021ef1ba4fa788fc1df24be3bc79e17f8226[m
+Merge: 7c89f3c fc9c80d
+Author: Anton <86152383+akuchmiy@users.noreply.github.com>
+Date:   Tue May 10 20:29:33 2022 +0300
+
+    Merge pull request #9 from BuyRackTar/client
+    
+    feat: transactions table, category edit component and store
+
+[33mcommit fc9c80daa17f477917deefc8717ce15f2a7b4563[m
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Tue May 10 20:29:02 2022 +0300
+
+    feat: transactions table, category edit component and store
+
+[33mcommit 7c89f3c679c7d0c241c9cc4b349d62381b73e7d4[m
+Merge: 9942b28 921c077
+Author: Anton <86152383+akuchmiy@users.noreply.github.com>
+Date:   Sat May 7 14:37:27 2022 +0300
+
+    Merge pull request #8 from BuyRackTar/client
+    
+    Client
+
+[33mcommit 921c077d30dae84bb5ca0fc5be9886c0ccb22647[m
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Sat May 7 14:36:40 2022 +0300
+
+    feat: global store, categories memoization, simple json db with json-server
+    
+    moved category store to global store, categories now does not refetch on
+    page visit, create category dispatch, different logic on category add, added simple json db for testing
+
+[33mcommit 755cc3f0c65c0d2a03507dbab762fdca6de6552c[m
+Merge: e4a6911 9942b28
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Thu May 5 21:14:34 2022 +0300
+
+    Merge branch 'master' into client
+
+[33mcommit e4a69110da41a2bf0bfe8348d3832cbf65207819[m
+Merge: fdb6205 d25f358
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Thu May 5 19:53:02 2022 +0300
+
+    Merge branch 'master' into client
+
+[33mcommit 9942b28b5d8b903f219cb14107ed4f69193ae3fc[m
+Author: Kostiantyn Chorobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Thu May 5 17:28:40 2022 +0300
+
+    updated code field in currency
+
+[33mcommit 8186d0c7d1332de6bf8f7b55a7fa915fdb9d0dd4[m
+Merge: 1916784 a76aadc
+Author: Kostiantyn Chorobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Thu May 5 15:57:23 2022 +0300
+
+    Merge branch 'master' of github.com:BuyRackTar/BuyRackTar-app
+
+[33mcommit 19167844eb8c701e32b99944965b8caf7adf47aa[m
+Author: Kostiantyn Chorobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Thu May 5 15:57:02 2022 +0300
+
+    added currencies controller
+
+[33mcommit a77296835e3ec7897dfc97bdb36a88325da86ba6[m
+Author: Kostiantyn Chorobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Thu May 5 00:09:24 2022 +0300
+
+    implemented lombok in entities and added application properties
+
+[33mcommit 370f0aea4dc8ac92236fb9991b45147791bb4667[m
+Author: Kostiantyn Chorobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Wed May 4 23:45:48 2022 +0300
+
+    added spring security
+
+[33mcommit a76aadc1072a7bebeef68fae35a0ff8181c2e5cf[m
+Merge: 776eb9c fdb6205
+Author: Anton <86152383+akuchmiy@users.noreply.github.com>
+Date:   Wed May 4 22:22:00 2022 +0300
+
+    Merge pull request #7 from BuyRackTar/client
+    
+    Client
+
+[33mcommit fdb6205c34fbdd60d0b0cbab698f3612e53f64d3[m
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Wed May 4 22:20:48 2022 +0300
+
+    feat: loader in category item, category view component, category service
+
+[33mcommit b9785a8a6ad4be0671b049bc6f49c31963f26bfd[m
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Wed May 4 22:16:08 2022 +0300
+
+    feat: load one category, one category select
+
+[33mcommit 3f0476231f1787f54ea3deb4dba53c75ac13711b[m
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Wed May 4 22:13:20 2022 +0300
+
+    feat: injectable id param from active route
+
+[33mcommit 88ce71f90838a1722ed8788c136999c19fa1f25e[m
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Wed May 4 22:10:35 2022 +0300
+
+    feat: category form, category create
+
+[33mcommit 0d7383fe6131735d12ab5b468dca3223178e2a9b[m
+Merge: ecd7d7c 776eb9c
+Author: Kostiantyn Chorobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Wed May 4 21:14:19 2022 +0300
+
+    Merge branch 'master' of github.com:BuyRackTar/BuyRackTar-app
+
+[33mcommit 776eb9ce6b83f8d6f908bfa4226b7a05df4555df[m
+Merge: cf4c715 2d0c5ac
+Author: Anton <86152383+akuchmiy@users.noreply.github.com>
+Date:   Wed May 4 21:13:50 2022 +0300
+
+    Merge pull request #6 from BuyRackTar/client
+    
+    fix: auth credentials dispatch
+
+[33mcommit 2d0c5ac2f5b69063457b40d4e1ba49d1aaac1c96[m
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Wed May 4 21:13:12 2022 +0300
+
+    fix: auth credentials dispatch
+
+[33mcommit ecd7d7c0e0bacc460d235a0259223f00ee7cd989[m
+Merge: ccba7b4 cf4c715
+Author: Kostiantyn Chorobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Wed May 4 19:00:49 2022 +0300
+
+    Merge branch 'master' of github.com:BuyRackTar/BuyRackTar-app
+
+[33mcommit cf4c715917f55e85a5c3a532ff085ee32c215002[m
+Merge: d25f358 02f55ec
+Author: Anton <86152383+akuchmiy@users.noreply.github.com>
+Date:   Tue May 3 22:09:54 2022 +0300
+
+    Merge pull request #5 from BuyRackTar/client
+    
+    feat: category state loading status, category create component
+
+[33mcommit 02f55ec29923b3f26127a14a6ec54d3f1b1367da[m
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Tue May 3 22:08:31 2022 +0300
+
+    feat: category state loading status, category create component
+
+[33mcommit d25f3583e41722ddab9e88fbe30cd898cc4be8d5[m
+Merge: a19523d 1162c0d
+Author: Anton <86152383+akuchmiy@users.noreply.github.com>
+Date:   Tue May 3 17:00:58 2022 +0300
+
+    Merge pull request #4 from BuyRackTar/client
+    
+    feat: currency store, modified category store
+
+[33mcommit 1162c0d878aaa11f3d464832bb72a87c445676d4[m
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Tue May 3 17:00:08 2022 +0300
+
+    feat: currency store, modified category store
+    
+    New currency store, added selectors to all stores
+    css fixed header and
+    sidebar
+    progress bar in category-item component
+
+[33mcommit ccba7b4e27320b59fa93c8948ed6d0eb8624b630[m
+Author: Kostiantyn Chorobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Mon May 2 20:41:21 2022 +0300
+
+    renamed database fields
+
+[33mcommit a19523df8dd8e6bb089a9136125598b6ea62eb2e[m
+Merge: 06a646c cc28d0e
+Author: Kostiantyn Chorobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Sun May 1 23:51:20 2022 +0300
+
+    Merge branch 'master' of github.com:BuyRackTar/BuyRackTar-app
+
+[33mcommit 06a646cb1b7368d2d2e7476a65e450aae3937204[m
+Author: Kostiantyn Chorobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Sun May 1 23:51:05 2022 +0300
+
+    updated tables fields
+
+[33mcommit cc28d0e6d15fe8906728d4ef54459e52ff00f76f[m
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Sun May 1 22:24:52 2022 +0300
+
+    category module -> catogory- state, table, view, item components, sidebar nav links
+
+[33mcommit b0c2fac40403d7d9d648064aa82ad0eabb39e374[m
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Sun May 1 18:39:12 2022 +0300
+
+    user state includes account and other users.
+    accountService, header user button
+
+[33mcommit a308247e39b379d049b7add9d5b55754663e448b[m
+Author: Kostiantyn Chorobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Sun May 1 14:23:35 2022 +0300
+
+    added create tables query
+
+[33mcommit db3440701ff94a01b31d9411f4288337c48ef90a[m
+Merge: cda048b 47ea3cc
+Author: Anton <86152383+akuchmiy@users.noreply.github.com>
+Date:   Sat Apr 30 19:33:03 2022 +0300
+
+    Merge pull request #3 from BuyRackTar/client
+    
+    docker compose file
+
+[33mcommit 47ea3cc9f8ca21da0efe8379045f20f7609241e6[m
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Sat Apr 30 19:32:32 2022 +0300
+
+    docker compose file
+
+[33mcommit cda048bd34ae743e47d645862e1a1070beea3d40[m
+Merge: 5ef61c9 8216688
+Author: Anton <86152383+akuchmiy@users.noreply.github.com>
+Date:   Sat Apr 30 17:42:35 2022 +0300
+
+    Merge pull request #2 from BuyRackTar/client
+    
+    set access token in auth service
+
+[33mcommit 8216688f9f913d2d407906d72325eededb82de52[m
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Sat Apr 30 17:42:01 2022 +0300
+
+    set access token in auth service
+
+[33mcommit 5ef61c9c305aceea39155ad9a69e6a9b8554dab0[m
+Merge: d03958f f07bcd8
+Author: Anton <86152383+akuchmiy@users.noreply.github.com>
+Date:   Sat Apr 30 16:39:46 2022 +0300
+
+    Merge pull request #1 from BuyRackTar/client-branch
+    
+    ngrx shared store, auth interceptors
+
+[33mcommit f07bcd839af60578343052a43ca34f4016779b46[m
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Sat Apr 30 16:36:03 2022 +0300
+
+    ngrx shared store, auth interceptors
+
+[33mcommit d03958f7ae17a34747ea7b5a04eb0614351de9bc[m
+Author: Kostiantyn Chorobuk <kostiantyn.chornobuk@gmail.com>
+Date:   Wed Apr 27 23:23:00 2022 +0300
+
+    api init commit
+
+[33mcommit ddf9f65a945a1f6a846aceb1a8ad1c328eb56662[m
+Author: Anton Kuchmii <anton.kuchmiy@cpamatica.io>
+Date:   Mon Apr 18 19:44:56 2022 +0300
+
+    initial buyraktak commit
