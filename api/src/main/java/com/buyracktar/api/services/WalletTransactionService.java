@@ -1,9 +1,6 @@
 package com.buyracktar.api.services;
 
-import com.buyracktar.api.entities.CategoryTransaction;
-import com.buyracktar.api.entities.Currency;
-import com.buyracktar.api.entities.Wallet;
-import com.buyracktar.api.entities.WalletTransaction;
+import com.buyracktar.api.entities.*;
 import com.buyracktar.api.repositories.CurrencyRepository;
 import com.buyracktar.api.repositories.WalletRepository;
 import com.buyracktar.api.repositories.WalletTransactionRepository;
@@ -18,8 +15,11 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 @Service
 @AllArgsConstructor
@@ -39,8 +39,15 @@ public class WalletTransactionService {
         } else {
 //            get wallet transaction by wallet (fromWallet and toWallet separately)
             Iterable<WalletTransaction> fromWalletTransactions = walletTransactionRepository.findByFromWallet(wallet);
+            List<WalletTransaction> fromWalletTransactionsList = new LinkedList<>();
+            for (WalletTransaction t : fromWalletTransactions) {
+                System.out.println(t.getAmount());
+                t.setAmount(CurrenciesManager.convertCurrency(t.getFromWallet().getCurrencyId(), t.getToWallet().getCurrencyId(), t.getAmount()));
+                fromWalletTransactionsList.add(t);
+                System.out.println(t.getAmount());
+            }
             Iterable<WalletTransaction> toWalletTransactions = walletTransactionRepository.findByToWallet(wallet);
-            Iterator<WalletTransaction> WalletTransactionsIterator = Iterators.concat(fromWalletTransactions.iterator(), toWalletTransactions.iterator());
+            Iterator<WalletTransaction> WalletTransactionsIterator = Iterators.concat(fromWalletTransactionsList.iterator(), toWalletTransactions.iterator());
             List<WalletTransaction> walletTransactionList = ImmutableList.copyOf(WalletTransactionsIterator);
 
             Iterable<CategoryTransaction> categoryTransactions = categoryTransactionService.getTransactionsByWallet(wallet);
@@ -55,7 +62,7 @@ public class WalletTransactionService {
             return null;
         } else {
             Currency currency = currencyRepository.findById(wallet.getCurrencyId()).orElse(null);
-            if(currency == null) {
+            if (currency == null) {
                 return null;
             }
             DecimalFormat df = new DecimalFormat();
@@ -68,7 +75,7 @@ public class WalletTransactionService {
             walletTransaction.setTime(LocalDateTime.now());
             walletTransaction.setToWallet(wallet);
             walletTransaction.setName("replenishment operation");
-            walletTransaction.setDescription("wallet " + wallet.getName() + " has been replenished of " + df.format(amount)+ " " + currency.getName());
+            walletTransaction.setDescription("wallet " + wallet.getName() + " has been replenished of " + df.format(amount) + " " + currency.getName());
             BigDecimal newBalance = wallet.getAmount().add(amount);
             wallet.setAmount(newBalance);
 
