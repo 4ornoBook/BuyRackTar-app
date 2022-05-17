@@ -18,6 +18,9 @@ import { SpendsFormComponent } from './components/spends-form/spends-form.compon
 import { ReactiveFormsModule } from '@angular/forms';
 import { TuiInputNumberModule, TuiSelectModule } from '@taiga-ui/kit';
 import { TuiFilterPipeModule } from '@taiga-ui/cdk';
+import { SpendsRingComponent } from './components/spends-ring/spends-ring.component';
+import { TuiRingChartModule } from '@taiga-ui/addon-charts';
+import { TuiMoneyModule } from '@taiga-ui/addon-commerce';
 
 @NgModule({
 	imports: [
@@ -36,16 +39,20 @@ import { TuiFilterPipeModule } from '@taiga-ui/cdk';
 		TuiTextfieldControllerModule,
 		TuiButtonModule,
 		TuiInputNumberModule,
+		TuiRingChartModule,
+		TuiMoneyModule,
 	],
 	declarations: [
 		DividerComponent,
 		TransactionsTableComponent,
 		SpendsFormComponent,
+		SpendsRingComponent,
 	],
 	exports: [
 		DividerComponent,
 		TransactionsTableComponent,
 		SpendsFormComponent,
+		SpendsRingComponent,
 	],
 })
 export class SharedModule {}

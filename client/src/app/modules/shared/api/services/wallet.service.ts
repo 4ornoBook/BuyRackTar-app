@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { WalletDto } from '+state/wallet.store/interfaces/wallet.dto';
 import { WalletEntity } from 'entities/Wallet.entity';
 import { WalletTransaction } from '+state/transaction.store/interfaces/wallet-transaction.interface';
+import { CategoryTransaction } from '../../../../+state/transaction.store/interfaces/category-transaction.interface';
 
 @Injectable({
 	providedIn: 'root',
@@ -38,7 +39,12 @@ export class WalletService {
 
 	getWalletTransactions(walletId: number) {
 		return this.http
-			.get<ApiResponse<WalletTransaction[]>>(
+			.get<
+				ApiResponse<{
+					categoryTransactions: CategoryTransaction[];
+					walletTransactions: WalletTransaction[];
+				}>
+			>(
 				API_URLS.WALLET_TRANSACTIONS.replace(
 					':walletId',
 					String(walletId)

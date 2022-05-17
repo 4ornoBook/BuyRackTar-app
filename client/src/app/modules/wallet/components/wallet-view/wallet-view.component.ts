@@ -12,8 +12,9 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TransactionTypes } from 'enums/transaction-type.enum';
-import { WalletSelectors, WalletActions } from '+state/wallet.store';
-import { CategorySelectors, CategoryActions } from '+state/category.store';
+import { WalletActions, WalletSelectors } from '+state/wallet.store';
+import { CategoryActions, CategorySelectors } from '+state/category.store';
+import { CombinedTransaction } from '+state/transaction.store/interfaces/combined-transaction.interface';
 import {
 	TransactionActions,
 	TransactionSelectors,
@@ -22,6 +23,8 @@ import { SpendTargets } from 'enums/spend-targets.enum';
 import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
 import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
 import { TransactionDto } from 'interfaces/transaction.dto';
+import { FormControl } from '@angular/forms';
+import { tuiPure } from '@taiga-ui/cdk';
 
 @UntilDestroy()
 @Component({
@@ -37,12 +40,14 @@ export class WalletViewComponent implements OnInit {
 	public buttonsDropdownOpen = false;
 
 	public wallet$ = WalletSelectors.selectWallet(this.store, this.walletId$);
-	public walletTransactions$ = this.store.select(
+	public transactions$ = this.store.select(
 		TransactionSelectors.selectTransactions
 	);
 
 	public wallets$ = this.store.select(WalletSelectors.selectWallets);
 	public categories$ = this.store.select(CategorySelectors.selectCategories);
+
+	public transactionType = new FormControl(TransactionTypes.Wallet);
 
 	constructor(
 		private store: Store,
@@ -66,8 +71,24 @@ export class WalletViewComponent implements OnInit {
 		transactionDto: TransactionDto,
 		dialogObserver: any
 	) {
+		if (transactionDto.spendTarget === SpendTargets.Category) {
+			// todo do something
+		} else {
+			// todo do something else
+		}
 		dialogObserver.complete();
-		console.log(transactionDto);
+	}
+
+	@tuiPure
+	public filterTransactions(
+		transactions: CombinedTransaction[],
+		transactionType: TransactionTypes
+	) {
+		if (transactionType === TransactionTypes.Category) {
+			return transactions.filter(transaction => transaction.category);
+		}
+
+		return transactions.filter(transaction => transaction.toWallet);
 	}
 
 	public showDialog(content: PolymorpheusContent<TuiDialogContext>): void {

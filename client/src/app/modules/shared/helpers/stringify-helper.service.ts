@@ -16,7 +16,7 @@ export class StringifyHelperService {
 		const map = new Map(
 			wallets.map(
 				({ id, name, currency }) =>
-					[id, `${name} ${currency?.name}`] as [number, string]
+					[id, `${name} - ${currency?.name}`] as [number, string]
 			)
 		);
 
@@ -30,7 +30,7 @@ export class StringifyHelperService {
 		const map = new Map(
 			categories.map(
 				({ id, name, currency }) =>
-					[id, `${name} ${currency?.name}`] as [number, string]
+					[id, `${name} - ${currency?.name}`] as [number, string]
 			)
 		);
 
