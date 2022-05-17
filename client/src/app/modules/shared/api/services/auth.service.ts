@@ -45,7 +45,7 @@ export class AuthService {
 
 	public refresh() {
 		return this.http
-			.get<ApiResponse<Tokens>>(API_URLS.ACCOUNT_REFRESH_TOKEN)
+			.get<ApiResponse<Tokens>>(API_URLS.ACCOUNT_REFRESH_TOKEN,{withCredentials: true})
 			.pipe(
 				map(({ data: tokens }) => {
 					AuthService.setAccessToken(tokens.accessToken);

@@ -6,8 +6,10 @@ import com.buyracktar.api.responsemodels.LoginResponse;
 import com.buyracktar.api.services.AccountService;
 import com.buyracktar.api.security.jwtutils.TokenManager;
 import com.buyracktar.api.security.jwtutils.models.LoginRequestModel;
+import com.google.common.net.HttpHeaders;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -21,15 +23,14 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class LoginController {
 
-    private final AccountService userDetailsService;
+    private final AccountService accountService;
 
     private final AuthenticationManager authenticationManager;
 
     private final TokenManager tokenManager;
 
     @PostMapping(value = "auth/login")
-    public ResponseEntity<Object> createToken(@RequestBody LoginRequestModel
-                                                      request) throws Exception {
+    public ResponseEntity<Object> createToken(@RequestBody LoginRequestModel request) throws Exception {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
@@ -40,9 +41,21 @@ public class LoginController {
         } catch (BadCredentialsException e) {
             return new ResponseEntity<>(new MyResponseTemplate(false, null, "wrong email or password"), HttpStatus.BAD_REQUEST);
         }
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getEmail());
+        final UserDetails userDetails = accountService.loadUserByUsername(request.getEmail());
         Account account = (Account) userDetails;
         final String accessToken = tokenManager.generateJwtToken(userDetails);
-        return ResponseEntity.ok(new MyResponseTemplate(true, new LoginResponse(accessToken,account), null));
+        final String refreshToken = tokenManager.generateJwtRefreshToken(userDetails);
+
+        ResponseCookie cookieHttp = ResponseCookie.from("refreshToken", refreshToken)
+                .httpOnly(true)
+                .sameSite("Lax")
+                .secure(true)
+                .path("/auth")
+                .build();
+
+        return ResponseEntity
+                .ok()
+                .header(HttpHeaders.SET_COOKIE,cookieHttp.toString())
+                .body(new MyResponseTemplate(true, new LoginResponse(accessToken, account), null));
     }
 }
