@@ -28,9 +28,9 @@ public class AccountController {
         return ResponseEntity.ok(new MyResponseTemplate(true, users, null));
     }
 
-    @PostMapping(value = "/{accountId}/users")
-    public ResponseEntity<Object> addNewUserInAccount(@PathVariable long accountId, @RequestBody User user) {
-        User addedUser = userService.addNewUser(accountId, user);
+    @PostMapping(value = "/users")
+    public ResponseEntity<Object> addNewUserInAccount(@RequestHeader String Authorization, @RequestBody User user) {
+        User addedUser = userService.addNewUser(Authorization, user);
         if(addedUser == null) {
             return new ResponseEntity<>(new MyResponseTemplate(false, null,"account doesn't exists"), HttpStatus.BAD_REQUEST);
         } else {
@@ -51,5 +51,15 @@ public class AccountController {
         }
         else
             return ResponseEntity.ok(new MyResponseTemplate(true, account, null));
+    }
+
+    @GetMapping(value = "users/{userId}")
+    public ResponseEntity<Object> getUserById(@PathVariable long userId) {
+        User user = userService.getById(userId);
+        if(user == null) {
+            return new ResponseEntity<>(new MyResponseTemplate(false, null, "wrong user id"),HttpStatus.BAD_REQUEST);
+        } else {
+            return ResponseEntity.ok(new MyResponseTemplate(true, user, null));
+        }
     }
 }
