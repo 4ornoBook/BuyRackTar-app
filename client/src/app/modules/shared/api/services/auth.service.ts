@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { API_URLS } from 'config/api-routes';
-import { Observable } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
 import { AccountEntity } from 'entities/Account.entity';
 import { LoginCredentials } from 'interfaces/auth/login-credentials.interface';
 import { ApiResponse } from 'interfaces/api/api-response.interface';
@@ -45,10 +45,16 @@ export class AuthService {
 
 	public refresh() {
 		return this.http
-			.get<ApiResponse<Tokens>>(API_URLS.ACCOUNT_REFRESH_TOKEN,{withCredentials: true})
+			.get<ApiResponse<Tokens>>(API_URLS.ACCOUNT_REFRESH_TOKEN, {
+				withCredentials: true,
+			})
 			.pipe(
 				map(({ data: tokens }) => {
-					AuthService.setAccessToken(tokens.accessToken);
+					return tokens.accessToken;
+				}),
+				catchError(err => {
+					console.log('in refresh - ', err);
+					throw err;
 				})
 			);
 	}
@@ -57,7 +63,7 @@ export class AuthService {
 		return localStorage.getItem(ACCESS_TOKEN) || '';
 	}
 
-	private static setAccessToken(token: string) {
+	static setAccessToken(token: string) {
 		localStorage.setItem(ACCESS_TOKEN, token);
 	}
 }

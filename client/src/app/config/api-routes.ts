@@ -12,7 +12,12 @@ export const API_URLS = {
 	ACCOUNT_CATEGORIES: `${API_URL}/accounts/categories`, //-- original
 	// ACCOUNT_CATEGORIES: `${API_URL}/categories`,
 
+	USER_GET: `${API_URL}/accounts/users/:id`, //-- original
+	USER_CREATE: `${API_URL}/accounts/users`, //-- original
+	USER_UPDATE: `${API_URL}/accounts/users/:id`, //-- original
+
 	USER_GET_WALLETS: `${API_URL}/users/:userId/wallets`, //-- original
+	USER_GET_TRANSACTIONS: `${API_URL}/users/:userId/transactions`, //-- original
 	// USER_GET_WALLETS: `${API_URL}/wallets`,
 
 	CURRENCIES_GET: `${API_URL}/currencies`,
@@ -21,11 +26,14 @@ export const API_URLS = {
 	CATEGORY_CREATE: `${API_URL}/categories`,
 	CATEGORY_UPDATE: `${API_URL}/categories/:id`,
 	CATEGORY_TRANSACTIONS: `${API_URL}/categories/:id/transactions`, //-- original
+	CATEGORY_SPENDINGS: `${API_URL}/categories/spendings`, //-- original
 	// CATEGORY_TRANSACTIONS: `${API_URL}/category-transactions`,
 
 	WALLET_GET_ONE: `${API_URL}/users/:userId/wallets/:walletId`, //	-- original
 	WALLET_CREATE: `${API_URL}/users/:userId/wallets`, //-- original
 	WALLET_UPDATE: `${API_URL}/users/:userId/wallets/:walletId`, //    -- original
+
+	WALLET_REPLENISH: `${API_URL}/wallets/:walletId/replenish`, //    -- original
 	// WALLET_GET_ONE: `${API_URL}/wallets/:id`,
 	// WALLET_CREATE: `${API_URL}/wallets`,
 	// WALLET_UPDATE: `${API_URL}/wallets/:id`,

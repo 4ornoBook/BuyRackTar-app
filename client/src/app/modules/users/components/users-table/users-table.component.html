@@ -1,4 +1,14 @@
 
+<a
+	routerLink="/users/create"
+	tuiButton
+	size="m"
+	shape="rounded"
+	class="tui-space_bottom-3"
+>
+	Create user
+</a>
+
 <tui-loader
 	*tuiLet="users$ | async as users;"
 	[showLoader]="users?.length === 0"

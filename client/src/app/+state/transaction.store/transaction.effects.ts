@@ -6,12 +6,17 @@ import {
 	loadUserTransactions,
 	loadCategoryTransactions,
 	setTransactions,
+	makeTransaction,
+	addTransaction,
 } from './transaction.actions';
 import { map, mergeMap } from 'rxjs/operators';
 import { CategoryService } from 'modules/shared/api/services/category.service';
 import { UserService } from 'modules/shared/api/services/user.service';
 import { WalletService } from 'modules/shared/api/services/wallet.service';
 import { Store } from '@ngrx/store';
+import { SpendTargets } from '../../enums/spend-targets.enum';
+import { TransactionService } from '../../modules/shared/api/services/transaction.service';
+import { CombinedTransaction } from './interfaces/combined-transaction.interface';
 
 @Injectable()
 export class TransactionEffects {
@@ -20,7 +25,8 @@ export class TransactionEffects {
 		private store: Store,
 		private categoryService: CategoryService,
 		private walletService: WalletService,
-		private userService: UserService
+		private userService: UserService,
+		private transactionService: TransactionService
 	) {}
 
 	loadUserTransactions$ = createEffect(() =>
@@ -28,11 +34,16 @@ export class TransactionEffects {
 			ofType(loadUserTransactions),
 			mergeMap(() => {
 				this.store.dispatch(setTransactions({ transactions: [] }));
-				return this.userService
-					.getUserTransactions()
-					.pipe(
-						map(transactions => setTransactions({ transactions }))
-					);
+				return this.userService.getUserTransactions().pipe(
+					map(transactions =>
+						setTransactions({
+							transactions: [
+								...transactions.categoryTransactions,
+								...transactions.walletTransactions,
+							],
+						})
+					)
+				);
 			})
 		)
 	);
@@ -71,6 +82,19 @@ export class TransactionEffects {
 						)
 					);
 			})
+		)
+	);
+
+	makeTransaction$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(makeTransaction),
+			mergeMap(({ transactionDto }) =>
+				this.transactionService.makeTransaction(transactionDto).pipe(
+					map(transaction => {
+						return addTransaction({ transaction });
+					})
+				)
+			)
 		)
 	);
 }

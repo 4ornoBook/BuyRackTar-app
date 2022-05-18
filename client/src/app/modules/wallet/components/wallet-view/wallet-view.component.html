@@ -51,6 +51,14 @@
 			<tui-data-list>
 				<button
 					tuiOption
+					(click)="showDialog(replenishForm)"
+				>
+					Replenish
+				</button>
+			</tui-data-list>
+			<tui-data-list>
+				<button
+					tuiOption
 					(click)="showDialog(spendsForm)"
 				>
 					Make a transaction
@@ -58,6 +66,20 @@
 			</tui-data-list>
 		</ng-template>
 	</div>
+
+	<ng-template #replenishForm let-observer>
+		<div class="spend-form">
+			<h2 class="tui-space_bottom-2">Make a transaction:</h2>
+			<app-spends-form
+				[disableSource]="true"
+				[chosenDestination]="wallet"
+				[wallets]="wallet ? [wallet] : []"
+				[spendTarget]="SpendTargets.Wallet"
+				(submitTransaction)="replenishWallet($event, observer)"
+				(cancelTransaction)="observer.complete()"
+			></app-spends-form>
+		</div>
+	</ng-template>
 
 	<ng-template #spendsForm let-observer>
 		<div class="spend-form">
@@ -115,8 +137,8 @@
 
 				<div class="wallet-spends">
 					<app-spends-ring
+						[transactionsSource]="wallet"
 						[transactions]="transactions"
-						[currencyName]="wallet?.currency?.name || ''"
 					></app-spends-ring>
 				</div>
 			</div>

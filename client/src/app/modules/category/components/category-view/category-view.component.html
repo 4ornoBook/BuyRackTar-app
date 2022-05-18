@@ -86,7 +86,7 @@
 
 					<div class="spendings-circle">
 						<tui-arc-chart
-							*tuiLet="getCategoryTotalSpendings(transactions) as totalSpendings"
+							*tuiLet="+getCategoryTotalSpendings(transactions).toFixed(2) as totalSpendings"
 							size="xl"
 							minLabel="0"
 							[maxLabel]="category?.limit?.toString() || '100%'"

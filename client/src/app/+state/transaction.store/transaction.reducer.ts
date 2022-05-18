@@ -1,5 +1,5 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { setTransactions } from './transaction.actions';
+import { addTransaction, setTransactions } from './transaction.actions';
 import { CombinedTransaction } from './interfaces/combined-transaction.interface';
 
 export interface UserState {
@@ -17,6 +17,10 @@ export const transactionReducer = createReducer(
 	on(setTransactions, (state, { transactions }) => ({
 		...state,
 		transactions,
+	})),
+	on(addTransaction, (state, { transaction }) => ({
+		...state,
+		transactions: [...state.transactions, transaction],
 	}))
 );
 

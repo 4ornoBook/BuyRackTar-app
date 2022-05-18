@@ -19,6 +19,9 @@ export class CategoriesTableComponent implements OnInit {
 	public categoriesLoading$ = this.store.select(
 		CategorySelectors.selectLoading
 	);
+	public categoriesSpendings$ = this.store.select(
+		CategorySelectors.selectCategoriesSpendings
+	);
 
 	constructor(private readonly store: Store) {}
 
@@ -28,8 +31,9 @@ export class CategoriesTableComponent implements OnInit {
 				untilDestroyed(this),
 				filter(account => !!account)
 			)
-			.subscribe(() =>
-				this.store.dispatch(CategoryActions.loadCategories())
-			);
+			.subscribe(() => {
+				this.store.dispatch(CategoryActions.loadCategories());
+				this.store.dispatch(CategoryActions.loadCategoriesSpendings());
+			});
 	}
 }

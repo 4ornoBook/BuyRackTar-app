@@ -5,12 +5,14 @@ import {
 	addCategory,
 	createCategory,
 	loadCategories,
+	loadCategoriesSpendings,
 	loadCategory,
 	setCategories,
 	setCategoriesLoading,
+	setCategoriesSpendings,
 	updateCategory,
 } from './category.actions';
-import { filter, mergeMap } from 'rxjs';
+import { filter, first, mergeMap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CategoryService } from 'modules/shared/api/services/category.service';
 import { select, Store } from '@ngrx/store';
@@ -41,6 +43,19 @@ export class CategoryEffects {
 				return this.accountService
 					.getAccountCategories()
 					.pipe(map(categories => setCategories({ categories })));
+			})
+		)
+	);
+
+	loadCategoriesSpendings$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(loadCategoriesSpendings),
+			mergeMap(() => {
+				return this.categoryService
+					.getSpendings()
+					.pipe(
+						map(spendings => setCategoriesSpendings({ spendings }))
+					);
 			})
 		)
 	);

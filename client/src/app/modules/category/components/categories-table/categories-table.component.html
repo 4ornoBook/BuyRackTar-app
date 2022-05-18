@@ -18,7 +18,7 @@
 	>
 		<app-category-item
 			[category]="category"
-			[includeShowButton]="true"
+			[categorySpending]="(categoriesSpendings$ | async)?.[category.id] || 0"
 		>
 		</app-category-item>
 	</div>

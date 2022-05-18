@@ -1,5 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { CombinedTransaction } from './interfaces/combined-transaction.interface';
+import { TransactionTypes } from '../../enums/transaction-type.enum';
+import { TransactionDto } from '../../interfaces/transaction.dto';
 
 const context = '[TRANSACTION]';
 
@@ -23,4 +25,9 @@ export const setTransactions = createAction(
 export const addTransaction = createAction(
 	`${context} add one`,
 	props<{ transaction: CombinedTransaction }>()
+);
+
+export const makeTransaction = createAction(
+	`${context} make transaction`,
+	props<{ transactionDto: TransactionDto }>()
 );

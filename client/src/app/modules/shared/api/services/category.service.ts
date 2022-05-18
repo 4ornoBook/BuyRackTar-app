@@ -7,6 +7,9 @@ import { map } from 'rxjs/operators';
 import { CategoryTransactionsEntity } from 'entities/CategoryTransactions.entity';
 import { CategoryDto } from '+state/category.store';
 import { CategoryTransaction } from '../../../../+state/transaction.store/interfaces/category-transaction.interface';
+import { TransactionDto } from '../../../../interfaces/transaction.dto';
+import { Observable } from 'rxjs';
+import { Spendings } from '../../../../+state/category.store/interfaces/spendings.interface';
 
 @Injectable()
 export class CategoryService {
@@ -48,6 +51,22 @@ export class CategoryService {
 			)
 			.pipe(
 				map(({ data: categoryTransactions }) => categoryTransactions)
+			);
+	}
+
+	getSpendings(): Observable<Record<number, number>> {
+		return this.http
+			.get<ApiResponse<Spendings[]>>(API_URLS.CATEGORY_SPENDINGS)
+			.pipe(
+				map(({ data: spendings }) => {
+					return spendings.reduce(
+						(spendingsMap: Record<number, number>, spending) => {
+							spendingsMap[spending.id] = spending.amount;
+							return spendingsMap;
+						},
+						{}
+					);
+				})
 			);
 	}
 }

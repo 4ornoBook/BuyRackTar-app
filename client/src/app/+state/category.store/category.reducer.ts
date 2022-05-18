@@ -4,6 +4,7 @@ import {
 	loadCategory,
 	setCategories,
 	setCategoriesLoading,
+	setCategoriesSpendings,
 } from './category.actions';
 import { CategoryEntity } from 'entities/Category.entity';
 
@@ -11,12 +12,14 @@ export interface CategoryState {
 	categories: CategoryEntity[];
 	loading: boolean;
 	allCategoriesLoaded: boolean;
+	spendings: Record<CategoryEntity['id'], number>;
 }
 
 const initialState: CategoryState = {
 	categories: [],
 	loading: false,
 	allCategoriesLoaded: false,
+	spendings: {},
 };
 
 export const categoryFeatureKey = 'category';
@@ -38,7 +41,11 @@ export const categoryReducer = createReducer(
 		].sort((a, b) => a.id - b.id),
 	})),
 	on(setCategoriesLoading, (state, _) => ({ ...state, loading: true })),
-	on(loadCategory, (state, _) => ({ ...state, loading: true }))
+	on(loadCategory, (state, _) => ({ ...state, loading: true })),
+	on(setCategoriesSpendings, (state, { spendings }) => ({
+		...state,
+		spendings,
+	}))
 );
 
 export const CategoryFeature = createFeature({

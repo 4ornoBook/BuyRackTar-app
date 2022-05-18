@@ -59,4 +59,5 @@ export const CategorySelectors = {
 	selectCategory: selectCategory,
 	selectCategories: selectCategories,
 	selectLoading: CategoryFeature.selectLoading,
+	selectCategoriesSpendings: CategoryFeature.selectSpendings,
 };

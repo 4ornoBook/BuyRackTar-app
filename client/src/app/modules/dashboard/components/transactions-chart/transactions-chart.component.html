@@ -1,0 +1,29 @@
+<tui-axes
+	axisY="none"
+	class="axes"
+	[axisXLabels]="axisXLabels"
+	[axisYSecondaryLabels]="axisYSecondaryLabels"
+>
+	<tui-bar-chart
+		class="chart"
+		[value]="spendings"
+		[hintContent]="hint"
+	></tui-bar-chart>
+</tui-axes>
+
+<ng-template
+	#hint
+	let-setIndex
+>
+	<p
+		*ngFor="let item of spendings; let index = index"
+		class="hint"
+	>
+        <span
+			class="dot"
+			[style.background]="getBackground(index)"
+		></span>
+		<span class="name">{{getSetName(index)}}</span>
+		<span>{{item[setIndex]}}</span>
+	</p>
+</ng-template>
