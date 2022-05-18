@@ -1,6 +1,8 @@
 package com.buyracktar.api.services;
 
+import com.buyracktar.api.entities.Account;
 import com.buyracktar.api.entities.User;
+import com.buyracktar.api.repositories.AccountRepository;
 import com.buyracktar.api.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,8 +12,21 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final AccountService accountService;
 
     public Iterable<User> getUsers(Long accountId) {
         return userRepository.getByAccountId(accountId);
+    }
+
+    public User addNewUser(long accountId, User newUser) {
+        Account account =  accountService.getAccountById(accountId).orElse(null);
+        if(account == null) {
+            return null;
+        }
+        else {
+            newUser.setAccountId(accountId);
+            userRepository.save(newUser);
+            return newUser;
+        }
     }
 }
