@@ -6,6 +6,7 @@ import com.buyracktar.api.repositories.AccountRepository;
 import com.buyracktar.api.repositories.UserRepository;
 import com.buyracktar.api.security.jwtutils.TokenManager;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -38,5 +39,16 @@ public class UserService {
 
     public User getById(long userId) {
         return userRepository.findById(userId).orElse(null);
+    }
+
+    public User updateUser(long userId, User upUser) {
+        User user = userRepository.findById(userId).orElse(null);
+        if(user == null || upUser == null) {
+            return null;
+        } else {
+            user.setName(upUser.getName());
+            userRepository.save(user);
+            return user;
+        }
     }
 }

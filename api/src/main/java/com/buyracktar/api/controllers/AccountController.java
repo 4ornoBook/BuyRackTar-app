@@ -62,4 +62,14 @@ public class AccountController {
             return ResponseEntity.ok(new MyResponseTemplate(true, user, null));
         }
     }
+
+    @PutMapping(value="users/{userId}")
+    public ResponseEntity<Object> updateUser(@PathVariable long userId, @RequestBody User user) {
+        User updatedUser = userService.updateUser(userId, user);
+        if(updatedUser == null) {
+            return new ResponseEntity<>(new MyResponseTemplate(false, null, "wrong user id"),HttpStatus.BAD_REQUEST);
+        } else {
+            return ResponseEntity.ok(new MyResponseTemplate(true, updatedUser, null));
+        }
+    }
 }
