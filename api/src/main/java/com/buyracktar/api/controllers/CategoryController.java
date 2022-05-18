@@ -47,8 +47,8 @@ public class CategoryController {
     }
 
     @GetMapping(value = "/spendings")
-    public ResponseEntity<Object> getCategoriesSpendings(@RequestHeader String Authentication) {
-        Iterable<CategorySpendings> spendings = categoryService.getCategoriesSpendings(Authentication);
+    public ResponseEntity<Object> getCategoriesSpendings(@RequestHeader String Authorization) {
+        Iterable<CategorySpendings> spendings = categoryService.getCategoriesSpendings(Authorization);
         if(spendings == null) {
             return new ResponseEntity<>(new MyResponseTemplate(false, null, "error"), HttpStatus.BAD_REQUEST);
         } else {
