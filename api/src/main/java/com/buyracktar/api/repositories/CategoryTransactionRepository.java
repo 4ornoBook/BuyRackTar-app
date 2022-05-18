@@ -15,6 +15,6 @@ public interface CategoryTransactionRepository extends CrudRepository<CategoryTr
 
     @Query("select ct from CategoryTransaction as ct " +
             "inner join Wallet w on ct.wallet.id = w.id " +
-            "where w.userId = 40")
+            "where w.userId = ?1")
     public Iterable<CategoryTransaction> findByUserId(long userId);
 }
