@@ -7,6 +7,7 @@ import { WalletDto } from '+state/wallet.store/interfaces/wallet.dto';
 import { WalletEntity } from 'entities/Wallet.entity';
 import { WalletTransaction } from '+state/transaction.store/interfaces/wallet-transaction.interface';
 import { CategoryTransaction } from '../../../../+state/transaction.store/interfaces/category-transaction.interface';
+import { TransactionDto } from '../../../../interfaces/transaction.dto';
 
 @Injectable({
 	providedIn: 'root',

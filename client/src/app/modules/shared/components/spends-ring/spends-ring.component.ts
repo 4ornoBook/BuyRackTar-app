@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { tuiPure } from '@taiga-ui/cdk';
 import { CombinedTransaction } from '+state/transaction.store/interfaces/combined-transaction.interface';
+import { WalletInterface } from '../../../../+state/wallet.store/interfaces/wallet.interface';
 
 export type Grouped = Record<string, number>;
 
@@ -10,6 +11,7 @@ export type Grouped = Record<string, number>;
 	styleUrls: ['./spends-ring.component.css'],
 })
 export class SpendsRingComponent implements OnChanges {
+	@Input() transactionsSource: WalletInterface | null = null;
 	@Input() transactions: CombinedTransaction[] = [];
 	@Input() currencyName = 'UAH';
 
@@ -47,6 +49,13 @@ export class SpendsRingComponent implements OnChanges {
 		transactions: CombinedTransaction[]
 	): Grouped {
 		return transactions.reduce((grouped: Grouped, transaction) => {
+			if (
+				transaction.toWallet &&
+				transaction.toWallet.id === this.transactionsSource?.id
+			) {
+				return grouped;
+			}
+
 			const amount = transaction.amount!;
 			let name;
 			if (transaction.category) {

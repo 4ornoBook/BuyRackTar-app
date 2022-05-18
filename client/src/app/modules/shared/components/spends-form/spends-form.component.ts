@@ -34,7 +34,10 @@ export class SpendsFormComponent implements OnChanges {
 	@Input() wallets: WalletInterface[] = [];
 
 	@Input() chosenSource: WalletInterface | null = null;
-	@Input() chosenDestination: CategoryInterface | null = null;
+	@Input() chosenDestination: WalletInterface | CategoryInterface | null =
+		null;
+
+	@Input() disableSource: boolean = false;
 
 	@Output() submitTransaction = new EventEmitter<TransactionDto>();
 	@Output() cancelTransaction = new EventEmitter<void>();
@@ -73,7 +76,7 @@ export class SpendsFormComponent implements OnChanges {
 				this.chosenDestination?.id || this.spendsForm.value.destination,
 		});
 
-		if (this.chosenSource) {
+		if (this.chosenSource || this.disableSource) {
 			this.spendsForm.get('source')?.disable({ onlySelf: true });
 		}
 

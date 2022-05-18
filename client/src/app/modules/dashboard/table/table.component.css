@@ -1,3 +1,11 @@
 .table {
 	height: 100%;
 }
+
+h1 {
+	margin-bottom: 1rem;
+}
+
+.type-radios {
+	margin-bottom: 2rem;
+}

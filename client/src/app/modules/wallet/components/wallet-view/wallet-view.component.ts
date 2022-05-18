@@ -9,11 +9,12 @@ import {
 	ID_FROM_ROUTE_PROVIDERS,
 } from 'modules/shared/helpers/routing-helper';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { TransactionTypes } from 'enums/transaction-type.enum';
 import { WalletActions, WalletSelectors } from '+state/wallet.store';
 import { CategoryActions, CategorySelectors } from '+state/category.store';
+import { TransactionService } from 'modules/shared/api/services/transaction.service';
 import { CombinedTransaction } from '+state/transaction.store/interfaces/combined-transaction.interface';
 import {
 	TransactionActions,
@@ -25,6 +26,9 @@ import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
 import { TransactionDto } from 'interfaces/transaction.dto';
 import { FormControl } from '@angular/forms';
 import { tuiPure } from '@taiga-ui/cdk';
+import { map } from 'rxjs/operators';
+import { addTransaction } from '../../../../+state/transaction.store/transaction.actions';
+import { NotificationAlertService } from '../../../shared/helpers/notification-alert.service';
 
 @UntilDestroy()
 @Component({
@@ -52,6 +56,8 @@ export class WalletViewComponent implements OnInit {
 	constructor(
 		private store: Store,
 		private dialogService: TuiDialogService,
+		private transactionService: TransactionService,
+		private notificationService: NotificationAlertService,
 		@Inject(ID_FROM_ROUTE) public walletId$: Observable<number>
 	) {}
 
@@ -71,12 +77,50 @@ export class WalletViewComponent implements OnInit {
 		transactionDto: TransactionDto,
 		dialogObserver: any
 	) {
-		if (transactionDto.spendTarget === SpendTargets.Category) {
-			// todo do something
-		} else {
-			// todo do something else
-		}
-		dialogObserver.complete();
+		this.transactionService
+			.makeTransaction(transactionDto)
+			.pipe(
+				map(transaction => {
+					this.store.dispatch(addTransaction({ transaction }));
+					dialogObserver.complete();
+					this.notificationService.showSuccess(
+						'Yeeep!',
+						'A new transactions is already in your history'
+					);
+				}),
+				catchError(err => {
+					this.notificationService.showError(
+						`Whoops! Something went wrong ${err?.error?.error}`
+					);
+					throw err;
+				})
+			)
+			.subscribe();
+	}
+
+	public replenishWallet(
+		transactionDto: TransactionDto,
+		dialogObserver: any
+	) {
+		this.transactionService
+			.replenishWallet(transactionDto)
+			.pipe(
+				map(transaction => {
+					this.store.dispatch(addTransaction({ transaction }));
+					dialogObserver.complete();
+					this.notificationService.showSuccess(
+						'Yeeep!',
+						'A new transactions is already in your history'
+					);
+				}),
+				catchError(err => {
+					this.notificationService.showError(
+						`Whoops! Something went wrong ${err?.error?.error}`
+					);
+					throw err;
+				})
+			)
+			.subscribe();
 	}
 
 	@tuiPure
