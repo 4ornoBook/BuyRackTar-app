@@ -20,8 +20,8 @@ public class CurrenciesManager {
         currencyPrice.put(8L,BigDecimal.valueOf(4.3504));//yuan156
     }
 
-    public static BigDecimal convertCurrency(long toCurrencyCode, long fromCurrencyCode, BigDecimal value) {
-        if(!currencyPrice.containsKey(fromCurrencyCode) || !currencyPrice.containsKey(toCurrencyCode)) {
+    public static BigDecimal convertCurrency(long fromCurrencyCode, long toCurrencyCode, BigDecimal value) {
+        if(!currencyPrice.containsKey(toCurrencyCode) || !currencyPrice.containsKey(fromCurrencyCode)) {
             return null;
         }
         else {

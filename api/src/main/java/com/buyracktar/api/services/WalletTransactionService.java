@@ -5,9 +5,12 @@ import com.buyracktar.api.repositories.CurrencyRepository;
 import com.buyracktar.api.repositories.WalletRepository;
 import com.buyracktar.api.repositories.WalletTransactionRepository;
 import com.buyracktar.api.responsemodels.AllTransactions;
+import com.buyracktar.api.responsemodels.MyResponseTemplate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterators;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,10 +45,8 @@ public class WalletTransactionService {
             Iterable<WalletTransaction> fromWalletTransactions = walletTransactionRepository.findByFromWallet(wallet);
             List<WalletTransaction> fromWalletTransactionsList = new LinkedList<>();
             for (WalletTransaction t : fromWalletTransactions) {
-                System.out.println(t.getAmount());
-                t.setAmount(CurrenciesManager.convertCurrency(t.getFromWallet().getCurrencyId(), t.getToWallet().getCurrencyId(), t.getAmount()));
+                t.setAmount(CurrenciesManager.convertCurrency(t.getToWallet().getCurrencyId(),t.getFromWallet().getCurrencyId(), t.getAmount()));
                 fromWalletTransactionsList.add(t);
-                System.out.println(t.getAmount());
             }
             Iterable<WalletTransaction> toWalletTransactions = walletTransactionRepository.findByToWallet(wallet);
             Iterator<WalletTransaction> WalletTransactionsIterator = Iterators.concat(fromWalletTransactionsList.iterator(), toWalletTransactions.iterator());
@@ -95,6 +96,48 @@ public class WalletTransactionService {
             walletTransactionRepository.save(walletTransaction);
             walletRepository.save(wallet);
             return walletTransaction;
+        }
+    }
+
+    @Transactional
+    public ResponseEntity<MyResponseTemplate> makeWalletTransaction(long fromWalletId, long toWalletId, BigDecimal amount) {
+        Wallet sourceWallet = walletRepository.findById(fromWalletId).orElse(null);
+        Wallet destinationWallet = walletRepository.findById(toWalletId).orElse(null);
+        if (sourceWallet == null || destinationWallet == null) {
+            return new ResponseEntity<>(new MyResponseTemplate(false, null, "wallet error"), HttpStatus.BAD_REQUEST);
+        } else {
+//            check if the wallet has enough money for the transaction
+            if (sourceWallet.getAmount().subtract(amount).compareTo(BigDecimal.ZERO) < 0) {
+                return new ResponseEntity<>(new MyResponseTemplate(false, null, "wallet balance is not enough for the transaction"), HttpStatus.BAD_REQUEST);
+            }
+//            take money from source wallet
+            sourceWallet.setAmount(sourceWallet.getAmount().subtract(amount));
+
+//            check wallet's currency
+            if (!sourceWallet.getCurrencyId().equals(destinationWallet.getCurrencyId())) {
+//                if currencies are not the same
+//                convertMoney in destination wallet's currency
+                amount = CurrenciesManager.convertCurrency(sourceWallet.getCurrencyId(), destinationWallet.getCurrencyId(), amount);
+            }
+//          add money to destination wallet
+            destinationWallet.setAmount(destinationWallet.getAmount().add(amount));
+//          create a transaction
+            WalletTransaction walletTransaction = new WalletTransaction();
+            walletTransaction.setFromWallet(sourceWallet);
+            walletTransaction.setToWallet(destinationWallet);
+            walletTransaction.setAmount(amount);
+            walletTransaction.setName("transaction between wallets");
+            walletTransaction.setDescription("transaction from " + sourceWallet.getName() + " to " + destinationWallet.getName());
+            walletTransaction.setTime(LocalDateTime.now());
+
+
+//          update source wallet and destination wallets with new balances
+            walletRepository.save(sourceWallet);
+            walletRepository.save(destinationWallet);
+
+//          add transaction
+            walletTransactionRepository.save(walletTransaction);
+            return ResponseEntity.ok(new MyResponseTemplate(true, walletTransaction, null));
         }
     }
 }
