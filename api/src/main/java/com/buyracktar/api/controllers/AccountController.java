@@ -52,4 +52,14 @@ public class AccountController {
         else
             return ResponseEntity.ok(new MyResponseTemplate(true, account, null));
     }
+
+    @GetMapping(value = "users/{userId}")
+    public ResponseEntity<Object> getUserById(@PathVariable long userId) {
+        User user = userService.getById(userId);
+        if(user == null) {
+            return new ResponseEntity<>(new MyResponseTemplate(false, null, "wrong user id"),HttpStatus.BAD_REQUEST);
+        } else {
+            return ResponseEntity.ok(new MyResponseTemplate(true, user, null));
+        }
+    }
 }
