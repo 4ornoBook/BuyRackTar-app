@@ -25,6 +25,7 @@ public class UserService {
         }
         else {
             newUser.setAccountId(accountId);
+            newUser.setOwner(false);
             userRepository.save(newUser);
             return newUser;
         }
