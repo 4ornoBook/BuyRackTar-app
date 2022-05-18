@@ -15,10 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.stream.Stream;
 
 @Controller
 @AllArgsConstructor
@@ -39,9 +35,9 @@ public class RefreshController {
                 String newRefreshToken = tokenManager.generateJwtRefreshToken(account);
                 ResponseCookie cookieHttp = ResponseCookie.from("refreshToken", newRefreshToken)
                         .httpOnly(true)
-                        .sameSite("Lax")
+                        .sameSite("None")
                         .secure(true)
-                        .path("/auth")
+                        .path("/")
                         .build();
                 return ResponseEntity
                         .ok()

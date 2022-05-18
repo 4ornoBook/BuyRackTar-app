@@ -48,9 +48,9 @@ public class LoginController {
 
         ResponseCookie cookieHttp = ResponseCookie.from("refreshToken", refreshToken)
                 .httpOnly(true)
-                .sameSite("Lax")
+                .sameSite("None")
                 .secure(true)
-                .path("/auth")
+                .path("/")
                 .build();
 
         return ResponseEntity
