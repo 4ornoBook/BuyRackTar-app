@@ -18,4 +18,8 @@ public class CategoryTransactionService {
     public Iterable<CategoryTransaction> getTransactionsByWallet(Wallet wallet) {
         return transactionRepository.findCategoryTransactionByWallet(wallet);
     }
+
+    public Iterable<CategoryTransaction> getByUserId(long userId) {
+        return transactionRepository.findByUserId(userId);
+    }
 }

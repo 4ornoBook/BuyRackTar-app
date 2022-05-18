@@ -25,6 +25,7 @@ import java.util.stream.StreamSupport;
 @AllArgsConstructor
 public class WalletTransactionService {
 
+    private final UserService userService;
     private final WalletTransactionRepository walletTransactionRepository;
     private final WalletRepository walletRepository;
 
@@ -52,6 +53,18 @@ public class WalletTransactionService {
 
             Iterable<CategoryTransaction> categoryTransactions = categoryTransactionService.getTransactionsByWallet(wallet);
             return new AllTransactions(walletTransactionList, categoryTransactions);
+        }
+    }
+
+    public AllTransactions getUserTransactions(long userId) {
+        User user = userService.getById(userId);
+        if (user == null) {
+            return null;
+        } else {
+            Iterable<WalletTransaction> userWalletTransactions = walletTransactionRepository.findByUserId(userId);
+            Iterable<CategoryTransaction> userCategoryTransactions = categoryTransactionService.getByUserId(userId);
+            AllTransactions allTransactions = new AllTransactions(userWalletTransactions, userCategoryTransactions);
+            return allTransactions;
         }
     }
 
