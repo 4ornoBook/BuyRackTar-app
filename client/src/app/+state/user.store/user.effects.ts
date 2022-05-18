@@ -10,6 +10,10 @@ import {
 	setAccountUsers,
 	loadAccount,
 	setCurrentUser,
+	createUser,
+	addAccountUser,
+	updateUser,
+	getAccountUser,
 } from './user.actions';
 import { map } from 'rxjs/operators';
 import { NotificationAlertService } from 'modules/shared/helpers/notification-alert.service';
@@ -20,14 +24,16 @@ import {
 	setWallets,
 } from '../wallet.store/wallet.actions';
 import { Router } from '@angular/router';
+import { UserService } from '../../modules/shared/api/services/user.service';
 
 @Injectable()
 export class UserEffects {
 	constructor(
 		private actions$: Actions,
 		private authService: AuthService,
-		private notificationsService: NotificationAlertService,
+		private notificationService: NotificationAlertService,
 		private accountService: AccountService,
+		private userService: UserService,
 		private router: Router
 	) {}
 
@@ -51,6 +57,40 @@ export class UserEffects {
 				this.accountService
 					.getAccount(accountId)
 					.pipe(map(account => setAccount({ account })))
+			)
+		)
+	);
+
+	createUser$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(createUser),
+			mergeMap(({ userDto }) =>
+				this.userService.createUser(userDto).pipe(
+					map(user => {
+						this.notificationService.showInfo(
+							'Cool!',
+							`A new user ${user.name} was successfully created!`
+						);
+						return addAccountUser({ user });
+					})
+				)
+			)
+		)
+	);
+
+	updateUser$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(updateUser),
+			mergeMap(({ userId, userDto }) =>
+				this.userService.updateUser(userId, userDto).pipe(
+					map(user => {
+						this.notificationService.showInfo(
+							'Cool!',
+							`A user ${user.name} was successfully updated!`
+						);
+						return addAccountUser({ user });
+					})
+				)
 			)
 		)
 	);
@@ -88,7 +128,7 @@ export class UserEffects {
 				mergeMap(({ credentials }) =>
 					this.authService.register(credentials).pipe(
 						map(() => {
-							this.notificationsService.showInfo(
+							this.notificationService.showInfo(
 								'Cool!',
 								'We have sent a confirmation letter to your email. Please follow it to move forward!'
 							);
@@ -117,6 +157,17 @@ export class UserEffects {
 						]);
 					})
 				)
+			)
+		)
+	);
+
+	getAccountUser$ = createEffect(() =>
+		this.actions$.pipe(
+			ofType(getAccountUser),
+			mergeMap(({ userId }) =>
+				this.accountService
+					.getAccountUser(userId)
+					.pipe(map(user => addAccountUser({ user })))
 			)
 		)
 	);

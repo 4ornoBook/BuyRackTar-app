@@ -1,0 +1,14 @@
+
+<ng-container
+	*tuiLet="user$ | async as user"
+>
+	<tui-loader [showLoader]="!user" [overlay]="true">
+		<app-user-form
+			title="Edit a user"
+			[user]="user"
+			(submitUser)="updateUser($event)"
+			[formAct]="FormActs.Update"
+		></app-user-form>
+	</tui-loader>
+</ng-container>
+

@@ -1,0 +1,24 @@
+.table {
+	height: 100%;
+}
+
+.info h1 {
+	margin-bottom: 2rem;
+}
+
+.dashboard-top {
+	display: flex;
+	gap: 1rem;
+}
+
+.chart {
+	flex-grow: 1;
+}
+
+.type-radios {
+	margin-bottom: 2rem;
+}
+
+.info-transactions {
+	margin-top: 2rem;
+}

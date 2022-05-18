@@ -39,6 +39,14 @@ export class AccountService {
 			.pipe(map(({ data: users }) => users));
 	}
 
+	public getAccountUser(userId: number): Observable<UserEntity> {
+		return this.http
+			.get<ApiResponse<UserEntity>>(
+				API_URLS.USER_GET.replace(':id', String(userId))
+			)
+			.pipe(map(({ data: user }) => user));
+	}
+
 	public getAccountCategories(): Observable<CategoryEntity[]> {
 		return this.http
 			.get<ApiResponse<CategoryEntity[]>>(API_URLS.ACCOUNT_CATEGORIES)

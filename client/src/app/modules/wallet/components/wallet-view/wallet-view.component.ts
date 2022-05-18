@@ -29,6 +29,7 @@ import { tuiPure } from '@taiga-ui/cdk';
 import { map } from 'rxjs/operators';
 import { addTransaction } from '../../../../+state/transaction.store/transaction.actions';
 import { NotificationAlertService } from '../../../shared/helpers/notification-alert.service';
+import { loadWallets } from '../../../../+state/wallet.store/wallet.actions';
 
 @UntilDestroy()
 @Component({

@@ -8,10 +8,6 @@
 	#content
 	let-index
 >
-	<tui-money
-		[singleColor]="true"
-		[value]="getRingValue( index)"
-		[currency]="currencyName"
-	></tui-money>
+	{{ getRingValue(index).toFixed(2) }}
 	<div>Spendings: {{ getRingLabel(index) }}</div>
 </ng-template>

@@ -12,6 +12,10 @@ export const API_URLS = {
 	ACCOUNT_CATEGORIES: `${API_URL}/accounts/categories`, //-- original
 	// ACCOUNT_CATEGORIES: `${API_URL}/categories`,
 
+	USER_GET: `${API_URL}/accounts/users/:id`, //-- original
+	USER_CREATE: `${API_URL}/accounts/users`, //-- original
+	USER_UPDATE: `${API_URL}/accounts/users/:id`, //-- original
+
 	USER_GET_WALLETS: `${API_URL}/users/:userId/wallets`, //-- original
 	USER_GET_TRANSACTIONS: `${API_URL}/users/:userId/transactions`, //-- original
 	// USER_GET_WALLETS: `${API_URL}/wallets`,

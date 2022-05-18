@@ -1,0 +1,34 @@
+
+<div class="create-form">
+
+	<form [formGroup]="userForm">
+
+		<h2 class="tui-form__header tui-form__header_margin-top_none">
+			{{ title }}
+		</h2>
+
+		<div class="tui-form__row">
+			<tui-input formControlName="name">
+				Enter a user name
+				<input
+					tuiTextfield
+					type="text"
+				/>
+			</tui-input>
+			<tui-field-error
+				formControlName="name"
+			></tui-field-error>
+		</div>
+
+		<div class="tui-form__buttons">
+			<button
+				tuiButton
+				size="l"
+				shape="rounded"
+				(click)="submitForm()"
+			>
+				{{ formAct }}
+			</button>
+		</div>
+	</form>
+</div>

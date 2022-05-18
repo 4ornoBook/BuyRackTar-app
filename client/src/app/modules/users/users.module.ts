@@ -10,10 +10,25 @@ import {
 	TuiSvgModule,
 } from '@taiga-ui/core';
 import { TuiLetModule } from '@taiga-ui/cdk';
-import { TuiIslandModule } from '@taiga-ui/kit';
+import {
+	TuiFieldErrorModule,
+	TuiInputModule,
+	TuiIslandModule,
+} from '@taiga-ui/kit';
+import { UserFormComponent } from './components/user-form/user-form.component';
+import { UserEditComponent } from './components/user-edit/user-edit.component';
+import { UserCreateComponent } from './components/user-create/user-create.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-	declarations: [UsersTableComponent, UserItemComponent],
+	declarations: [
+		UsersTableComponent,
+		UserItemComponent,
+		UserFormComponent,
+		UserEditComponent,
+		UserCreateComponent,
+	],
 	imports: [
 		CommonModule,
 		UsersRoutingModule,
@@ -23,6 +38,10 @@ import { TuiIslandModule } from '@taiga-ui/kit';
 		TuiLetModule,
 		TuiIslandModule,
 		TuiHintModule,
+		ReactiveFormsModule,
+		TuiInputModule,
+		TuiFieldErrorModule,
+		RouterModule,
 	],
 })
 export class UsersModule {}

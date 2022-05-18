@@ -2,6 +2,8 @@ import { createAction, props } from '@ngrx/store';
 import { UserEntity } from 'entities/User.entity';
 import { LoginCredentials } from 'interfaces/auth/login-credentials.interface';
 import { AccountEntity } from 'entities/Account.entity';
+import { CategoryDto } from '../category.store';
+import { UserDto } from './interfaces/user.dto';
 
 const context = '[USER]';
 
@@ -20,6 +22,11 @@ export const getAccountUsers = createAction(
 	props<{ accountId: number }>()
 );
 
+export const getAccountUser = createAction(
+	`${context} get account user`,
+	props<{ userId: number }>()
+);
+
 export const loadAccount = createAction(
 	`${context} load account`,
 	props<{ accountId: number }>()
@@ -35,7 +42,22 @@ export const setAccountUsers = createAction(
 	props<{ users: UserEntity[] }>()
 );
 
+export const addAccountUser = createAction(
+	`${context} add account user`,
+	props<{ user: UserEntity }>()
+);
+
 export const setCurrentUser = createAction(
 	`${context} set user`,
 	props<{ userId: number }>()
+);
+
+export const createUser = createAction(
+	`${context} create user`,
+	props<{ userDto: UserDto }>()
+);
+
+export const updateUser = createAction(
+	`${context} update user`,
+	props<{ userId: number; userDto: UserDto }>()
 );

@@ -50,8 +50,7 @@ export class TransactionService {
 					String(transactionDto.source)
 				),
 				{
-					fromWallet: transactionDto.source,
-					toWallet: transactionDto.destination,
+					walletId: transactionDto.destination,
 					amount: transactionDto.amount,
 				}
 			)
@@ -63,13 +62,12 @@ export class TransactionService {
 	) {
 		return this.http
 			.post<ApiResponse<CategoryTransaction>>(
-				API_URLS.CATEGORY_TRANSACTIONS.replace(
-					':id',
-					String(transactionDto.destination)
+				API_URLS.WALLET_TRANSACTIONS.replace(
+					':walletId',
+					String(transactionDto.source)
 				),
 				{
-					wallet: transactionDto.source,
-					category: transactionDto.destination,
+					categoryId: transactionDto.destination,
 					amount: transactionDto.amount,
 				}
 			)
