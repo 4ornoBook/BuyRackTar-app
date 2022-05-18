@@ -1,10 +1,13 @@
 package com.buyracktar.api.controllers;
 
 import com.buyracktar.api.entities.Category;
+import com.buyracktar.api.entities.CategorySpendings;
 import com.buyracktar.api.responsemodels.MyResponseTemplate;
+import com.buyracktar.api.security.jwtutils.TokenManager;
 import com.buyracktar.api.services.CategoryService;
 import com.buyracktar.api.services.CategoryTransactionService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,5 +44,15 @@ public class CategoryController {
     @GetMapping(value = "/{id}/transactions")
     public ResponseEntity<Object> getCategoryTransactions(@PathVariable long id) {
         return ResponseEntity.ok(new MyResponseTemplate(true, transactionService.getTransactionsByCategory(id), null));
+    }
+
+    @GetMapping(value = "/spendings")
+    public ResponseEntity<Object> getCategoriesSpendings(@RequestHeader String Authentication) {
+        Iterable<CategorySpendings> spendings = categoryService.getCategoriesSpendings(Authentication);
+        if(spendings == null) {
+            return new ResponseEntity<>(new MyResponseTemplate(false, null, "error"), HttpStatus.BAD_REQUEST);
+        } else {
+            return ResponseEntity.ok(new MyResponseTemplate(true, spendings, null));
+        }
     }
 }
