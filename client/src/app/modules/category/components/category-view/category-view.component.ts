@@ -8,7 +8,7 @@ import {
 	ID_FROM_ROUTE,
 	ID_FROM_ROUTE_PROVIDERS,
 } from 'modules/shared/helpers/routing-helper';
-import { Observable } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { CategoryActions, CategorySelectors } from '+state/category.store';
 import {
@@ -23,6 +23,10 @@ import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
 import { TuiDialogContext, TuiDialogService } from '@taiga-ui/core';
 import { SpendTargets } from 'enums/spend-targets.enum';
 import { TransactionDto } from '../../../../interfaces/transaction.dto';
+import { map } from 'rxjs/operators';
+import { addTransaction } from '../../../../+state/transaction.store/transaction.actions';
+import { TransactionService } from '../../../shared/api/services/transaction.service';
+import { NotificationAlertService } from '../../../shared/helpers/notification-alert.service';
 
 @UntilDestroy()
 @Component({
@@ -51,6 +55,8 @@ export class CategoryViewComponent implements OnInit {
 	constructor(
 		private store: Store,
 		private dialogService: TuiDialogService,
+		private transactionService: TransactionService,
+		private notificationService: NotificationAlertService,
 		@Inject(ID_FROM_ROUTE) public categoryId$: Observable<number>
 	) {}
 
@@ -69,8 +75,25 @@ export class CategoryViewComponent implements OnInit {
 		transactionDto: TransactionDto,
 		dialogObserver: any
 	) {
-		dialogObserver.complete();
-		console.log(transactionDto);
+		this.transactionService
+			.makeTransaction(transactionDto)
+			.pipe(
+				map(transaction => {
+					this.store.dispatch(addTransaction({ transaction }));
+					dialogObserver.complete();
+					this.notificationService.showSuccess(
+						'Yeeep!',
+						'A new transactions is already in your history'
+					);
+				}),
+				catchError(err => {
+					this.notificationService.showError(
+						`Whoops! Something went wrong ${err?.error?.error}`
+					);
+					throw err;
+				})
+			)
+			.subscribe();
 	}
 
 	public showDialog(content: PolymorpheusContent<TuiDialogContext>): void {

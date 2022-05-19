@@ -7,7 +7,9 @@ export function jwtOptionsFactory(authService: AuthService) {
 			return authService.getAccessToken();
 		},
 		allowedDomains: [
-			environment.production ? 'aboba.com' : 'localhost:3000',
+			environment.production
+				? 'buyracktar-api.herokuapp.com'
+				: 'localhost:3000',
 		],
 	};
 }
