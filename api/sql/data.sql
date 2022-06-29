@@ -1,3 +1,5 @@
+\connect buyraktar
+
 insert into currency
 values (1, 840, 'USD'),
        (2, 978, 'EUR'),

@@ -1,14 +1,26 @@
-version: "3.9"
 services:
-  postgres-brt:
-    container_name: buyraktar-pg
-    image: postgres:alpine
-    restart: always
-    ports:
-      - "5432:5432"
-    volumes:
-      - .pg/storage:/var/lib/postgresql/data
+  app:
+    image: 'docker-test:latest'
+    build:
+      context: .
+    container_name: app
+    depends_on:
+      - buyraktar
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: buyraktar
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://buyraktar:5432/buyraktar
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+          
+  buyraktar:
+    image: postgres:latest
+    restart: always
+    container_name: buyraktar
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=buyraktar
+    volumes:
+      - ./log-directory:/var/lib/postgresql/data
+      - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/01create_tables.sql
+      - ./sql/data.sql:/docker-entrypoint-initdb.d/02data.sql
